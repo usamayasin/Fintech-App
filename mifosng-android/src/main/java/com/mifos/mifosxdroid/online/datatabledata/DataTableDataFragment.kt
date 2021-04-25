@@ -159,7 +159,7 @@ class DataTableDataFragment : MifosBaseFragment(), DataTableActionListener, Data
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             Constants.DIALOG_FRAGMENT -> if (resultCode == Activity.RESULT_OK) {
                 mDataTableDataPresenter
@@ -167,7 +167,6 @@ class DataTableDataFragment : MifosBaseFragment(), DataTableActionListener, Data
             }
         }
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         mDataTableDataPresenter!!.detachView()
