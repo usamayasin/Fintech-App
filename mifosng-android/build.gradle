@@ -172,9 +172,9 @@ dependencies {
     //implementation "com.github.Raizlabs.DBFlow:dbflow:$rootProject.raizLabsDBFlow"
 
     // App's Support dependencies, including test
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation "com.google.android.gms:play-services-places:$rootProject.playServicesVersion"
@@ -195,11 +195,11 @@ dependencies {
     kapt "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"
 
     //LifeCycle
-    implementation 'androidx.lifecycle:lifecycle-runtime:2.3.1'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.3.1'
-    implementation 'androidx.lifecycle:lifecycle-reactivestreams:2.3.1'
-    kapt 'androidx.lifecycle:lifecycle-compiler:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-reactivestreams:2.0.0'
+    kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0'
 
     //Square dependencies
     implementation("com.squareup.retrofit2:retrofit:$rootProject.retrofitVersionLatest") {
