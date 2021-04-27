@@ -83,7 +83,7 @@
     </style>
 
     <style name="MaterialDatePickerTheme" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorAccent">@color/primary</item>
+        <item name="colorAccent">@color/red</item>
     </style>
 
     <style name="badge_style">

@@ -25,6 +25,7 @@ import com.mifos.mifosxdroid.R;
 import com.mifos.mifosxdroid.core.MifosBaseActivity;
 import com.mifos.mifosxdroid.core.util.Toaster;
 import com.mifos.mifosxdroid.online.DashboardActivity;
+import com.mifos.mifosxdroid.passcode.NewPassCodeActivity;
 import com.mifos.mifosxdroid.passcode.PassCodeActivity;
 import com.mifos.objects.user.User;
 import com.mifos.utils.Constants;
@@ -203,7 +204,7 @@ public class LoginActivity extends MifosBaseActivity implements LoginMvpView {
         if (PrefManager.getPassCodeStatus()) {
             startActivity(new Intent(this, DashboardActivity.class));
         } else {
-            Intent intent = new Intent(this, PassCodeActivity.class);
+            Intent intent = new Intent(this, NewPassCodeActivity.class);
             intent.putExtra(Constants.INTIAL_LOGIN, true);
             startActivity(intent);
         }

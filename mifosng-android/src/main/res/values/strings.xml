@@ -838,7 +838,7 @@
     <string name="ui">UI</string>
     <string name="dark_mode_def_value">MODE_NIGHT_FOLLOW_SYSTEM</string>
 
-    <string-array name="dark_mode_entries"  translatable="false">
+    <string-array name="dark_mode_entries" translatable="false">
         <item>Light</item>
         <item>Dark</item>
         <item>System Default</item>
@@ -861,9 +861,17 @@
     <string name="about_license">License</string>
     <string name="about_license_sub">Check Mozilla Public License 2.0</string>
 
-    <string-array name="dark_mode_values"  translatable="false">
+    <string-array name="dark_mode_values" translatable="false">
         <item>light</item>
         <item>dark</item>
         <item>default</item>
     </string-array>
+    <string name="biometric">Use Biometric</string>
+    <string name="dialog_message_phone_state_permission_denied_prompt">This permission is required
+        to show currency according to your country.Are you sure you want to deny it?
+    </string>
+    <string name="dialog_message_phone_state_permission_never_ask_again">You have denied permission
+        to fetch Phone State, without this permission currency might not be shown in proper format.
+        Please enable it in settings
+    </string>
 </resources>
