@@ -28,6 +28,5 @@
     <style name="Button.Login" parent="Button.Base">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_marginTop">8dp</item>
-        <item name="android:text">@string/login</item>
     </style>
 </resources>

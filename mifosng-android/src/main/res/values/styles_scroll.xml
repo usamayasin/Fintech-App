@@ -15,6 +15,7 @@
 
     <style name="ScrollView.Login" parent="ScrollView.Base">
         <item name="android:padding">10dp</item>
+        <item name="android:background">@color/primary</item>
     </style>
 
 

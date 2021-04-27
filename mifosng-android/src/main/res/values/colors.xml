@@ -56,12 +56,13 @@
     <color name="gray_bright">#33CCCCCC</color>
 
 
-    <!-- Material design colors -->
-
-    <color name="primary">#2196F3</color>
-    <color name="primary_dark">#1976D2</color>
-    <color name="primary_light">#BBDEFB</color>
-    <color name="accent">#03A9F4</color>
+    <!-- Material design colors D93C3F -->
+    <color name="primary">#F3F6FF</color>
+    <color name="primary_dark">#F3F6FF</color>
+    <color name="primary_light">#F3F6FF</color>
+    <color name="accent">#F3F6FF</color>
+    <color name="red_app">#D93C3F</color>
+    <color name="red_light_app">#F2E4EC</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
     <color name="icons">#FFFFFF</color>
