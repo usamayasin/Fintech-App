@@ -4,65 +4,89 @@
 
     >
 
-    <include layout="@layout/toolbar" />
+    <TextView
+        android:id="@+id/tv_connection_settings"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/primary"
+        android:gravity="end"
+        android:maxLines="2"
+        android:paddingEnd="25dp"
+        android:onClick="onConnectionSettingsClicked"
+        android:paddingRight="20dp"
+        android:text="Connection \n Settings"
+        android:textColor="#696969"
+        android:textStyle="bold" />
 
     <androidx.core.widget.NestedScrollView
         style="@style/ScrollView.Login"
-        android:layout_below="@+id/toolbar"
-        android:padding="@dimen/layout_padding_30dp"
+        android:layout_below="@+id/tv_connection_settings"
+        android:paddingStart="@dimen/layout_padding_30dp"
+        android:paddingLeft="@dimen/layout_padding_30dp"
+        android:paddingEnd="@dimen/layout_padding_30dp"
+        android:paddingRight="@dimen/layout_padding_30dp"
+        android:paddingBottom="@dimen/layout_padding_30dp"
+        android:paddingTop="5dp">
 
-        >
+        <LinearLayout
+            style="@style/LinearLayout.Base"
+            android:animateLayoutChanges="true">
 
-        <LinearLayout style="@style/LinearLayout.Base"
-            android:animateLayoutChanges="true"
-            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="200dp"
-                android:layout_height="100dp"
-                android:src="@drawable/mifos_logo"
-                android:layout_gravity="center"/>
-            <TextView
-                style="@style/TextView.Login"
-                android:layout_gravity="center"
-                android:text="@string/enter_credentials"/>
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/app_logo" />
 
+            </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/userWrapper"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/marginItemsInSectionLarge"
-                app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                android:layout_marginBottom="10dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/username"
+                    android:cursorVisible="true"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:nextFocusDown="@+id/et_password"
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passwordWrapper"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/marginItemsInSectionLarge"
-                app:layout_constraintBottom_toTopOf="@+id/bt_login"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:hintEnabled="true"
+                android:hint="@string/password"
                 app:passwordToggleEnabled="true">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/password"
                     android:imeOptions="actionNext"
-                    android:inputType="textPassword" />
+                    android:cursorVisible="true"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:backgroundTint="@color/gray_dark"
+                    android:inputType="textPassword"
+                    android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -83,8 +107,8 @@
                         <EditText
                             android:id="@+id/et_instanceURL"
                             style="@style/EditText.Connection"
-                            android:inputType="textUri"
                             android:hint="@string/hint_instance_url"
+                            android:inputType="textUri"
                             android:nextFocusDown="@+id/et_instancePort" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -126,19 +150,61 @@
 
             </LinearLayout>
 
-            <Button
+            <LinearLayout
                 android:id="@+id/bt_login"
-                style="@style/Button.Login"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:gravity="center"
+                android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/login_button_rounded"
+                android:gravity="center"
+                android:orientation="horizontal"
                 android:paddingTop="8.7dp"
-                android:paddingBottom="8.71dp"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF" />
+                android:paddingBottom="8.71dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Sign in"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingLeft="10dp"
+                    app:srcCompat="@drawable/ic_arrow_right" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/fingerprint_button_rounded"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_fingerprint" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="Smart Id"
+                    android:textAllCaps="false"
+                    android:textColor="@color/red_app" />
+            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

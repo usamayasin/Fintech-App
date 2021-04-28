@@ -7,6 +7,10 @@ package com.mifos.mifosxdroid;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import com.mifos.api.BaseUrl;
 import com.mifos.mifosxdroid.core.MifosBaseActivity;
@@ -21,20 +25,32 @@ import com.mifos.utils.PrefManager;
  */
 public class SplashScreenActivity extends MifosBaseActivity {
 
+    ImageView splashImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        if (!PrefManager.isAuthenticated()) {
-            PrefManager.setInstanceUrl(BaseUrl.PROTOCOL_HTTPS
-                    + BaseUrl.API_ENDPOINT + BaseUrl.API_PATH);
-            startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
-        } else {
-            Intent intent = new Intent(SplashScreenActivity.this,
-                    PassCodeActivity.class);
-            intent.putExtra(PassCodeConstants.PASSCODE_INITIAL_LOGIN, true);
-            startActivity(intent);
-        }
-        finish();
+
+        splashImage = findViewById(R.id.iv_splash_image);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (!PrefManager.isAuthenticated()) {
+                    PrefManager.setInstanceUrl(BaseUrl.PROTOCOL_HTTPS
+                            + BaseUrl.API_ENDPOINT + BaseUrl.API_PATH);
+                    startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
+                } else {
+                    Intent intent = new Intent(SplashScreenActivity.this,
+                            PassCodeActivity.class);
+                    intent.putExtra(PassCodeConstants.PASSCODE_INITIAL_LOGIN, true);
+                    startActivity(intent);
+                }
+                finish();
+            }
+        },2000);
+
+        Animation myAnimation = AnimationUtils.loadAnimation(this,R.anim.animation);
+        if(splashImage != null) splashImage.startAnimation(myAnimation);
     }
 }

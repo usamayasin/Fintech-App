@@ -15,6 +15,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -125,6 +126,11 @@ public class LoginActivity extends MifosBaseActivity implements LoginMvpView {
         et_domain.addTextChangedListener(urlWatcher);
         et_port.addTextChangedListener(urlWatcher);
         urlWatcher.afterTextChanged(null);
+    }
+
+    public void onConnectionSettingsClicked(View view){
+        ll_connectionSettings.setVisibility(
+                ll_connectionSettings.getVisibility() == VISIBLE ? GONE : VISIBLE);
     }
 
     public boolean validateUserInputs() {
