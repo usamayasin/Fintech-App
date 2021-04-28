@@ -3,6 +3,7 @@
     android:id="@+id/view_flipper"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary"
     android:inAnimation="@android:anim/fade_in"
     android:outAnimation="@android:anim/fade_out"
     android:padding="10dp">
@@ -17,19 +18,25 @@
     <!-- Actual content -->
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:background="@color/primary">
 
-        <LinearLayout style="@style/LinearLayout.Base">
+        <LinearLayout
+            style="@style/LinearLayout.Base"
+            android:padding="20dp"
+            android:background="@color/primary">
 
             <TextView style="@style/TextView.CreateGroup" />
 
-            <com.google.android.material.textfield.TextInputLayout style="@style/TextInput.Base">
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInput.Base">
 
                 <EditText
                     android:id="@+id/et_group_name"
                     style="@style/EditText.BaseWidth"
                     android:gravity="start"
                     android:hint="@string/groupname"
+                    android:textSize="15dp"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:paddingBottom="16dp"
@@ -37,81 +44,122 @@
 
                 <requestFocus />
             </com.google.android.material.textfield.TextInputLayout>
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/tv_office"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:text="@string/office_name_mandatory"
-                android:textSize="12sp"
-                style="@style/Base.TextAppearance.AppCompat.Small" />
 
-            <androidx.appcompat.widget.AppCompatSpinner
-                style="@style/Widget.AppCompat.Spinner.Underlined"
-                android:id="@+id/sp_group_offices"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:spinnerMode="dropdown"
-                android:paddingTop="10dp"
-                android:backgroundTint="@color/gray_dark"/>
-        </LinearLayout>
             <LinearLayout
-                android:id="@+id/ll_address"
-                android:layout_height="match_parent"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_office"
+                    style="@style/Base.TextAppearance.AppCompat.Small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/office_name_mandatory"
+                    android:textSize="15sp" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/sp_group_offices"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@android:color/transparent"
+                    android:spinnerMode="dropdown" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:background="@color/gray_dark" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_datePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="vertical"
-                android:paddingTop="16dp">
+                android:weightSum="2">
 
                 <LinearLayout
                     android:id="@+id/ll_payment_cycle"
-                    android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
-                    <ImageView
-                        android:baselineAlignBottom="true"
-                        android:layout_gravity="center"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="4dp"
+                    <!--<ImageView
                         android:layout_width="30dp"
-                        app:srcCompat="@drawable/ic_event_black_24dp"/>
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="4dp"
+                        android:baselineAlignBottom="true"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_event_black_24dp" />-->
 
                     <LinearLayout
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginStart="8dp"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
                             style="@style/Base.TextAppearance.AppCompat.Small"
-                            android:layout_height="match_parent"
                             android:layout_width="wrap_content"
-                            android:textSize="12sp"
-                            android:text="@string/center_submission_date"/>
+                            android:layout_height="match_parent"
+                            android:text="@string/center_submission_date"
+                            android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/tv_group_submission_date"
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content" />
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
+                    <ImageView
+                        android:id="@+id/iv_datePicker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginEnd="14dp"
+                        android:layout_marginRight="14dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/ic_baseline_arrow_drop_down" />
+
+                    <!--  <ImageView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="1"
+                          android:background="@color/red"
+                          android:src="@drawable/ic_baseline_arrow_drop_down" />-->
+
                 </LinearLayout>
+
                 <View
-                    android:background="@color/gray_dark"
-                    android:layout_height="0.2dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_width="match_parent"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:background="@color/gray_dark" />
 
             </LinearLayout>
 
-            <com.google.android.material.textfield.TextInputLayout style="@style/TextInput.Base"
-                android:layout_marginTop="10dp">
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInput.Base"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp">
 
                 <EditText
                     android:id="@+id/et_group_external_id"
@@ -120,8 +168,8 @@
                     android:hint="@string/external_id"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                    android:paddingTop="10dp"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textSize="15sp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
@@ -129,65 +177,69 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
                 android:checked="false"
-                android:paddingTop="10dp"
                 android:text="@string/center_active" />
 
             <LinearLayout
-                android:layout_height="match_parent"
+                android:id="@+id/layout_submission"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:paddingTop="16dp"
-                android:visibility="gone"
-                android:id="@+id/layout_submission">
+                android:visibility="gone">
 
                 <LinearLayout
-                    android:layout_height="match_parent"
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:baselineAlignBottom="true"
-                        android:layout_gravity="center"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="4dp"
                         android:layout_width="30dp"
-                        app:srcCompat="@drawable/ic_event_black_24dp"/>
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="4dp"
+                        android:baselineAlignBottom="true"
+                        app:srcCompat="@drawable/ic_event_black_24dp" />
 
                     <LinearLayout
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginStart="8dp"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
                         android:orientation="vertical">
 
                         <TextView
                             style="@style/Base.TextAppearance.AppCompat.Small"
-                            android:layout_height="match_parent"
                             android:layout_width="wrap_content"
-                            android:textSize="12sp"
-                            android:text="@string/center_activation_date"/>
+                            android:layout_height="match_parent"
+                            android:text="@string/center_activation_date"
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/tv_group_activationDate"
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content" />
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <View
-                    android:background="@color/gray_dark"
+                    android:layout_width="match_parent"
                     android:layout_height="0.2dp"
                     android:layout_marginTop="8dp"
-                    android:layout_width="match_parent"/>
+                    android:background="@color/gray_dark" />
 
             </LinearLayout>
 
             <Button
                 android:id="@+id/btn_submit"
                 style="@style/Button.Base"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/login_button_rounded"
                 android:text="@string/submit" />
 
 

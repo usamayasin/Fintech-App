@@ -72,6 +72,9 @@ class CreateNewGroupFragment : ProgressableFragment(), OnDatePickListener, Creat
     @BindView(R.id.layout_submission)
     var layout_submission: LinearLayout? = null
 
+    var ll_datePicker:LinearLayout?=null
+    var iv_datePicker:ImageView?=null
+
     @JvmField
     @Inject
     var mCreateNewGroupPresenter: CreateNewGroupPresenter? = null
@@ -101,6 +104,8 @@ class CreateNewGroupFragment : ProgressableFragment(), OnDatePickListener, Creat
         rootView = inflater.inflate(R.layout.fragment_create_new_group, null)
         ButterKnife.bind(this, rootView)
         mCreateNewGroupPresenter!!.attachView(this)
+        ll_datePicker=rootView.findViewById(R.id.ll_datePicker)
+        iv_datePicker=rootView.findViewById(R.id.iv_datePicker)
         inflateOfficesSpinner()
         inflateSubmissionDate()
         inflateActivationDate()
@@ -134,6 +139,8 @@ class CreateNewGroupFragment : ProgressableFragment(), OnDatePickListener, Creat
                 Toaster.show(rootView, R.string.error_network_not_available, Toaster.LONG)
             }
         }
+
+
         return rootView
     }
 
@@ -162,12 +169,18 @@ class CreateNewGroupFragment : ProgressableFragment(), OnDatePickListener, Creat
     fun inflateActivationDate() {
         newDatePicker = MFDatePicker.newInsance(this)
         tv_activationDate!!.text = MFDatePicker.getDatePickedAsString()
-        tv_activationDate!!.setOnClickListener { (newDatePicker as MFDatePicker?)?.show(activity!!.supportFragmentManager, FragmentConstants.DFRAG_DATE_PICKER) }
+        ll_datePicker!!.setOnClickListener { showDatePickerDialog() }
+        iv_datePicker!!.setOnClickListener { showDatePickerDialog() }
+        tv_activationDate!!.setOnClickListener { showDatePickerDialog() }
     }
 
     override fun onDatePicked(date: String) {
         tv_submissionDate!!.text = date
         tv_activationDate!!.text = date
+    }
+
+    fun showDatePickerDialog(){
+        (newDatePicker as MFDatePicker?)?.show(activity!!.supportFragmentManager, FragmentConstants.DFRAG_DATE_PICKER)
     }
 
     val isGroupNameValid: Boolean
