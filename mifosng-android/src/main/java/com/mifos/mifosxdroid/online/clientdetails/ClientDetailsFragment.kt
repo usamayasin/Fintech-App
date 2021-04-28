@@ -11,6 +11,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -22,11 +23,11 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
-import com.joanzapata.iconify.fonts.MaterialIcons
-import com.joanzapata.iconify.widget.IconTextView
 import com.mifos.mifosxdroid.R
 import com.mifos.mifosxdroid.activity.pinpointclient.PinpointClientActivity
 import com.mifos.mifosxdroid.adapters.LoanAccountsListAdapter
@@ -53,6 +54,7 @@ import com.mifos.utils.Constants
 import com.mifos.utils.FragmentConstants
 import com.mifos.utils.ImageLoaderUtils
 import com.mifos.utils.Utils
+import kotlinx.android.synthetic.main.fragment_client_details.*
 import okhttp3.ResponseBody
 import java.io.File
 import java.io.FileOutputStream
@@ -64,6 +66,9 @@ class ClientDetailsFragment : MifosBaseFragment(), ClientDetailsMvpView {
     private val TAG = ClientDetailsFragment::class.java.simpleName
     var clientId = 0
     var chargesList: MutableList<Charges> = ArrayList()
+    var rvAdapter: RecyclerView.Adapter<*>? = null
+    var rvlayoutManager: RecyclerView.LayoutManager? = null
+
 
     @JvmField
     @BindView(R.id.tv_fullName)
@@ -92,6 +97,10 @@ class ClientDetailsFragment : MifosBaseFragment(), ClientDetailsMvpView {
     @JvmField
     @BindView(R.id.tv_group)
     var tvGroup: TextView? = null
+
+    @JvmField
+    @BindView(R.id.iv_expandable)
+    var ivExpandView: ImageView? = null
 
     @JvmField
     @BindView(R.id.iv_clientImage)
@@ -148,7 +157,6 @@ class ClientDetailsFragment : MifosBaseFragment(), ClientDetailsMvpView {
     private var mListener: OnFragmentInteractionListener? = null
     private val clientImageFile = File(Environment.getExternalStorageDirectory().toString() +
             "/client_image.png")
-    private var accountAccordion: AccountAccordion? = null
     private var isClientActive = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -175,6 +183,75 @@ class ClientDetailsFragment : MifosBaseFragment(), ClientDetailsMvpView {
 
     fun inflateClientInformation() {
         mClientDetailsPresenter!!.loadClientDetailsAndClientAccounts(clientId)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        iv_expandable.setOnClickListener {
+            rv_loan_accounts.setVisibility(
+                    if (rv_loan_accounts.getVisibility() == View.VISIBLE) {
+                        View.GONE
+                    } else {
+                        View.VISIBLE
+                    }
+            )
+
+            if (rv_loan_accounts.visibility == View.GONE) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    iv_expandable.background = resources.getDrawable(R.drawable.circular_bg_green)
+                }
+                iv_expandable.setImageResource(R.drawable.ic_add_green)
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    iv_expandable.background = resources.getDrawable(R.drawable.circular_bg_pink)
+                }
+                iv_expandable.setImageResource(R.drawable.ic_minus_pink)
+            }
+
+        }
+
+        iv_savings_expandable.setOnClickListener {
+            rv_saving_accounts.setVisibility(
+                    if (rv_saving_accounts.getVisibility() == View.VISIBLE) {
+                        View.GONE
+                    } else {
+                        View.VISIBLE
+                    }
+            )
+            if (rv_saving_accounts.visibility == View.GONE) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    iv_savings_expandable.background = resources.getDrawable(R.drawable.circular_bg_green)
+                }
+                iv_savings_expandable.setImageResource(R.drawable.ic_add_green)
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    iv_savings_expandable.background = resources.getDrawable(R.drawable.circular_bg_pink)
+                }
+                iv_savings_expandable.setImageResource(R.drawable.ic_minus_pink)
+            }
+        }
+
+        iv_recurring_expandable.setOnClickListener {
+            rv_recurring_accounts.setVisibility(
+                    if (rv_recurring_accounts.getVisibility() == View.VISIBLE) {
+                        View.GONE
+                    } else {
+                        View.VISIBLE
+                    }
+            )
+            if (rv_recurring_accounts.visibility == View.GONE) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    iv_recurring_expandable.background = resources.getDrawable(R.drawable.circular_bg_green)
+                }
+                iv_recurring_expandable.setImageResource(R.drawable.ic_add_green)
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    iv_recurring_expandable.background = resources.getDrawable(R.drawable.circular_bg_pink)
+                }
+                iv_recurring_expandable.setImageResource(R.drawable.ic_minus_pink)
+            }
+        }
     }
 
     override fun onAttach(activity: Activity) {
@@ -510,30 +587,46 @@ class ClientDetailsFragment : MifosBaseFragment(), ClientDetailsMvpView {
         if (!isAdded) {
             return
         }
-        accountAccordion = AccountAccordion(activity)
+        tv_loan_account_count.text = clientAccounts.loanAccounts.size.toString()
+        tv_saving_account_count.text = clientAccounts.nonRecurringSavingsAccounts.size.toString()
+        tv_recurring_count.text  = clientAccounts.recurringSavingsAccounts.size.toString()
         if (clientAccounts.loanAccounts.size > 0) {
-            val section = AccountAccordion.Section.LOANS
-            val adapter = LoanAccountsListAdapter(activity!!.applicationContext,
-                    clientAccounts.loanAccounts)
-            section.connect(activity, adapter, AdapterView.OnItemClickListener { adapterView, view, i, l -> mListener!!.loadLoanAccountSummary(adapter.getItem(i).id) })
+            iv_expandable.isClickable = true
+            rvlayoutManager = LinearLayoutManager(activity)
+            (rvlayoutManager as LinearLayoutManager).orientation = LinearLayoutManager.VERTICAL
+            rv_loan_accounts.layoutManager = rvlayoutManager
+            rv_loan_accounts.setHasFixedSize(true)
+            rvAdapter = LoanAccountsListAdapter(activity!!.applicationContext, clientAccounts.loanAccounts,mListener)
+            rv_loan_accounts.adapter = rvAdapter
+        } else {
+            iv_expandable.isClickable = false
         }
         if (clientAccounts.nonRecurringSavingsAccounts.size > 0) {
-            val section = AccountAccordion.Section.SAVINGS
-            val adapter = SavingsAccountsListAdapter(activity!!.applicationContext,
-                    clientAccounts.nonRecurringSavingsAccounts)
-            section.connect(activity, adapter, AdapterView.OnItemClickListener { adapterView, view, i, l ->
-                mListener!!.loadSavingsAccountSummary(adapter.getItem(i).id,
-                        adapter.getItem(i).depositType)
-            })
+            iv_savings_expandable.isClickable = true
+            rvlayoutManager = LinearLayoutManager(activity)
+            (rvlayoutManager as LinearLayoutManager).orientation = LinearLayoutManager.VERTICAL
+            rv_saving_accounts.layoutManager = rvlayoutManager
+            rv_saving_accounts.setHasFixedSize(true)
+
+            rvAdapter = SavingsAccountsListAdapter(activity!!.applicationContext, clientAccounts.nonRecurringSavingsAccounts,mListener)
+
+            rv_saving_accounts.adapter = rvAdapter
+        } else {
+            iv_savings_expandable.isClickable = false
         }
         if (clientAccounts.recurringSavingsAccounts.size > 0) {
-            val section = AccountAccordion.Section.RECURRING
-            val adapter = SavingsAccountsListAdapter(activity!!.applicationContext,
-                    clientAccounts.recurringSavingsAccounts)
-            section.connect(activity, adapter, AdapterView.OnItemClickListener { adapterView, view, i, l ->
-                mListener!!.loadSavingsAccountSummary(adapter.getItem(i).id,
-                        adapter.getItem(i).depositType)
-            })
+            iv_recurring_expandable.isClickable = true
+            rvlayoutManager = LinearLayoutManager(activity)
+            (rvlayoutManager as LinearLayoutManager).orientation = LinearLayoutManager.VERTICAL
+            rv_recurring_accounts.layoutManager = rvlayoutManager
+            rv_recurring_accounts.setHasFixedSize(true)
+
+            rvAdapter = SavingsAccountsListAdapter(activity!!.applicationContext, clientAccounts.recurringSavingsAccounts,mListener)
+
+            rv_recurring_accounts.adapter = rvAdapter
+
+        } else {
+            iv_recurring_expandable.isClickable = false
         }
     }
 
@@ -544,125 +637,6 @@ class ClientDetailsFragment : MifosBaseFragment(), ClientDetailsMvpView {
     interface OnFragmentInteractionListener {
         fun loadLoanAccountSummary(loanAccountNumber: Int)
         fun loadSavingsAccountSummary(savingsAccountNumber: Int, accountType: DepositType?)
-    }
-
-    private class AccountAccordion(private val context: Activity?) {
-        private var currentSection: Section? = null
-        fun setCurrentSection(currentSection: Section?) {
-            // close previous section
-            if (this.currentSection != null) {
-                this.currentSection!!.close(context)
-            }
-            this.currentSection = currentSection
-
-            // open new section
-            if (this.currentSection != null) {
-                this.currentSection!!.open(context)
-            }
-        }
-
-        enum class Section(private val sectionId: Int, private val textViewStringId: Int) {
-            LOANS(R.id.account_accordion_section_loans, R.string.loanAccounts), SAVINGS(R.id.account_accordion_section_savings, R.string.savingAccounts), RECURRING(R.id.account_accordion_section_recurring, R.string.recurringAccount);
-
-            private var mListViewCount = 0.0
-            fun getTextView(context: Activity?): TextView {
-                return getSectionView(context).findViewById<View>(R.id.tv_toggle_accounts) as TextView
-            }
-
-            fun getIconView(context: Activity?): IconTextView {
-                return getSectionView(context).findViewById<View>(R.id.tv_toggle_accounts_icon) as IconTextView
-            }
-
-            fun getListView(context: Activity?): ListView {
-                return getSectionView(context).findViewById<View>(R.id.lv_accounts) as ListView
-            }
-
-            fun getCountView(context: Activity?): TextView {
-                return getSectionView(context).findViewById<View>(R.id.tv_count_accounts) as TextView
-            }
-
-            fun getSectionView(context: Activity?): View {
-                return context!!.findViewById(sectionId)
-            }
-
-            fun connect(context: Activity?, adapter: ListAdapter, onItemClickListener: AdapterView.OnItemClickListener?) {
-                getCountView(context).text = adapter.count.toString()
-                val listView = getListView(context)
-                listView.adapter = adapter
-                listView.onItemClickListener = onItemClickListener
-            }
-
-            fun open(context: Activity?) {
-                val iconView = getIconView(context)
-                iconView.text = "{" + LIST_CLOSED_ICON.key() + "}"
-                mListViewCount = java.lang.Double.valueOf(getCountView(context)
-                        .text
-                        .toString())
-                val listView = getListView(context)
-                resizeListView(context, listView)
-                listView.visibility = View.VISIBLE
-            }
-
-            fun close(context: Activity?) {
-                val iconView = getIconView(context)
-                iconView.text = "{" + LIST_OPEN_ICON.key() + "}"
-                getListView(context).visibility = View.GONE
-            }
-
-            private fun configureSection(context: Activity?, accordion: AccountAccordion) {
-                val listView = getListView(context)
-                val textView = getTextView(context)
-                val iconView = getIconView(context)
-                val onClickListener = View.OnClickListener {
-                    if (this@Section == accordion.currentSection) {
-                        accordion.setCurrentSection(null)
-                    } else if (listView != null && listView.count > 0) {
-                        accordion.setCurrentSection(this@Section)
-                    }
-                }
-                if (textView != null) {
-                    textView.setOnClickListener(onClickListener)
-                    textView.text = context!!.getString(textViewStringId)
-                }
-                iconView?.setOnClickListener(onClickListener)
-                listView?.setOnTouchListener { view, motionEvent ->
-                    view.parent.requestDisallowInterceptTouchEvent(true)
-                    false
-                }
-                // initialize section in closed state
-                close(context)
-            }
-
-            private fun resizeListView(context: Activity?, listView: ListView) {
-                if (mListViewCount < 4) {
-                    //default listview height is 200dp,which displays 4 listview items.
-                    // This calculates the required listview height
-                    // if listview items are less than 4
-                    val heightInDp = mListViewCount / 4 * 200
-                    val heightInPx = heightInDp * context!!.resources
-                            .displayMetrics.density
-                    val params = listView.layoutParams
-                    params.height = heightInPx.toInt()
-                    listView.layoutParams = params
-                    listView.requestLayout()
-                }
-            }
-
-            companion object {
-                private val LIST_OPEN_ICON = MaterialIcons.md_add_circle_outline
-                private val LIST_CLOSED_ICON = MaterialIcons.md_remove_circle_outline
-                fun configure(context: Activity?, accordion: AccountAccordion) {
-                    for (section in values()) {
-                        section.configureSection(context, accordion)
-                    }
-                }
-            }
-
-        }
-
-        init {
-            Section.configure(context, this)
-        }
     }
 
     companion object {

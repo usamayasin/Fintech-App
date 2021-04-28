@@ -212,27 +212,27 @@ class GroupDetailsFragment : MifosBaseFragment(), GroupDetailsMvpView {
         accountAccordion = AccountAccordion(activity)
         if (groupAccounts?.loanAccounts!!.size > 0) {
             val section = AccountAccordion.Section.LOANS
-            val adapter = LoanAccountsListAdapter(activity!!.applicationContext,
-                    groupAccounts?.loanAccounts)
-            section.connect(activity, adapter, AdapterView.OnItemClickListener { adapterView, view, i, l -> mListener!!.loadLoanAccountSummary(adapter.getItem(i).id) })
+//            val adapter = LoanAccountsListAdapter(activity!!.applicationContext,
+//                    groupAccounts?.loanAccounts)
+//            section.connect(activity, adapter, AdapterView.OnItemClickListener { adapterView, view, i, l -> mListener!!.loadLoanAccountSummary(adapter.getItem(i).id) })
         }
         if (groupAccounts.nonRecurringSavingsAccounts.size > 0) {
-            val section = AccountAccordion.Section.SAVINGS
-            val adapter = SavingsAccountsListAdapter(activity!!.applicationContext,
-                    groupAccounts.nonRecurringSavingsAccounts)
-            section.connect(activity, adapter, AdapterView.OnItemClickListener { adapterView, view, i, l ->
-                mListener!!.loadSavingsAccountSummary(adapter.getItem(i).id,
-                        adapter.getItem(i).depositType)
-            })
+//            val section = AccountAccordion.Section.SAVINGS
+//            val adapter = SavingsAccountsListAdapter(activity!!.applicationContext,
+//                    groupAccounts.nonRecurringSavingsAccounts)
+//            section.connect(activity, adapter, AdapterView.OnItemClickListener { adapterView, view, i, l ->
+//                mListener!!.loadSavingsAccountSummary(adapter.getItem(i).id,
+//                        adapter.getItem(i).depositType)
+//            })
         }
         if (groupAccounts.recurringSavingsAccounts.size > 0) {
-            val section = AccountAccordion.Section.RECURRING
-            val adapter = SavingsAccountsListAdapter(activity!!.applicationContext,
-                    groupAccounts.recurringSavingsAccounts)
-            section.connect(activity, adapter, AdapterView.OnItemClickListener { adapterView, view, i, l ->
-                mListener!!.loadSavingsAccountSummary(adapter.getItem(i).id,
-                        adapter.getItem(i).depositType)
-            })
+//            val section = AccountAccordion.Section.RECURRING
+//            val adapter = SavingsAccountsListAdapter(activity!!.applicationContext,
+//                    groupAccounts.recurringSavingsAccounts)
+//            section.connect(activity, adapter, AdapterView.OnItemClickListener { adapterView, view, i, l ->
+//                mListener!!.loadSavingsAccountSummary(adapter.getItem(i).id,
+//                        adapter.getItem(i).depositType)
+//            })
         }
     }
 
