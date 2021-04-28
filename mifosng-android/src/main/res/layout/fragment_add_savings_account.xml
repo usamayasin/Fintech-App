@@ -15,7 +15,8 @@
     <!-- Actual content -->
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:padding="20dp">
 
         <LinearLayout style="@style/LinearLayout.Base">
 

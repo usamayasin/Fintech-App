@@ -26,7 +26,6 @@ import com.mifos.mifosxdroid.core.MifosBaseActivity;
 import com.mifos.mifosxdroid.core.util.Toaster;
 import com.mifos.mifosxdroid.online.DashboardActivity;
 import com.mifos.mifosxdroid.passcode.NewPassCodeActivity;
-import com.mifos.mifosxdroid.passcode.PassCodeActivity;
 import com.mifos.objects.user.User;
 import com.mifos.utils.Constants;
 import com.mifos.utils.Network;
