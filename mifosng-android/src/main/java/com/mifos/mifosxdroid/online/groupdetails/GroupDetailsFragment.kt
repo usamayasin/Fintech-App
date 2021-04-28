@@ -1,16 +1,21 @@
 package com.mifos.mifosxdroid.online.groupdetails
 
 import android.app.Activity
+import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.*
 import android.widget.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import com.joanzapata.iconify.fonts.MaterialIcons
 import com.joanzapata.iconify.widget.IconTextView
 import com.mifos.mifosxdroid.R
+import com.mifos.mifosxdroid.adapters.GroupDetailLoanAdapter
+import com.mifos.mifosxdroid.adapters.GroupDetailSavingAdapter
 import com.mifos.mifosxdroid.adapters.LoanAccountsListAdapter
 import com.mifos.mifosxdroid.adapters.SavingsAccountsListAdapter
 import com.mifos.mifosxdroid.core.MifosBaseActivity
@@ -28,7 +33,17 @@ import com.mifos.objects.group.Group
 import com.mifos.utils.Constants
 import com.mifos.utils.FragmentConstants
 import com.mifos.utils.Utils
+import kotlinx.android.synthetic.main.fragment_group_details.*
+import kotlinx.android.synthetic.main.fragment_group_details.iv_expandable
+import kotlinx.android.synthetic.main.fragment_group_details.iv_recurring_expandable
+import kotlinx.android.synthetic.main.fragment_group_details.iv_savings_expandable
+import kotlinx.android.synthetic.main.fragment_group_details.rv_loan_accounts
+import kotlinx.android.synthetic.main.fragment_group_details.rv_recurring_accounts
+import kotlinx.android.synthetic.main.fragment_group_details.rv_saving_accounts
+import kotlinx.android.synthetic.main.fragment_group_details.tv_recurring_count
+
 import javax.inject.Inject
+
 /**
  * Created by nellyk on 2/27/2016.
  */
@@ -85,6 +100,7 @@ class GroupDetailsFragment : MifosBaseFragment(), GroupDetailsMvpView {
     @BindView(R.id.ll_bottom_panel)
     var llBottomPanel: LinearLayout? = null
 
+
     @JvmField
     @Inject
     var mGroupDetailsPresenter: GroupDetailsPresenter? = null
@@ -92,6 +108,7 @@ class GroupDetailsFragment : MifosBaseFragment(), GroupDetailsMvpView {
     private var groupId = 0
     private var accountAccordion: AccountAccordion? = null
     private var mListener: OnFragmentInteractionListener? = null
+    var rvlayoutManager: RecyclerView.LayoutManager? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as MifosBaseActivity?)!!.activityComponent.inject(this)
@@ -101,12 +118,80 @@ class GroupDetailsFragment : MifosBaseFragment(), GroupDetailsMvpView {
         setHasOptionsMenu(true)
     }
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_group_details, container, false)
         ButterKnife.bind(this, rootView)
         mGroupDetailsPresenter!!.attachView(this)
         mGroupDetailsPresenter!!.loadGroupDetailsAndAccounts(groupId)
         return rootView
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        iv_expandable.setOnClickListener {
+            rv_loan_accounts.setVisibility(
+                    if (rv_loan_accounts.getVisibility() == View.VISIBLE) {
+                        View.GONE
+                    } else {
+                        View.VISIBLE
+                    }
+            )
+
+            if (rv_loan_accounts.visibility == View.GONE) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    iv_expandable.background = resources.getDrawable(R.drawable.circular_bg_green)
+                }
+                iv_expandable.setImageResource(R.drawable.ic_add_green)
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    iv_expandable.background = resources.getDrawable(R.drawable.circular_bg_pink)
+                }
+                iv_expandable.setImageResource(R.drawable.ic_minus_pink)
+            }
+
+        }
+        iv_savings_expandable.setOnClickListener {
+            rv_saving_accounts.setVisibility(
+                    if (rv_saving_accounts.getVisibility() == View.VISIBLE) {
+                        View.GONE
+                    } else {
+                        View.VISIBLE
+                    }
+            )
+            if (rv_saving_accounts.visibility == View.GONE) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    iv_savings_expandable.background = resources.getDrawable(R.drawable.circular_bg_green)
+                }
+                iv_savings_expandable.setImageResource(R.drawable.ic_add_green)
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    iv_savings_expandable.background = resources.getDrawable(R.drawable.circular_bg_pink)
+                }
+                iv_savings_expandable.setImageResource(R.drawable.ic_minus_pink)
+            }
+        }
+        iv_recurring_expandable.setOnClickListener {
+            rv_recurring_accounts.setVisibility(
+                    if (rv_recurring_accounts.getVisibility() == View.VISIBLE) {
+                        View.GONE
+                    } else {
+                        View.VISIBLE
+                    }
+            )
+            if (rv_recurring_accounts.visibility == View.GONE) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    iv_recurring_expandable.background = resources.getDrawable(R.drawable.circular_bg_green)
+                }
+                iv_recurring_expandable.setImageResource(R.drawable.ic_add_green)
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    iv_recurring_expandable.background = resources.getDrawable(R.drawable.circular_bg_pink)
+                }
+                iv_recurring_expandable.setImageResource(R.drawable.ic_minus_pink)
+            }
+        }
     }
 
     @OnClick(R.id.btn_activate_group)
@@ -209,14 +294,39 @@ class GroupDetailsFragment : MifosBaseFragment(), GroupDetailsMvpView {
         if (!isAdded) {
             return
         }
+
+        tv_group_detail_loan_account_count.text = groupAccounts?.loanAccounts!!.size.toString()
+        tv_group_detail_saving_account_count.text = groupAccounts?.nonRecurringSavingsAccounts!!.size.toString()
+        tv_recurring_count.text = groupAccounts?.recurringSavingsAccounts!!.size.toString()
+
         accountAccordion = AccountAccordion(activity)
+
         if (groupAccounts?.loanAccounts!!.size > 0) {
+            iv_expandable.isClickable = true
+            rvlayoutManager = LinearLayoutManager(activity)
+            (rvlayoutManager as LinearLayoutManager).orientation = LinearLayoutManager.VERTICAL
+            rv_loan_accounts.layoutManager = rvlayoutManager
+            rv_loan_accounts.setHasFixedSize(true)
+            val adapter = GroupDetailLoanAdapter(requireContext(), groupAccounts.loanAccounts, mListener)
+            rv_loan_accounts.adapter = adapter
             val section = AccountAccordion.Section.LOANS
 //            val adapter = LoanAccountsListAdapter(activity!!.applicationContext,
 //                    groupAccounts?.loanAccounts)
 //            section.connect(activity, adapter, AdapterView.OnItemClickListener { adapterView, view, i, l -> mListener!!.loadLoanAccountSummary(adapter.getItem(i).id) })
+        } else {
+            iv_expandable.isClickable = false
         }
+
         if (groupAccounts.nonRecurringSavingsAccounts.size > 0) {
+            iv_savings_expandable.isClickable = true
+
+            rvlayoutManager = LinearLayoutManager(activity)
+            (rvlayoutManager as LinearLayoutManager).orientation = LinearLayoutManager.VERTICAL
+            rv_saving_accounts.layoutManager = rvlayoutManager
+            rv_saving_accounts.setHasFixedSize(true)
+            val adapter = GroupDetailSavingAdapter(requireContext(),
+                    groupAccounts.nonRecurringSavingsAccounts, mListener)
+            rv_saving_accounts.adapter = adapter
 //            val section = AccountAccordion.Section.SAVINGS
 //            val adapter = SavingsAccountsListAdapter(activity!!.applicationContext,
 //                    groupAccounts.nonRecurringSavingsAccounts)
@@ -224,8 +334,21 @@ class GroupDetailsFragment : MifosBaseFragment(), GroupDetailsMvpView {
 //                mListener!!.loadSavingsAccountSummary(adapter.getItem(i).id,
 //                        adapter.getItem(i).depositType)
 //            })
+        } else {
+            iv_savings_expandable.isClickable = false
         }
+
         if (groupAccounts.recurringSavingsAccounts.size > 0) {
+            iv_recurring_expandable.isClickable = true
+            rvlayoutManager = LinearLayoutManager(activity)
+            (rvlayoutManager as LinearLayoutManager).orientation = LinearLayoutManager.VERTICAL
+            rv_recurring_accounts.layoutManager = rvlayoutManager
+            rv_recurring_accounts.setHasFixedSize(true)
+            val adapter = GroupDetailSavingAdapter(requireContext(),
+                    groupAccounts.recurringSavingsAccounts, mListener)
+            rv_recurring_accounts.adapter = adapter
+
+
 //            val section = AccountAccordion.Section.RECURRING
 //            val adapter = SavingsAccountsListAdapter(activity!!.applicationContext,
 //                    groupAccounts.recurringSavingsAccounts)
@@ -233,6 +356,8 @@ class GroupDetailsFragment : MifosBaseFragment(), GroupDetailsMvpView {
 //                mListener!!.loadSavingsAccountSummary(adapter.getItem(i).id,
 //                        adapter.getItem(i).depositType)
 //            })
+        } else {
+            iv_recurring_expandable.isClickable = false
         }
     }
 
@@ -399,6 +524,7 @@ class GroupDetailsFragment : MifosBaseFragment(), GroupDetailsMvpView {
 
     companion object {
         val LOG_TAG = GroupDetailsFragment::class.java.simpleName
+
         @JvmStatic
         fun newInstance(groupId: Int): GroupDetailsFragment {
             val fragment = GroupDetailsFragment()
