@@ -7,7 +7,10 @@ package com.mifos.mifosxdroid.online.clientlist
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
+import android.widget.EditText
 import android.widget.ProgressBar
 import androidx.appcompat.view.ActionMode
 import androidx.fragment.app.Fragment
@@ -75,6 +78,10 @@ class ClientListFragment : MifosBaseFragment(), RecyclerItemClickListener.OnItem
     @JvmField
     @BindView(R.id.pb_client)
     var pb_client: ProgressBar? = null
+
+    @JvmField
+    @BindView(R.id.et_client_search)
+    var et_client_search:EditText?= null
 
     @JvmField
     @Inject
@@ -153,7 +160,39 @@ class ClientListFragment : MifosBaseFragment(), RecyclerItemClickListener.OnItem
             mClientListPresenter!!.loadClients(false, 0)
         }
         mClientListPresenter!!.loadDatabaseClients()
+
+        et_client_search?.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                if (s.isEmpty().not() && s.isBlank().not()) {
+                    searchList(s.toString())
+                }else{
+                    showClientList(clientList)
+                }
+            }
+        })
+
+
+
         return rootView
+    }
+
+    fun searchList(value: String) {
+        val filteredList = clientList?.filter { it -> it.displayName?.toLowerCase()!!.contains(value.toLowerCase() )}
+        if (filteredList?.size!! > 0) {
+            mClientNameListAdapter!!.setClients(filteredList)
+            mClientNameListAdapter!!.notifyDataSetChanged()
+        } else {
+            showClientList(clientList)
+
+        }
     }
 
     override fun onResume() {
