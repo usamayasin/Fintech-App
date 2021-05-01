@@ -36,7 +36,7 @@
         android:paddingTop="24dp"
         android:gravity="center"
         android:text="@string/identifiers"
-        android:textColor="@color/primary"
+        android:textColor="@color/black"
         android:textStyle="bold"/>
     <LinearLayout
         android:layout_height="wrap_content"
@@ -124,7 +124,7 @@
         android:layout_width="match_parent"
         android:text="@string/create_identifier"
         android:textAllCaps="true"
-        android:backgroundTint="@color/primary" />
+        android:background="@drawable/login_button_rounded"/>
 
 </LinearLayout>
 </ViewFlipper>

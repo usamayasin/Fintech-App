@@ -273,6 +273,7 @@ class ClientDetailsFragment : MifosBaseFragment(), ClientDetailsMvpView {
                 val selectedImage = data.data
                 val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
 
+
                 // Get the cursor
                 val cursor = activity!!.applicationContext.contentResolver.query(
                         selectedImage,
