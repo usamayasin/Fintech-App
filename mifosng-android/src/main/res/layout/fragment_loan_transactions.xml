@@ -15,5 +15,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/elv_loan_transactions"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:divider="@null"
+        android:dividerHeight="0dp"/>
 </RelativeLayout>

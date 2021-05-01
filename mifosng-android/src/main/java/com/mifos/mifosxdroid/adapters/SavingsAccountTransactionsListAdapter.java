@@ -74,6 +74,17 @@ public class SavingsAccountTransactionsListAdapter extends BaseAdapter {
                 (listOfTransactions.get(i).getDate()));
         reusableViewHolder.tv_transactionType.setText(listOfTransactions.get(i)
                 .getTransactionType().getValue());
+        if(listOfTransactions.get(i)
+                .getTransactionType().getWithdrawal()){
+            reusableViewHolder.tv_transactionType.setTextColor(Color.RED);
+        }else if(listOfTransactions.get(i)
+                .getTransactionType().getDeposit()){
+            reusableViewHolder.tv_transactionType.setTextColor(
+                    ContextCompat.getColor(mContext, R.color.savings_account_status_active));
+
+        }else{
+            reusableViewHolder.tv_transactionType.setTextColor(Color.BLACK);
+        }
 
         String transactionAmount = listOfTransactions.get(i).getCurrency().getDisplaySymbol() +
                 mContext.getResources().getString(R.string.space) +

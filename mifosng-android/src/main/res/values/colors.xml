@@ -80,5 +80,6 @@
 
     <color name="gray_btn_bg_color">#D0D0D0</color>
     <color name="cardview_login_hints">#BCBCBC</color>
+    <color name="total_color">#fdecec</color>
 
 </resources>
