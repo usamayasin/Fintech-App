@@ -8,14 +8,47 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/light_grey"
-    android:orientation="horizontal"
-    android:paddingBottom="8dp"
-    android:paddingLeft="4dp"
-    android:paddingRight="4dp"
-    android:paddingTop="8dp">
+    android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/loan_repayment_footer_layout"
+        android:weightSum="3">
+        <TextView
+            android:id="@+id/tv_total_paid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:text="@string/medium_text"
+            android:gravity="left"/>
+
+        <TextView
+            android:id="@+id/tv_total_upcoming"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:text="@string/medium_text"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/tv_total_overdue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:text="@string/medium_text"
+            android:gravity="right"/>
+
+    </LinearLayout>
+
+   <!-- <TextView
         android:id="@+id/tv_total_paid"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -40,6 +73,6 @@
         android:layout_weight="1"
         android:text="@string/medium_text"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:gravity="right"/>
+        android:gravity="right"/>-->
 
 </LinearLayout>

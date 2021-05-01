@@ -7,7 +7,10 @@ package com.mifos.mifosxdroid.online.groupslist
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
+import android.widget.EditText
 import android.widget.ProgressBar
 import androidx.appcompat.view.ActionMode
 import androidx.fragment.app.Fragment
@@ -32,6 +35,7 @@ import com.mifos.mifosxdroid.online.createnewgroup.CreateNewGroupFragment
 import com.mifos.objects.group.Group
 import com.mifos.utils.Constants
 import com.mifos.utils.FragmentConstants
+import kotlinx.android.synthetic.main.fragment_groups.*
 import java.util.*
 import javax.inject.Inject
 
@@ -76,6 +80,10 @@ class GroupsListFragment : MifosBaseFragment(), GroupsListMvpView, RecyclerItemC
     @JvmField
     @BindView(R.id.layout_error)
     var errorView: View? = null
+
+    @JvmField
+    @BindView(R.id.et_group_search)
+    var et_group_search: EditText? = null
 
     @JvmField
     @Inject
@@ -152,7 +160,39 @@ class GroupsListFragment : MifosBaseFragment(), GroupsListMvpView, RecyclerItemC
             mGroupsListPresenter!!.loadGroups(false, 0)
         }
         mGroupsListPresenter!!.loadDatabaseGroups()
+
+        /*iv_group_search_icon.setOnClickListener {
+
+        }*/
+        et_group_search?.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                if (s.isEmpty().not() && s.isBlank().not()) {
+                    searchList(s.toString())
+                }else{
+                    mGroupListAdapter!!.setGroups(mGroupList)
+                }
+            }
+        })
+
         return rootView
+    }
+
+    fun searchList(value: String) {
+        val filteredList= mGroupList?.filter { it -> it.name.toLowerCase()!!.contains(value.toLowerCase()) }
+        if (filteredList?.size!! > 0) {
+            mGroupListAdapter!!.setGroups(filteredList)
+        } else {
+            mGroupListAdapter!!.setGroups(mGroupList)
+
+        }
     }
 
     /**
@@ -368,6 +408,7 @@ class GroupsListFragment : MifosBaseFragment(), GroupsListMvpView, RecyclerItemC
             }
             return groupListFragment
         }
+
         /**
          * This method will be called, whenever GroupsListFragment will not have Parent Fragment.
          * So, Presenter make the call to Rest API and fetch the Client List and show in UI

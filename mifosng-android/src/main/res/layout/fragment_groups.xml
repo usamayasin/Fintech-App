@@ -38,7 +38,7 @@
                 app:srcCompat="@drawable/ic_search_black_24dp" />
 
             <EditText
-                android:id="@+id/et_search"
+                android:id="@+id/et_group_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"

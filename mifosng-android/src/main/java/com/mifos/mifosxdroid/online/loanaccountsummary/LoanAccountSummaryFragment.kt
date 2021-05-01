@@ -8,10 +8,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Button
-import android.widget.QuickContactBadge
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.content.ContextCompat
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -40,7 +37,8 @@ class LoanAccountSummaryFragment : ProgressableFragment(), LoanAccountSummaryMvp
 
     @kotlin.jvm.JvmField
     @BindView(R.id.view_status_indicator)
-    var view_status_indicator: View? = null
+    var view_status_indicator: ImageView? = null
+
 
     @kotlin.jvm.JvmField
     @BindView(R.id.tv_clientName)
@@ -328,41 +326,58 @@ class LoanAccountSummaryFragment : ProgressableFragment(), LoanAccountSummaryMvp
         //quickContactBadge.setImageToDefault();
         bt_processLoanTransaction!!.isEnabled = true
         if (loanWithAssociations.status.active) {
-            inflateLoanSummary(loanWithAssociations)
+            view_status_indicator!!.setColorFilter(
+                    ContextCompat.getColor(activity!!, R.color.loan_status_disbursed))
             // if Loan is already active
             // the Transaction Would be Make Repayment
-            view_status_indicator!!.setBackgroundColor(
-                    ContextCompat.getColor(activity!!, R.color.light_green))
+
+            /* view_status_indicator!!.setBackgroundColor(
+                     ContextCompat.getColor(activity!!, R.color.light_green))*/
             bt_processLoanTransaction!!.text = "Make Repayment"
             processLoanTransactionAction = TRANSACTION_REPAYMENT
+            inflateLoanSummary(loanWithAssociations)
         } else if (loanWithAssociations.status.pendingApproval) {
             // if Loan is Pending for Approval
             // the Action would be Approve Loan
-            view_status_indicator!!.setBackgroundColor(
+            view_status_indicator!!.setColorFilter(
                     ContextCompat.getColor(activity!!, R.color.light_yellow))
+
+            /* view_status_indicator!!.setBackgroundColor(
+                     ContextCompat.getColor(activity!!, R.color.light_yellow))*/
             bt_processLoanTransaction!!.text = "Approve Loan"
             processLoanTransactionAction = ACTION_APPROVE_LOAN
         } else if (loanWithAssociations.status.waitingForDisbursal) {
             // if Loan is Waiting for Disbursal
             // the Action would be Disburse Loan
-            view_status_indicator!!.setBackgroundColor(
+            view_status_indicator!!.setColorFilter(
                     ContextCompat.getColor(activity!!, R.color.blue))
+            /*
+              view_status_indicator!!.setBackgroundColor(
+                      ContextCompat.getColor(activity!!, R.color.blue))*/
             bt_processLoanTransaction!!.text = "Disburse Loan"
             processLoanTransactionAction = ACTION_DISBURSE_LOAN
         } else if (loanWithAssociations.status.closedObligationsMet) {
-            inflateLoanSummary(loanWithAssociations)
             // if Loan is Closed after the obligations are met
             // the make payment will be disabled so that no more payment can be collected
-            view_status_indicator!!.setBackgroundColor(
+
+            view_status_indicator!!.setColorFilter(
                     ContextCompat.getColor(activity!!, R.color.black))
+
+            /* view_status_indicator!!.setBackgroundColor(
+                     ContextCompat.getColor(activity!!, R.color.black))*/
             bt_processLoanTransaction!!.isEnabled = false
             bt_processLoanTransaction!!.text = "Make Repayment"
-        } else {
             inflateLoanSummary(loanWithAssociations)
-            view_status_indicator!!.setBackgroundColor(
+
+        } else {
+            view_status_indicator!!.setColorFilter(
                     ContextCompat.getColor(activity!!, R.color.black))
+
+            /*  view_status_indicator!!.setBackgroundColor(
+                      ContextCompat.getColor(activity!!, R.color.black))*/
             bt_processLoanTransaction!!.isEnabled = false
             bt_processLoanTransaction!!.text = "Loan Closed"
+            inflateLoanSummary(loanWithAssociations)
         }
     }
 
@@ -414,6 +429,7 @@ class LoanAccountSummaryFragment : ProgressableFragment(), LoanAccountSummaryMvp
         private const val ACTION_APPROVE_LOAN = 0
         private const val ACTION_DISBURSE_LOAN = 1
         private const val TRANSACTION_REPAYMENT = 2
+
         @kotlin.jvm.JvmStatic
         fun newInstance(loanAccountNumber: Int,
                         parentFragment: Boolean): LoanAccountSummaryFragment {
