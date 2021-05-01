@@ -178,6 +178,6 @@ public class MifosBaseActivity extends BasePassCodeActivity implements BaseActiv
 
     @Override
     public Class getPassCodeClass() {
-        return PassCodeActivity.class;
+        return null;
     }
 }

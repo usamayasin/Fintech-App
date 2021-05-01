@@ -30,6 +30,7 @@ import com.mifos.services.data.LoansPayload
 import com.mifos.utils.Constants
 import com.mifos.utils.DateHelper
 import com.mifos.utils.FragmentConstants
+import kotlinx.android.synthetic.main.fragment_add_loan.*
 import java.util.*
 import javax.inject.Inject
 import kotlin.properties.Delegates
@@ -547,6 +548,7 @@ class LoanAccountFragment : ProgressableDialogFragment(), OnDatePickListener, Lo
                 loanTermFrequency = mLoanTemplate.termFrequencyTypeOptions[position]
                         .id
                 spLoanTermFrequencyType!!.setSelection(loanTermFrequency)
+                setLoanTermPeriod(loanTermFrequency)
                 if (loanTermFrequency == 2) {
                     // Show and inflate Nth day and week spinners
                     showHideRepaidMonthSpinners(View.VISIBLE)
@@ -593,6 +595,17 @@ class LoanAccountFragment : ProgressableDialogFragment(), OnDatePickListener, Lo
         }
     }
 
+    fun setLoanTermPeriod(setLoanTermPeriod:Int){
+        when (setLoanTermPeriod) {
+            0 -> tv_loan_term_periods.text = "Days"
+            1 -> tv_loan_term_periods.text = "Weeks"
+            2 -> tv_loan_term_periods.text = "Months"
+            3 -> tv_loan_term_periods.text = "Years"
+            else -> {
+                tv_loan_term_periods.text = "Days"
+            }
+        }
+    }
     override fun onNothingSelected(parent: AdapterView<*>?) {}
     private fun showHideRepaidMonthSpinners(visibility: Int) {
         spRepaymentFreqNthDay!!.visibility = visibility

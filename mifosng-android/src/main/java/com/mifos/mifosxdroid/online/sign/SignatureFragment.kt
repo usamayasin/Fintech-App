@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.view.*
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mifos.api.GenericResponse
 import com.mifos.mifosxdroid.R
 import com.mifos.mifosxdroid.core.MifosBaseActivity
@@ -19,20 +18,19 @@ import com.mifos.mifosxdroid.core.util.Toaster
 import com.mifos.mifosxdroid.views.SignatureView
 import com.mifos.mifosxdroid.views.SignatureView.OnSignatureSaveListener
 import com.mifos.utils.*
+import kotlinx.android.synthetic.main.fragment_sign.*
 import java.io.File
 import javax.inject.Inject
+
 
 /**
  * Created by Tarun on 28-06-2017.
  */
-class SignatureFragment : MifosBaseFragment(), SignatureMvpView, BottomNavigationView.OnNavigationItemSelectedListener, OnSignatureSaveListener {
+class SignatureFragment : MifosBaseFragment(), SignatureMvpView, OnSignatureSaveListener {
     @JvmField
     @BindView(R.id.sign_view)
     var signView: SignatureView? = null
 
-    @JvmField
-    @BindView(R.id.navigation)
-    var bottomNavigationView: BottomNavigationView? = null
 
     @JvmField
     @Inject
@@ -61,11 +59,20 @@ class SignatureFragment : MifosBaseFragment(), SignatureMvpView, BottomNavigatio
         return rootView
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        btn_reset_sign.setOnClickListener{
+            signView!!.clear()
+        }
+
+        btn_from_gallery.setOnClickListener{
+            documentFromGallery
+        }
+    }
+
     private fun showInterface() {
         setToolbarTitle(getString(R.string.upload_sign))
         signView!!.setOnSignatureSaveListener(this)
-        bottomNavigationView!!.setOnNavigationItemSelectedListener(this)
-        bottomNavigationView!!.itemIconTintList = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -73,13 +80,13 @@ class SignatureFragment : MifosBaseFragment(), SignatureMvpView, BottomNavigatio
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.btn_reset_sign -> signView!!.clear()
-            R.id.btn_from_gallery -> documentFromGallery
-        }
-        return true
-    }
+//    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            R.id.btn_reset_sign -> signView!!.clear()
+//            R.id.btn_from_gallery -> documentFromGallery
+//        }
+//        return true
+//    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -143,12 +150,8 @@ class SignatureFragment : MifosBaseFragment(), SignatureMvpView, BottomNavigatio
     override val documentFromGallery: Unit
         get() {
             val intentDocument: Intent
-            intentDocument = if (AndroidVersionUtil.isApiVersionGreaterOrEqual(Build.VERSION_CODES.KITKAT)) {
-                Intent(Intent.ACTION_OPEN_DOCUMENT)
-            } else {
-                Intent(Intent.ACTION_GET_CONTENT)
-            }
-            intentDocument.addCategory(Intent.CATEGORY_OPENABLE)
+            intentDocument = Intent(Intent.ACTION_PICK)
+//            intentDocument.addCategory(Intent.CATEGORY_OPENABLE)
             intentDocument.type = "image/*"
             startActivityForResult(intentDocument, FILE_SELECT_CODE)
         }

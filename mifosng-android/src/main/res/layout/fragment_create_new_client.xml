@@ -17,7 +17,8 @@
     <!-- Actual content -->
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:padding="20dp">
 
         <LinearLayout style="@style/LinearLayout.Base">
 
@@ -107,8 +108,9 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="16dp"
                 android:text="@string/gender"
-                android:textSize="12sp"
-                style="@style/Base.TextAppearance.AppCompat.Small"/>
+                android:layout_marginStart="4dp"
+                style="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_marginLeft="4dp" />
 
             <androidx.appcompat.widget.AppCompatSpinner
                 style="@style/Widget.AppCompat.Spinner.Underlined"
@@ -117,6 +119,8 @@
                 android:layout_width="match_parent"
                 android:spinnerMode="dropdown"
                 android:paddingTop="10dp"
+                android:gravity="start"
+                android:layout_gravity="start"
                 android:backgroundTint="@color/gray_dark"/>
 
         </LinearLayout>
@@ -130,58 +134,66 @@
             <LinearLayout
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:baselineAlignBottom="true"
-                    android:layout_gravity="center"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_width="30dp"
-                    app:srcCompat="@drawable/ic_event_black_24dp"/>
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <LinearLayout
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        style="@style/Base.TextAppearance.AppCompat.Medium"
                         android:layout_height="match_parent"
                         android:layout_width="wrap_content"
-                        android:textSize="12sp"
                         android:text="@string/dob"/>
 
                     <TextView
                         android:id="@+id/tv_dateofbirth"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" />
-
+                        android:paddingTop="7dp"
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginLeft="4dp" />
                 </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_datePicker"
+                    android:layout_width="60dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_baseline_arrow_drop_down" />
 
             </LinearLayout>
             <View
-                android:background="@color/gray_dark"
-                android:layout_height="0.2dp"
-                android:layout_marginTop="8dp"
-                android:layout_width="match_parent"/>
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:background="@color/gray_dark" />
 
         </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="20dp">
                 <TextView
                     android:id="@+id/tv_client_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="16dp"
                     android:text="@string/client_type"
-                    android:textSize="12sp"
-                    style="@style/Base.TextAppearance.AppCompat.Small"/>
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    style="@style/Base.TextAppearance.AppCompat.Medium"/>
 
                 <androidx.appcompat.widget.AppCompatSpinner
                     style="@style/Widget.AppCompat.Spinner.Underlined"
@@ -196,15 +208,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="18dp">
             <TextView
                 android:id="@+id/tv_client_classification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
                 android:text="@string/client_classification"
-                android:textSize="12sp"
-                style="@style/Base.TextAppearance.AppCompat.Small"/>
+                android:layout_marginLeft="4dp"
+                android:layout_marginStart="4dp"
+                style="@style/Base.TextAppearance.AppCompat.Medium"/>
 
             <androidx.appcompat.widget.AppCompatSpinner
                 style="@style/Widget.AppCompat.Spinner.Underlined"
@@ -224,10 +237,11 @@
                 android:id="@+id/tv_office"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
                 android:text="@string/office_name_mandatory"
-                android:textSize="12sp"
-                style="@style/Base.TextAppearance.AppCompat.Small"/>
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:paddingTop="16dp"
+                style="@style/Base.TextAppearance.AppCompat.Medium"/>
 
             <androidx.appcompat.widget.AppCompatSpinner
                 style="@style/Widget.AppCompat.Spinner.Underlined"
@@ -247,10 +261,11 @@
                 android:id="@+id/tv_staff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
+                android:paddingTop="16dp"
                 android:text="@string/staff_names"
-                android:textSize="12sp"
-                style="@style/Base.TextAppearance.AppCompat.Small"/>
+                android:layout_marginLeft="4dp"
+                android:layout_marginStart="4dp"
+                style="@style/Base.TextAppearance.AppCompat.Medium"/>
             <androidx.appcompat.widget.AppCompatSpinner
                 style="@style/Widget.AppCompat.Spinner.Underlined"
                 android:id="@+id/sp_staff"
@@ -266,7 +281,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:checked="false"
-                android:paddingTop="10dp"
                 android:text="@string/client_active" />
 
             <LinearLayout
@@ -282,34 +296,38 @@
                     android:layout_width="match_parent"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:baselineAlignBottom="true"
-                        android:layout_gravity="center"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="4dp"
-                        android:layout_width="30dp"
-                        app:srcCompat="@drawable/ic_event_black_24dp"/>
-
                     <LinearLayout
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
                         android:layout_marginStart="8dp"
                         android:layout_width="match_parent"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_weight="1">
 
                         <TextView
-                            style="@style/Base.TextAppearance.AppCompat.Small"
+                            style="@style/Base.TextAppearance.AppCompat.Medium"
                             android:layout_height="match_parent"
                             android:layout_width="wrap_content"
-                            android:textSize="12sp"
                             android:text="@string/loan_submission_date"/>
 
                         <TextView
                             android:id="@+id/tv_submission_date"
                             android:layout_height="wrap_content"
-                            android:layout_width="wrap_content" />
+                            android:layout_width="wrap_content"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"/>
 
                     </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginEnd="14dp"
+                        android:layout_marginRight="14dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/ic_baseline_arrow_drop_down" />
 
                 </LinearLayout>
                 <View
@@ -323,7 +341,10 @@
             <Button
                 android:id="@+id/btn_submit"
                 style="@style/Button.Base"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/login_button_rounded"
                 android:text="@string/submit" />
 
         </LinearLayout>

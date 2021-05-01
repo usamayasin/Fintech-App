@@ -1,28 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.mifos.mifosxdroid.views.SignatureView
+        android:id="@+id/sign_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/sign_view"/>
-
+        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary">
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/navigation"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <LinearLayout
+            android:id="@+id/btn_reset_sign"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:itemIconTint="@color/light_blue"
-            app:itemTextColor="@android:color/white"
-            app:menu="@menu/sign_bottom_navbar"/>
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/login_button_rounded"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="45dp"
+                app:srcCompat="@drawable/ic_close" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reset"
+                android:textColor="@color/white"
+                android:autoSizeMaxTextSize="16sp"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeTextType="uniform" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_from_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/grey_button_rounded"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                app:srcCompat="@drawable/ic_gallery" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/from_gallery"
+                android:textColor="@color/black"
+                android:autoSizeMaxTextSize="16sp"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeTextType="uniform"
+                />
+
+        </LinearLayout>
+
     </LinearLayout>
-
-
 </LinearLayout>

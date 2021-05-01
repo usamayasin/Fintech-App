@@ -6,7 +6,7 @@
     <item tools:context=".online.sign.SignatureFragment"
         android:title="@string/upload"
         android:id="@+id/menu_upload_sign"
-        android:icon="@android:drawable/ic_menu_upload"
+        android:icon="@drawable/ic_file_upload"
         app:showAsAction="always|withText"/>
 
 </menu>

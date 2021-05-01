@@ -10,93 +10,115 @@
     android:layout_height="wrap_content"
     android:padding="8dp">
 
-    <TableLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:padding="8dp"
-        android:id="@+id/tableLayout"
-        android:background="@color/light_blue">
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp"
+            android:orientation="vertical"
+            android:id="@+id/tableLayout">
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/tableRow1">
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/tableRow1"
+                android:padding="5dp">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:id="@+id/textView2"
-                android:layout_height="wrap_content"
-                android:text="@string/charge_id"
-                />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/textView2"
+                    android:layout_height="wrap_content"
+                    android:text="@string/charge_id"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
 
-            <TextView
-                android:id="@+id/tv_charger_id"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                 />
-        </TableRow>
+                <TextView
+                    android:id="@+id/tv_charger_id"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
 
-        <TableRow
-            android:id="@+id/tableRow"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            <LinearLayout
+                android:id="@+id/tableRow"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="5dp"
+                >
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="@string/charge_name" />
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/charge_name"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
 
-            <TextView
-                android:id="@+id/tv_chargeName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-        </TableRow>
+                <TextView
+                    android:id="@+id/tv_chargeName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            </LinearLayout>
 
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            <LinearLayout
+                android:id="@+id/tableRow2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="5dp"
+                >
 
-            <TextView
-                android:id="@+id/tvn_charge_amount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/amount" />
+                <TextView
+                    android:id="@+id/tvn_charge_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/amount"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
 
-            <TextView
-                android:id="@+id/tv_charge_amount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/tv_charge_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
-        <TableRow
-            android:id="@+id/tableRow3"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            <LinearLayout
+                android:id="@+id/tableRow3"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="5dp"
+                >
 
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/due_date" />
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/due_date"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
 
-            <TextView
-                android:id="@+id/tv_charge_duedate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-        </TableRow>
-    </TableLayout>
+                <TextView
+                    android:id="@+id/tv_charge_duedate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 
 </RelativeLayout>

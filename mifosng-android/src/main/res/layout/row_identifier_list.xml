@@ -4,8 +4,7 @@
   ~ This project is licensed under the open source MPL V2.
   ~ See https://github.com/openMF/android-client/blob/master/LICENSE.md
   -->
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -13,99 +12,111 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="2dp"
         android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
         android:layout_marginTop="2dp"
-        app:cardCornerRadius="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp"
+        app:cardCornerRadius="10dp"
         app:cardElevation="2dp"
         app:cardPreventCornerOverlap="false"
-        app:contentPadding="0dp">
+        app:contentPadding="10dp">
 
-        <TableLayout
+        <LinearLayout
+            android:id="@+id/tableLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:padding="4dp"
-            android:id="@+id/tableLayout">
+            android:orientation="vertical"
+            android:padding="4dp">
 
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:padding="5dp">
 
                 <TextView
                     android:id="@+id/textView2"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/id" />
+                    android:text="@string/id"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/tv_identifier_id"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.86"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
                     android:gravity="left"
-                    android:text="" />
+                    app:layout_constraintStart_toEndOf="@+id/textView2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="12312" />
 
                 <ImageView
                     android:id="@+id/iv_identifier_options"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@drawable/ic_more_vert_black_24dp"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:srcCompat="@drawable/ic_more_vert_black_24dp" />
 
-            </TableRow>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TableRow
+            <LinearLayout
                 android:id="@+id/tableRow"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:padding="5dp">
 
                 <TextView
                     android:id="@+id/textView6"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/type" />
+                    android:text="@string/type"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/tv_identifier_type"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:gravity="left"
-                    android:text="" />
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="123213" />
 
-            </TableRow>
+            </LinearLayout>
 
-            <TableRow
+            <LinearLayout
                 android:id="@+id/tableRow2"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:padding="5dp">
 
                 <TextView
                     android:id="@+id/textView4"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/description" />
+                    android:text="@string/description"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/tv_identifier_description"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
                     android:gravity="left"
                     android:text="" />
 
-            </TableRow>
+            </LinearLayout>
 
-        </TableLayout>
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
