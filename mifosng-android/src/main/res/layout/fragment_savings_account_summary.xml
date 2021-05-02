@@ -19,12 +19,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="10sp">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cv_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -49,15 +51,25 @@
                         android:layout_height="75dp"
                         android:layout_gravity="center">
 
+                        <!-- <com.mifos.mifosxdroid.views.CircularImageView
+                             android:id="@+id/iv_loan_saving_summary_clientImage"
+                             style="@style/ClientImage"
+                             android:layout_gravity="center" />-->
+
                         <com.mifos.mifosxdroid.views.CircularImageView
                             android:id="@+id/iv_loan_saving_summary_clientImage"
-                            style="@style/ClientImage"
-                            android:layout_gravity="center" />
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:elevation="2dp"
+                            app:border="false"
+                            app:srcCompat="@drawable/ic_dp_placeholder" />
 
                         <ProgressBar
                             android:id="@+id/pb_imageProgressBar"
                             style="@style/ProgressBar.Base"
-                            android:layout_gravity="center" />
+                            android:layout_gravity="center"
+                            android:visibility="gone" />
 
                     </FrameLayout>
 
@@ -76,8 +88,10 @@
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
+            android:id="@+id/ll_productName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/cv_main"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
@@ -90,20 +104,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/product_name" />
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeTextType="uniform"
+                android:text="@string/product_name"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_savingsAccountNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="end" />
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="end"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_account_balance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_productName"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
@@ -116,20 +141,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/savings_account_balance" />
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeTextType="uniform"
+                android:text="@string/savings_account_balance"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_savings_account_balance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="end" />
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="end"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_total_deposit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_account_balance"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
@@ -142,20 +178,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/savings_total_deposits" />
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeTextType="uniform"
+                android:text="@string/savings_total_deposits"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_total_deposits"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="end" />
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="end"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_total_withdrawal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_total_deposit"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
@@ -167,20 +214,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/savings_total_withdrawals" />
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeTextType="uniform"
+                android:text="@string/savings_total_withdrawals"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_total_withdrawals"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="end" />
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="end"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_interest_earned"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_total_withdrawal"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
@@ -193,27 +251,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/savings_interest_earned" />
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeTextType="uniform"
+                android:text="@string/savings_interest_earned"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_interest_earned"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="end" />
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="end"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <TextView
+
             android:id="@+id/savings_transactions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_interest_earned"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeTextType="uniform"
             android:padding="5dp"
-            android:text="@string/transactions" />
+            android:text="@string/transactions"
+            android:textSize="14sp" />
 
         <ListView
             android:id="@+id/lv_savings_transactions"
@@ -222,45 +295,49 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="10dp"
+            android:layout_below="@+id/savings_transactions"/>
 
         <LinearLayout
             android:id="@+id/buttons"
             style="@style/LinearLayout.Width"
+            android:layout_alignParentBottom="true"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            >
 
             <Button
                 android:id="@+id/bt_withdrawal"
                 style="@style/Button.Base.Weight"
-                android:layout_weight="1"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:textSize="14sp"
                 android:background="@drawable/login_button_rounded"
                 android:text="@string/savings_make_withdrawal" />
 
             <Button
                 android:id="@+id/bt_deposit"
                 style="@style/Button.Base.Weight"
-                android:layout_weight="0.84"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:layout_weight="0.84"
+                android:textSize="14sp"
                 android:background="@drawable/login_button_rounded"
                 android:text="@string/savings_make_deposit" />
 
             <Button
                 android:id="@+id/bt_approve_saving"
                 style="@style/Button.Base.Weight"
-                android:layout_weight="1"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:textSize="14sp"
                 android:background="@drawable/login_button_rounded"
                 android:text="@string/approve_savings" />
 
         </LinearLayout>
 
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <!--<RelativeLayout
         android:layout_width="match_parent"

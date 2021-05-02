@@ -55,14 +55,19 @@
 
                             <com.mifos.mifosxdroid.views.CircularImageView
                                 android:id="@+id/iv_loan_account_summary_clientImage"
-                                style="@style/ClientImage"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:elevation="2dp"
                                 android:layout_gravity="center"
+                                app:srcCompat="@drawable/ic_dp_placeholder"
+                                app:border="false"
                                 />
 
                             <ProgressBar
                                 android:id="@+id/pb_imageProgressBar"
                                 style="@style/ProgressBar.Base"
-                                android:layout_gravity="center" />
+                                android:layout_gravity="center"
+                                android:visibility="gone"/>
 
                         </FrameLayout>
 
@@ -260,20 +265,33 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="start"
-                            android:text="@string/summary" />
+                            android:text="@string/summary"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="@string/loan" />
+                            android:text="@string/loan"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
                             android:text="@string/amount_paid" />
 
                         <TextView
@@ -281,7 +299,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="@string/balance" />
+                            android:text="@string/balance"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"/>
 
 
                     </LinearLayout>
@@ -300,6 +322,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="start"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:textStyle="bold"
                             android:text="@string/loan_principal" />
 
                         <TextView
@@ -308,6 +335,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:textStyle="bold"
                              />
 
                         <TextView
@@ -316,6 +348,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:textStyle="bold"
                              />
 
                         <TextView
@@ -324,6 +361,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:textStyle="bold"
                              />
 
 
@@ -343,7 +385,12 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="start"
-                            android:text="@string/loan_interest" />
+                            android:text="@string/loan_interest"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:id="@+id/tv_interest"
@@ -351,6 +398,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:textStyle="bold"
                             />
 
                         <TextView
@@ -359,6 +411,10 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
                            />
 
                         <TextView
@@ -367,6 +423,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:textStyle="bold"
                              />
 
 
@@ -386,7 +447,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="start"
-                            android:text="@string/loan_fees" />
+                            android:text="@string/loan_fees"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:id="@+id/tv_fees"
@@ -394,6 +459,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:textStyle="bold"
                              />
 
                         <TextView
@@ -402,6 +472,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:textStyle="bold"
                              />
 
                         <TextView
@@ -410,6 +485,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:textStyle="bold"
                            />
 
 
@@ -429,7 +509,12 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="start"
-                            android:text="@string/loan_penalty" />
+                            android:text="@string/loan_penalty"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:id="@+id/tv_penalty"
@@ -437,6 +522,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:textStyle="bold"
                              />
 
                         <TextView
@@ -445,6 +535,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:textStyle="bold"
                             />
 
                         <TextView
@@ -453,6 +548,10 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
+                            android:textSize="14sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
                             />
 
 
@@ -465,13 +564,17 @@
                         android:background="@color/total_color"
                         android:orientation="horizontal"
                         android:padding="5dp"
-                        android:weightSum="3">
+                        android:weightSum="4">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="start"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:textStyle="bold"
                             android:text="@string/total" />
 
                         <TextView
@@ -480,6 +583,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="start"
+                            android:text="N/A"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:textStyle="bold"
                             android:textColor="@color/red" />
 
 
@@ -489,7 +597,24 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="start"
+                            android:text="N/A"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/red" />
 
+                        <TextView
+                            android:id="@+id/tv_total_due"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:text="N/A"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:textStyle="bold"
                             android:textColor="@color/red" />
 
 
@@ -506,6 +631,11 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="@dimen/text_size_20sp"
                 android:layout_marginBottom="@dimen/marginItemsInSectionSmall"
+                android:textSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10sp"
+                android:textStyle="bold"
                 android:background="@drawable/login_button_rounded"
                 android:text="@string/process_loan_transaction" />
 

@@ -37,6 +37,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="10sp"
             android:text="12-02-2014"
             android:textColor="@color/primary_text" />
 
@@ -47,6 +52,11 @@
             android:layout_weight="1"
             android:gravity="end"
             android:text="200005"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="10sp"
             android:textColor="@color/primary_text" />
 
         <TextView
@@ -56,6 +66,11 @@
             android:layout_weight="1"
             android:gravity="end"
             android:text="200005"
+            android:textSize="14sp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="10sp"
+            android:textStyle="bold"
             android:textColor="@color/primary_text" />
 
     </LinearLayout>
