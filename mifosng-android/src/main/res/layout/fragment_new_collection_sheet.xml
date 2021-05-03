@@ -4,13 +4,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
         style="@style/LinearLayout.Base"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:layout_margin="20dp">
        <TextView
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_marginTop="10dp"
            android:layout_marginBottom="10dp"
-           android:textSize="24sp"
+           android:textSize="20sp"
            android:text="@string/generate_new"/>
         <TextView
             android:layout_width="match_parent"
@@ -19,61 +20,87 @@
             android:textSize="12sp"
             android:textColor="@color/gray_dark"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="20dp"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Select Office"/>
         <androidx.appcompat.widget.AppCompatSpinner
-            style="@style/spinner_style"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:spinnerMode="dropdown"
             android:paddingTop="10dp"
             android:id="@+id/sp_office_list"
             android:entries="@array/search_options"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="40dp"/>
+            android:layout_marginBottom="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_dark"
+            android:layout_marginBottom="20dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/repayment_date"
-            android:id="@+id/tv_repayment_date"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="5dp"
             android:text="@string/repayment_date"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_repayment_date"
+            android:layout_marginBottom="5dp"
+            android:text="@string/repayment_date"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_dark"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Select Loan Officer"/>
+
         <androidx.appcompat.widget.AppCompatSpinner
-            style="@style/spinner_style"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:id="@+id/sp_staff_list"
             android:spinnerMode="dropdown"
             android:paddingTop="10dp"
             android:entries="@array/search_options"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="40dp"/>
+            android:layout_marginBottom="5dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_dark"
+            android:layout_marginBottom="10dp"/>
 
-
-            <RelativeLayout
+            <LinearLayout
                 style="@style/LinearLayout.Width"
                 android:padding="10dp">
                 <Button
-                    android:layout_width="150dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/generate"
+                    android:layout_weight="1"
                     android:background="@drawable/login_button_rounded"
                     android:id="@+id/btn_fetch_collection_sheet"
                     android:textColor="@color/white"
                     android:layout_marginRight="20dp"/>
                 <Button
-                    android:layout_width="150dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/clear"
+                    android:layout_weight="1"
                     android:id="@+id/btn_clear"
                     android:layout_alignParentEnd="true"
-                    android:background="@drawable/login_button_rounded"
-                    android:backgroundTint="@color/light_grey"
-                    android:textColor="@color/white"
+                    android:background="@drawable/grey_button_rounded"
+                    android:textColor="@color/black"
                     android:layout_alignParentRight="true" />
-            </RelativeLayout>
+            </LinearLayout>
     </LinearLayout>
 </ScrollView>

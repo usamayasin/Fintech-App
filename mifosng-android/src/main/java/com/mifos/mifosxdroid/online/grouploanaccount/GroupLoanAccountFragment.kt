@@ -30,6 +30,7 @@ import com.mifos.services.data.GroupLoanPayload
 import com.mifos.utils.Constants
 import com.mifos.utils.DateHelper
 import com.mifos.utils.FragmentConstants
+import kotlinx.android.synthetic.main.fragment_add_loan.*
 import java.util.*
 import javax.inject.Inject
 
@@ -142,6 +143,10 @@ class GroupLoanAccountFragment : ProgressableDialogFragment(), OnDatePickListene
     @BindView(R.id.sp_linking_options)
     var spLinkingOptions: Spinner? = null
 
+    @kotlin.jvm.JvmField
+    @BindView(R.id.v_spLinkingOptions)
+    var v_spLinkingOptions: View? = null
+
     @JvmField
     @Inject
     var mGroupLoanAccountPresenter: GroupLoanAccountPresenter? = null
@@ -215,6 +220,7 @@ class GroupLoanAccountFragment : ProgressableDialogFragment(), OnDatePickListene
         //So, hiding the widgets
         tvLinkingOptions!!.visibility = View.GONE
         spLinkingOptions!!.visibility = View.GONE
+        v_spLinkingOptions!!.visibility = View.GONE
         inflateSubmissionDate()
         inflateDisbursementDate()
         inflateLoansProductSpinner()

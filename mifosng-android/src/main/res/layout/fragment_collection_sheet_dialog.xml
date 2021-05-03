@@ -7,7 +7,8 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="20dp"
     android:text="@string/found_sheet"
-    android:textSize="24sp"
+    android:textSize="18sp"
+    android:textColor="@color/black"
     android:gravity="center"/>
 
     <TextView
@@ -54,25 +55,30 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="right"
-        android:layout_marginRight="20dp">
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_margin="10dp">
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/fill_now"
-            android:background="@color/white"
-            android:textColor="@color/primary"
+            android:layout_weight="1"
+            android:background="@drawable/login_button_rounded"
+            android:textColor="@color/white"
             android:id="@+id/btn_fillnow"
+            android:layout_margin="5dp"
             />
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:textColor="@color/primary"
+            android:background="@drawable/login_button_rounded"
+            android:textColor="@color/white"
             android:text="@string/cancel"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:id="@+id/btn_cancel"/>
     </LinearLayout>
 </LinearLayout>

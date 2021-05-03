@@ -206,7 +206,7 @@ class ClientChargeFragment : MifosBaseFragment(), ClientChargeMvpView, RecyclerI
         menu.clear()
         val menuItemAddNewDocument = menu.add(Menu.NONE, MENU_ITEM_ADD_NEW_CHARGES, Menu.NONE, getString(R.string.add_new))
         menuItemAddNewDocument.icon = ResourcesCompat.getDrawable(resources,
-                R.drawable.ic_add_white_24dp, null)
+                R.drawable.ic_add_black, null)
         menuItemAddNewDocument.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
         super.onPrepareOptionsMenu(menu)
     }

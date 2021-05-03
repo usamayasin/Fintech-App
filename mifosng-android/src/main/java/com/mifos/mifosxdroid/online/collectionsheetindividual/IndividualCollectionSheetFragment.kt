@@ -15,6 +15,7 @@ import com.mifos.mifosxdroid.R
 import com.mifos.mifosxdroid.core.MifosBaseFragment
 import com.mifos.mifosxdroid.online.savedcollectionsheetindividual.SavedIndividualCollectionSheetFragment
 import com.mifos.utils.Constants
+import com.mifos.utils.Utils
 import java.util.*
 
 /**
@@ -41,6 +42,11 @@ class IndividualCollectionSheetFragment : MifosBaseFragment() {
         setupViewPager(viewPager)
         tabLayout!!.setupWithViewPager(viewPager)
         return rootView
+    }
+
+    override fun onResume() {
+        Utils.BACK_PRESSED = "IndividualCollectionSheetFragment"
+        super.onResume()
     }
 
     private fun setupViewPager(viewPager: ViewPager?) {

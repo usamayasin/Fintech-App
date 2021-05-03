@@ -145,6 +145,10 @@ class LoanAccountFragment : ProgressableDialogFragment(), OnDatePickListener, Lo
     var btnLoanSubmit: Button? = null
 
     @kotlin.jvm.JvmField
+    @BindView(R.id.v_spLinkingOptions)
+    var v_spLinkingOptions: View? = null
+
+    @kotlin.jvm.JvmField
     @Inject
     var mLoanAccountPresenter: LoanAccountPresenter? = null
     var submissionDate: String? = null
@@ -220,6 +224,12 @@ class LoanAccountFragment : ProgressableDialogFragment(), OnDatePickListener, Lo
         disbursementDate = DateHelper.getDateAsStringUsedForCollectionSheetPayload(disbursementDate).replace("-", " ")
         inflateSpinners()
         return rootView
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        spLinkingOptions?.visibility = View.VISIBLE
+        v_spLinkingOptions?.visibility = View.VISIBLE
     }
 
     @OnClick(R.id.btn_loan_submit)

@@ -74,6 +74,7 @@ class CreateNewGroupFragment : ProgressableFragment(), OnDatePickListener, Creat
 
     var ll_datePicker:LinearLayout?=null
     var iv_datePicker:ImageView?=null
+    var iv_submissionDatePicker:ImageView?=null
 
     @JvmField
     @Inject
@@ -106,6 +107,7 @@ class CreateNewGroupFragment : ProgressableFragment(), OnDatePickListener, Creat
         mCreateNewGroupPresenter!!.attachView(this)
         ll_datePicker=rootView.findViewById(R.id.ll_datePicker)
         iv_datePicker=rootView.findViewById(R.id.iv_datePicker)
+        iv_submissionDatePicker=rootView.findViewById(R.id.iv_submissionDatePicker)
         inflateOfficesSpinner()
         inflateSubmissionDate()
         inflateActivationDate()
@@ -172,6 +174,10 @@ class CreateNewGroupFragment : ProgressableFragment(), OnDatePickListener, Creat
         ll_datePicker!!.setOnClickListener { showDatePickerDialog() }
         iv_datePicker!!.setOnClickListener { showDatePickerDialog() }
         tv_activationDate!!.setOnClickListener { showDatePickerDialog() }
+
+        layout_submission?.setOnClickListener { showDatePickerDialog() }
+        iv_submissionDatePicker?.setOnClickListener { showDatePickerDialog() }
+        tv_activationDate?.setOnClickListener { showDatePickerDialog() }
     }
 
     override fun onDatePicked(date: String) {

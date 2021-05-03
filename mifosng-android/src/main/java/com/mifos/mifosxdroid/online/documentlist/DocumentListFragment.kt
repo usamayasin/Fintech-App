@@ -283,7 +283,7 @@ class DocumentListFragment : MifosBaseFragment(), DocumentListMvpView, RecyclerI
         menu.clear()
         val menuItemAddNewDocument = menu.add(Menu.NONE, MENU_ITEM_ADD_NEW_DOCUMENT, Menu.NONE, getString(R.string.add_new))
         menuItemAddNewDocument.icon = ContextCompat
-                .getDrawable(activity!!, R.drawable.ic_add_white_24dp)
+                .getDrawable(activity!!, R.drawable.ic_add_black)
         menuItemAddNewDocument.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
         super.onPrepareOptionsMenu(menu)
     }

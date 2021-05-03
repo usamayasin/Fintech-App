@@ -11,8 +11,7 @@
 
         <LinearLayout style="@style/LinearLayout.Base">
 
-            <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cv_client"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,13 +38,20 @@
 
                             <com.mifos.mifosxdroid.views.CircularImageView
                                 android:id="@+id/iv_clientImage"
-                                style="@style/ClientImage"
-                                android:layout_gravity="center" />
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:elevation="2dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/ic_dp_placeholder"
+                                app:border="false"/>
 
                             <ProgressBar
                                 android:id="@+id/pb_imageProgressBar"
                                 style="@style/ProgressBar.Base"
-                                android:layout_gravity="center" />
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:visibility="gone"/>
 
                         </FrameLayout>
 

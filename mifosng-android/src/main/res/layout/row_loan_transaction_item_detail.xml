@@ -7,10 +7,8 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/transaction_detail_bg">
-
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -29,8 +27,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:gravity="left"
+                android:gravity="center"
                 android:text="@string/id"
+                android:textSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10dp"
+
                 android:textColor="@color/black" />
 
             <TextView
@@ -39,9 +42,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:gravity="right"
+                android:gravity="center"
                 android:text="09214"
-                android:textColor="@color/black" />
+                android:textSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
 
         </TableRow>
 
@@ -56,8 +64,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:gravity="left"
+                android:gravity="center"
                 android:text="@string/office"
+                android:textSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10dp"
                 android:textColor="@color/black" />
 
             <TextView
@@ -66,9 +78,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:gravity="right"
+                android:gravity="center"
                 android:text="@string/withdrawal"
-                android:textColor="@color/black" />
+                android:textSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
         </TableRow>
 
     </TableLayout>
@@ -79,16 +96,19 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/break_down"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textSize="14sp"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMaxTextSize="14sp"
+        android:autoSizeMinTextSize="10dp" />
 
-    <View
+   <!-- <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginBottom="4dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="4dp"
-        android:background="@color/black" />
+        android:background="@color/black" />-->
 
     <TableLayout
         android:layout_width="match_parent"
@@ -100,7 +120,7 @@
             android:id="@+id/tableRow3"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@color/transaction_detail_table_header_bg">
+            android:background="@color/total_color">
 
             <TextView
                 android:id="@+id/tv_title_principal"
@@ -108,42 +128,57 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
                 android:padding="4dp"
+                android:gravity="center"
                 android:text="@string/loan_principal"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="bold" />
+                android:textSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10dp"
+                android:textColor="@color/black"
+                />
 
             <TextView
                 android:id="@+id/tv_title_interest"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
-                android:gravity="right"
+                android:gravity="center"
                 android:padding="4dp"
                 android:text="@string/loan_interest"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="bold" />
+                android:textSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10dp"
+                android:textColor="@color/black"
+                 />
 
             <TextView
                 android:id="@+id/tv_title_fees"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
-                android:gravity="right"
+                android:gravity="center"
                 android:padding="4dp"
                 android:text="@string/loan_fees"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="bold" />
+                android:textSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10dp"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/tv_title_penalties"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
-                android:gravity="right"
+                android:gravity="center"
                 android:padding="4dp"
                 android:text="@string/loan_penalty"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="bold" />
+                android:textSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10dp"
+                android:textColor="@color/black" />
 
         </TableRow>
 
@@ -158,34 +193,51 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
                 android:padding="4dp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:gravity="center"
+                android:textSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tv_interest"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
-                android:gravity="right"
+                android:gravity="center"
                 android:padding="4dp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10dp" />
 
             <TextView
                 android:id="@+id/tv_fees"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
-                android:gravity="right"
+                android:gravity="center"
                 android:padding="4dp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10dp" />
 
             <TextView
                 android:id="@+id/tv_penalties"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
-                android:gravity="right"
+                android:gravity="center"
                 android:padding="4dp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10dp" />
 
 
         </TableRow>

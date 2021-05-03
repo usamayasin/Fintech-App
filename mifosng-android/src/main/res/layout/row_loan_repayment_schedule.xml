@@ -5,45 +5,75 @@
   ~ See https://github.com/openMF/android-client/blob/master/LICENSE.md
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardUseCompatPadding="true">
 
-    <View
-        android:id="@+id/view_status_indicator"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:background="@color/light_red"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="8dp"/>
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_weight="1"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="12-02-2014"
-        android:textColor="@color/primary_text"
-        android:id="@+id/tv_repayment_due_date"/>
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:weightSum="3">
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="200005"
-        android:textColor="@color/primary_text"
-        android:id="@+id/tv_repayment_amount_due"/>
+        <View
+            android:id="@+id/view_status_indicator"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center|start"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/light_red" />
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:text="200005"
-        android:gravity="right"
-        android:textColor="@color/primary_text"
-        android:id="@+id/tv_repayment_amount_paid"/>
+        <TextView
+            android:id="@+id/tv_repayment_due_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="10sp"
+            android:text="12-02-2014"
+            android:textColor="@color/primary_text" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_repayment_amount_due"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="200005"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="10sp"
+            android:textColor="@color/primary_text" />
+
+        <TextView
+            android:id="@+id/tv_repayment_amount_paid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="200005"
+            android:textSize="14sp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="10sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_text" />
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

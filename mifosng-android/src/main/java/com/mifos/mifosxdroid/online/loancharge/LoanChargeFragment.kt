@@ -158,7 +158,7 @@ class LoanChargeFragment : MifosBaseFragment(), LoanChargeMvpView, RecyclerItemC
         menu.clear()
         val menuItemAddNewLoanCharge = menu.add(Menu.NONE, MENU_ITEM_ADD_NEW_LOAN_CHARGES,
                 Menu.NONE, getString(R.string.add_new))
-        menuItemAddNewLoanCharge.icon = resources.getDrawable(R.drawable.ic_add_white_24dp)
+        menuItemAddNewLoanCharge.icon = resources.getDrawable(R.drawable.ic_add_black)
         menuItemAddNewLoanCharge.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
         super.onPrepareOptionsMenu(menu)
     }

@@ -5,55 +5,138 @@
   ~ See https://github.com/openMF/android-client/blob/master/LICENSE.md
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:paddingBottom="8dp"
-    android:paddingLeft="4dp"
-    android:paddingRight="4dp"
-    android:paddingTop="8dp">
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardUseCompatPadding="true">
 
-    <TextView
-        android:id="@+id/tv_arrow"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        android:shadowColor="#22000000"
-        android:shadowDx="3"
-        android:shadowDy="3"
-        android:shadowRadius="1"
-        android:text="{fa-android}"
-        android:textColor="@color/primary_text"
-        android:textSize="20sp" />
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/tv_transaction_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autoSizeMaxTextSize="12sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="start"
+                android:textSize="12sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/tv_transaction_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="end"
+                android:textSize="14sp"
+                android:textStyle="bold">
+
+            </TextView>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_transaction_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="start"
+            android:text="@string/withdrawal"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_arrow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:shadowColor="#22000000"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="1"
+            android:text="{fa-android}"
+            android:textColor="@color/primary_text"
+            android:textSize="20sp"
+            android:visibility="gone" />
 
 
-    <TextView
-        android:id="@+id/tv_transaction_date"
-        android:layout_width="0dp"
+    </LinearLayout>
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.35"
-        android:gravity="left"
-        android:text="May 24,2014"
-        android:textColor="@color/primary_text" />
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:weightSum="4">
 
-    <TextView
-        android:id="@+id/tv_transaction_type"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.30"
-        android:gravity="center"
-        android:text="@string/withdrawal"
-        android:textColor="@color/primary_text" />
-
-    <TextView
-        android:id="@+id/tv_transaction_amount"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.35"
-        android:gravity="right"
-        android:text="2500 INR"
-        android:textColor="@color/primary_text" />
+        <TextView
+            android:id="@+id/tv_arrow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:shadowColor="#22000000"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="1"
+            android:text="{fa-android}"
+            android:textColor="@color/primary_text"
+            android:textSize="20sp"
+            android:layout_marginEnd="8dp" />
 
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_transaction_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="May 24,2014"
+            android:textColor="@color/primary_text" />
+
+        <TextView
+            android:id="@+id/tv_transaction_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/withdrawal"
+            android:textColor="@color/primary_text" />
+
+        <TextView
+            android:id="@+id/tv_transaction_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="2500 INR"
+            android:textColor="@color/primary_text" />
+
+    </LinearLayout>-->
+
+
+</androidx.cardview.widget.CardView>

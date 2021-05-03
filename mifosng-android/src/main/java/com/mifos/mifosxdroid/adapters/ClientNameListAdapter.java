@@ -9,6 +9,8 @@ import android.content.Context;
 import android.graphics.Color;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,12 +63,13 @@ public class ClientNameListAdapter extends SelectableAdapter<RecyclerView.ViewHo
 
             Client client = getItem(position);
             String clientName;
-            if (client.getFullname() == null) {
+            Log.e("Dislplay name /////////", client.getDisplayName());
+            /*if (client.getFullname() == null) {
                 clientName = client.getFirstname() + " " + client.getLastname();
             } else {
                 clientName = client.getFullname();
-            }
-            ((ViewHolder) holder).tv_clientName.setText(clientName);
+            }*/
+            ((ViewHolder) holder).tv_clientName.setText( client.getDisplayName());
             ((ViewHolder) holder).tv_clientAccountNumber.setText(client.getAccountNo());
 
             // lazy the  load profile picture
