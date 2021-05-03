@@ -11,13 +11,12 @@
     android:outAnimation="@android:anim/fade_out">
 
     <!-- Comment this out when editing the actual content -->
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
-
-    <!-- Actual content -->
+     <ProgressBar
+         android:id="@+id/progress_bar"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center" />
+     Actual content
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -55,14 +54,18 @@
 
                             <com.mifos.mifosxdroid.views.CircularImageView
                                 android:id="@+id/iv_loan_account_summary_clientImage"
-                                style="@style/ClientImage"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
                                 android:layout_gravity="center"
-                                />
+                                android:elevation="2dp"
+                                app:border="false"
+                                app:srcCompat="@drawable/ic_dp_placeholder" />
 
                             <ProgressBar
                                 android:id="@+id/pb_imageProgressBar"
                                 style="@style/ProgressBar.Base"
-                                android:layout_gravity="center" />
+                                android:layout_gravity="center"
+                                android:visibility="gone" />
 
                         </FrameLayout>
 
@@ -73,8 +76,7 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/marginItemsInSectionSmall"
                             android:layout_marginBottom="@dimen/marginItemsInSectionSmall"
-                            android:padding="10dp"
-                             />
+                            android:padding="10dp" />
 
                     </LinearLayout>
 
@@ -96,6 +98,15 @@
                             android:padding="12dp">
 
                             <TextView
+                                android:id="@+id/tv_loanAccountNumber"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:ellipsize="end"
+                                android:lines="1"
+                                android:textColor="@color/black" />
+
+                            <TextView
                                 android:id="@+id/tv_loan_product_short_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -103,16 +114,6 @@
                                 android:lines="1"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tv_loanAccountNumber"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:ellipsize="end"
-                                android:lines="1"
-
-                                android:textColor="@color/black" />
 
 
                         </LinearLayout>
@@ -149,7 +150,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                   />
+                    android:autoSizeMaxTextSize="14sp"
+                    android:autoSizeMinTextSize="10sp"
+                    android:autoSizeTextType="uniform"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
 
             </LinearLayout>
 
@@ -175,7 +180,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                     />
+                    android:autoSizeMaxTextSize="14sp"
+                    android:autoSizeMinTextSize="10sp"
+                    android:autoSizeTextType="uniform"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
 
             </LinearLayout>
 
@@ -201,7 +210,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    />
+                    android:autoSizeMaxTextSize="14sp"
+                    android:autoSizeMinTextSize="10sp"
+                    android:autoSizeTextType="uniform"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
 
             </LinearLayout>
 
@@ -227,7 +240,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    />
+                    android:autoSizeMaxTextSize="14sp"
+                    android:autoSizeMinTextSize="10sp"
+                    android:autoSizeTextType="uniform"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
 
             </LinearLayout>
 
@@ -241,8 +258,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:orientation="vertical"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp">
@@ -250,6 +265,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:orientation="horizontal"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
@@ -259,29 +276,45 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
                             android:gravity="start"
-                            android:text="@string/summary" />
+                            android:text="@string/summary"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="@string/loan" />
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
+                            android:gravity="start"
+                            android:text="@string/loan"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="@string/amount_paid" />
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
+                            android:gravity="start"
+                            android:text="@string/amount_paid"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="end"
-                            android:text="@string/balance" />
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
+                            android:gravity="start"
+                            android:text="@string/balance"
+                            android:textSize="14sp" />
 
 
                     </LinearLayout>
@@ -289,7 +322,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
                         android:orientation="horizontal"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
@@ -299,32 +334,49 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
                             android:gravity="start"
-                            android:text="@string/loan_principal" />
+                            android:text="@string/loan_principal"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_principal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
-                             />
+                            android:gravity="start"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_loan_principal_paid"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
-                             />
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
+                            android:gravity="start"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_loan_principal_due"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="end"
-                             />
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
+                            android:gravity="start"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
 
                     </LinearLayout>
@@ -332,7 +384,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
                         android:orientation="horizontal"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
@@ -342,32 +396,49 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
                             android:gravity="start"
-                            android:text="@string/loan_interest" />
+                            android:text="@string/loan_interest"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_interest"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
-                            />
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
+                            android:gravity="start"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_loan_interest_paid"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
-                           />
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
+                            android:gravity="start"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_loan_interest_due"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="end"
-                             />
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
+                            android:gravity="start"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
 
                     </LinearLayout>
@@ -375,7 +446,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
                         android:orientation="horizontal"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
@@ -385,32 +458,48 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
                             android:gravity="start"
-                            android:text="@string/loan_fees" />
+                            android:text="@string/loan_fees"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_fees"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
-                             />
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
+                            android:gravity="start"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_loan_fees_paid"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
-                             />
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
+                            android:gravity="start"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_loan_fees_due"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="end"
-                           />
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
+                            android:gravity="start"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
 
                     </LinearLayout>
@@ -418,7 +507,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
                         android:orientation="horizontal"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
@@ -428,32 +519,49 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
                             android:gravity="start"
-                            android:text="@string/loan_penalty" />
+                            android:text="@string/loan_penalty"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_penalty"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
-                             />
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
+                            android:gravity="start"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_loan_penalty_paid"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
-                            />
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
+                            android:gravity="start"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_loan_penalty_due"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="end"
-                            />
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
+                            android:gravity="start"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
 
                     </LinearLayout>
@@ -464,13 +572,19 @@
                         android:layout_marginTop="10dp"
                         android:background="@color/total_color"
                         android:orientation="horizontal"
-                        android:padding="5dp"
-                        android:weightSum="3">
+                        android:paddingStart="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="10dp"
+                        android:weightSum="4">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
                             android:gravity="start"
                             android:text="@string/total" />
 
@@ -479,8 +593,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
                             android:gravity="start"
-                            android:textColor="@color/red" />
+                            android:text="N/A"
+                            android:textColor="@color/red"
+                            android:textStyle="bold" />
 
 
                         <TextView
@@ -488,9 +607,26 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
                             android:gravity="start"
+                            android:text="N/A"
+                            android:textColor="@color/red"
+                            android:textStyle="bold" />
 
-                            android:textColor="@color/red" />
+                        <TextView
+                            android:id="@+id/tv_total_due"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeTextType="uniform"
+                            android:gravity="start"
+                            android:text="N/A"
+                            android:textColor="@color/red"
+                            android:textStyle="bold" />
 
 
                     </LinearLayout>
@@ -506,8 +642,13 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="@dimen/text_size_20sp"
                 android:layout_marginBottom="@dimen/marginItemsInSectionSmall"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeTextType="uniform"
                 android:background="@drawable/login_button_rounded"
-                android:text="@string/process_loan_transaction" />
+                android:text="@string/process_loan_transaction"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

@@ -130,6 +130,10 @@ public class LoanTransactionAdapter extends BaseExpandableListAdapter {
 
         return view;
     }
+    public void setTransactionList(List<Transaction> transactionList){
+        this.transactionList=transactionList;
+        notifyDataSetChanged();
+    }
 
     @Override
     public View getChildView(int i, int i2, boolean b, View view, ViewGroup viewGroup) {

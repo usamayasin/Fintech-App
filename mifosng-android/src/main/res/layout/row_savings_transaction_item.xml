@@ -8,7 +8,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:layout_marginBottom="5dp"
+    android:layout_marginBottom="2dp"
     app:cardCornerRadius="10dp"
     app:cardUseCompatPadding="true">
 
@@ -26,7 +26,11 @@
             android:layout_weight="0.35"
             android:gravity="left"
             android:text="May 24,2014"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="10dp"/>
 
         <TextView
             android:id="@+id/tv_transaction_type"
@@ -36,7 +40,11 @@
             android:layout_weight="0.30"
             android:gravity="center"
             android:text="@string/withdrawal"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="10dp"/>
 
         <TextView
             android:id="@+id/tv_transaction_amount"
@@ -46,7 +54,11 @@
             android:layout_weight="0.35"
             android:gravity="right"
             android:text="2500 INR"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="10dp"/>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

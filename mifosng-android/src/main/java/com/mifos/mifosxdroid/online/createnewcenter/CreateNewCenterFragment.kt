@@ -63,6 +63,11 @@ class CreateNewCenterFragment : MifosBaseFragment(), OnDatePickListener, CreateN
     var llCenter: LinearLayout? = null
 
     @JvmField
+    @BindView(R.id.iv_submissionCreateNewCenterDatePicker)
+    var iv_submissionCreateNewCenterDatePicker: ImageView? = null
+
+
+    @JvmField
     @BindView(R.id.layout_submission)
     var layout_submission: LinearLayout? = null
     var officeId = 0
@@ -124,6 +129,8 @@ class CreateNewCenterFragment : MifosBaseFragment(), OnDatePickListener, CreateN
         newDatePicker = MFDatePicker.newInsance(this)
         tv_activationDate!!.text = MFDatePicker.getDatePickedAsString()
         tv_activationDate!!.setOnClickListener { (newDatePicker as MFDatePicker?)!!.show(activity!!.supportFragmentManager, FragmentConstants.DFRAG_DATE_PICKER) }
+        layout_submission!!.setOnClickListener {  (newDatePicker as MFDatePicker?)!!.show(activity!!.supportFragmentManager, FragmentConstants.DFRAG_DATE_PICKER) }
+        iv_submissionCreateNewCenterDatePicker!!.setOnClickListener { (newDatePicker as MFDatePicker?)!!.show(activity!!.supportFragmentManager, FragmentConstants.DFRAG_DATE_PICKER) }
     }
 
     override fun onDatePicked(date: String) {

@@ -3,6 +3,7 @@
   ~ See https://github.com/openMF/android-client/blob/master/LICENSE.md
   -->
 <ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/view_flipper"
     android:layout_width="match_parent"
@@ -24,54 +25,62 @@
         android:layout_height="match_parent"
         android:layout_margin="16dp">
 
-        <LinearLayout
-            android:id="@+id/linear_layout_1"
-            android:layout_width="fill_parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:orientation="horizontal"
-            android:paddingBottom="8dp">
+            app:cardCornerRadius="10dp"
+            app:cardUseCompatPadding="true">
 
-            <TextView
-                android:id="@+id/tv_clientName"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:id="@+id/linear_layout_1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="0.8"
-                android:text="@string/client_name"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-            <QuickContactBadge
-                android:id="@+id/quickContactBadge_client"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|end"
-                android:layout_marginLeft="100dp" />
+                <TextView
+                    android:id="@+id/tv_clientName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.8"
+                    android:text="@string/client_name"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        </LinearLayout>
+                <QuickContactBadge
+                    android:id="@+id/quickContactBadge_client"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|end"
+                    android:layout_marginLeft="100dp" />
 
-        <View
-            android:id="@+id/divider_1"
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/linear_layout_1"
-            android:background="@color/black" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!--  <View
+              android:id="@+id/divider_1"
+              android:layout_width="fill_parent"
+              android:layout_height="1dp"
+              android:layout_below="@+id/cv_1"
+              android:background="@color/black" />-->
 
         <TableLayout
             android:id="@+id/tbl_transaction_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/divider_1"
-            android:layout_marginTop="4dp">
+            android:layout_below="@+id/cv_1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp">
 
             <TableRow
                 android:id="@+id/tbl_transaction_details_row_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="4dp"
-                android:paddingTop="4dp">
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -96,8 +105,8 @@
                 android:id="@+id/tbl_transaction_details_row_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="4dp"
-                android:paddingTop="4dp">
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
 
                 <TextView
                     android:id="@+id/transaction_date"
@@ -119,38 +128,11 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/tbl_transaction_details_row_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="4dp"
-                android:paddingTop="4dp">
-
-                <TextView
-                    android:id="@+id/tv_transaction_amount"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="0.6"
-                    android:text="@string/amount"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <EditText
-                    android:id="@+id/et_transaction_amount"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="0.4"
-                    android:gravity="left"
-                    android:inputType="numberDecimal" />
-
-            </TableRow>
-
-            <TableRow
                 android:id="@+id/tbl_transaction_details_row_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="4dp"
-                android:paddingTop="4dp">
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
 
                 <TextView
                     android:id="@+id/tv_payment_type"
@@ -170,27 +152,89 @@
 
             </TableRow>
 
+            <TableRow
+                android:id="@+id/tbl_transaction_details_row_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <!-- <TextView
+                     android:id="@+id/tv_transaction_amount"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_vertical"
+                     android:layout_weight="0.6"
+                     android:text="@string/amount"
+                     android:visibility="gone"
+                     android:textAppearance="?android:attr/textAppearanceMedium" />-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInput.Base"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/black"
+                    android:textColorHint="@color/black">
+
+                    <EditText
+                        android:id="@+id/et_transaction_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:hint="@string/amount"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:singleLine="true"
+                        android:textColorHint="@color/black"
+                        android:textSize="15sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- <EditText
+                     android:id="@+id/et_transaction_amount"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_vertical"
+                     android:layout_weight="0.4"
+                     android:gravity="left"
+                     android:inputType="numberDecimal" />-->
+
+            </TableRow>
+
         </TableLayout>
 
-        <Button
-            android:id="@+id/bt_cancelTransaction"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_below="@+id/tbl_transaction_details"
-            android:layout_marginTop="8dp"
-            android:text="@string/cancel"
-            android:layout_alignParentLeft="true" />
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-        <Button
-            android:id="@+id/bt_reviewTransaction"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/tbl_transaction_details"
-            android:layout_marginTop="8dp"
-            android:text="@string/review_transaction"
-            android:layout_alignParentRight="true" />
+            <Button
+                android:id="@+id/bt_cancelTransaction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tbl_transaction_details"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/login_button_rounded"
+                android:text="@string/cancel"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/bt_reviewTransaction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/login_button_rounded"
+                android:text="@string/review_transaction"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
 
     </RelativeLayout>
 </ViewFlipper>

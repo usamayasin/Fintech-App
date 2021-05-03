@@ -187,12 +187,14 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:paddingTop="16dp"
-                android:visibility="gone">
+                android:visibility="gone"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
                     <ImageView
                         android:layout_width="30dp"
@@ -200,13 +202,15 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="4dp"
                         android:baselineAlignBottom="true"
+                        android:visibility="gone"
                         app:srcCompat="@drawable/ic_event_black_24dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
@@ -222,6 +226,16 @@
                             android:layout_height="wrap_content" />
 
                     </LinearLayout>
+                    <ImageView
+                        android:id="@+id/iv_submissionDatePicker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginEnd="14dp"
+                        android:layout_marginRight="14dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/ic_baseline_arrow_drop_down" />
 
                 </LinearLayout>
 
