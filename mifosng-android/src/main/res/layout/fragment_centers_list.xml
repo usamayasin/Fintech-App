@@ -24,7 +24,7 @@
             android:layout_centerHorizontal="true"
             android:layout_weight="1"
             android:padding="10dp"
-            android:scrollbars="vertical"
+            android:scrollbars="none"
             android:fadeScrollbars="false"/>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

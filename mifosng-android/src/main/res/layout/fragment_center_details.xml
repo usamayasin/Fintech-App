@@ -1,191 +1,365 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 ~ This project is licensed under the open source MPL V2.
 ~ See https://github.com/openMF/android-client/blob/master/LICENSE.md
 -->
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_center"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/rl_center">
+    android:layout_height="match_parent">
 
-    <ScrollView style="@style/ScrollView.Base"
-                android:id="@+id/container">
+    <ScrollView
+        android:id="@+id/container"
+        style="@style/ScrollView.Base">
 
-        <TableLayout
+        <LinearLayout
             android:id="@+id/tbl_centerDetails"
-            style="@style/Table">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:gravity="center_horizontal"
-                style="@style/TextView.Client"
-                android:textColor="@color/black"
-                android:text="@string/center_details"/>
-
-            <TableRow
-                android:id="@+id/row_activation_date"
-                style="@style/TableRow">
-
-                <TextView
-                    style="@style/TextView.Row"
-                    android:text="@string/activation_date" />
-
-                <TextView
-                    android:id="@+id/tv_center_activation_date"
-                    style="@style/TextView.Row.Value" />
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/row_meeting_date"
-                style="@style/TableRow">
-
-                <TextView
-                    style="@style/TextView.Row"
-                    android:text="@string/next_meeting_on" />
-
-                <TextView
-                    android:id="@+id/tv_meeting_date"
-                    style="@style/TextView.Row.Value" />
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/row_meeting_frequency"
-                style="@style/TableRow">
-
-                <TextView
-                    style="@style/TextView.Row"
-                    android:text="@string/meeting_frequency" />
-
-                <TextView
-                    style="@style/TextView.Row.Value"
-                    android:id="@+id/tv_meeting_frequency" />
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/row_staff_name"
-                style="@style/TableRow">
-
-                <TextView
-                    style="@style/TextView.Row"
-                    android:text="@string/staff_name" />
-
-                <TextView
-                    android:id="@+id/tv_staff_name"
-                    style="@style/TextView.Row.Value" />
-            </TableRow>
-
-            <TextView
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:layout_height="1dp"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:background="@color/black"/>
-
-            <TextView
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:gravity="center_horizontal"
-                android:paddingTop="16dp"
-                style="@style/TextView.Client"
-                android:textColor="@color/black"
-                android:text="@string/summary_info"/>
+                app:cardCornerRadius="10dp"
+                app:cardUseCompatPadding="true">
 
-            <TableRow
-                android:id="@+id/row_active_clients"
-                style="@style/TableRow">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                <TextView
-                    style="@style/TextView.Row"
-                    android:text="@string/active_clients" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@color/red_app"
+                        android:gravity="center_horizontal"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="@string/center_details"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/tv_active_clients"
-                    style="@style/TextView.Row.Value" />
-            </TableRow>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp">
 
-            <TableRow
-                android:id="@+id/row_active_group_loans"
-                style="@style/TableRow">
 
-                <TextView
-                    style="@style/TextView.Row"
-                    android:text="@string/active_group_loans" />
+                        <LinearLayout
+                            android:id="@+id/row_activation_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="5dp"
+                            android:weightSum="2">
 
-                <TextView
-                    android:id="@+id/tv_active_group_loans"
-                    style="@style/TextView.Row.Value" />
-            </TableRow>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/activation_date"
+                                android:textSize="14sp" />
 
-            <TableRow
-                android:id="@+id/row_active_client_loans"
-                style="@style/TableRow">
+                            <TextView
+                                android:id="@+id/tv_center_activation_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
 
-                <TextView
-                    style="@style/TextView.Row"
-                    android:text="@string/active_client_loans" />
+                        <LinearLayout
+                            android:id="@+id/row_meeting_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="5dp"
+                            android:weightSum="2">
 
-                <TextView
-                    style="@style/TextView.Row.Value"
-                    android:id="@+id/tv_active_client_loans" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/next_meeting_on"
+                                android:textSize="14sp" />
 
-            </TableRow>
+                            <TextView
+                                android:id="@+id/tv_meeting_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
 
-            <TableRow
-                android:id="@+id/row_active_group_borrowers"
-                style="@style/TableRow">
+                        <LinearLayout
+                            android:id="@+id/row_meeting_frequency"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="5dp"
+                            android:weightSum="2">
 
-                <TextView
-                    style="@style/TextView.Row"
-                    android:text="@string/active_group_borrowers" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/meeting_frequency"
+                                android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/tv_active_group_borrowers"
-                    style="@style/TextView.Row.Value" />
-            </TableRow>
+                            <TextView
+                                android:id="@+id/tv_meeting_frequency"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
 
-            <TableRow
-                android:id="@+id/row_active_client_borrowers"
-                style="@style/TableRow">
+                        </LinearLayout>
 
-                <TextView
-                    style="@style/TextView.Row"
-                    android:text="@string/active_client_borrowers" />
+                        <LinearLayout
+                            android:id="@+id/row_staff_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="5dp"
+                            android:weightSum="2">
 
-                <TextView
-                    android:id="@+id/tv_active_client_borrowers"
-                    style="@style/TextView.Row.Value" />
-            </TableRow>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/staff_name"
+                                android:textSize="14sp" />
 
-            <TableRow
-                android:id="@+id/row_active_overdue_group_loans"
-                style="@style/TableRow">
+                            <TextView
+                                android:id="@+id/tv_staff_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
 
-                <TextView
-                    style="@style/TextView.Row"
-                    android:text="@string/active_overdue_group_loans" />
+                    </LinearLayout>
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_active_overdue_group_loans"
-                    style="@style/TextView.Row.Value" />
-            </TableRow>
+            </androidx.cardview.widget.CardView>
 
-            <TableRow
-                android:id="@+id/row_active_overdue_client_loans"
-                style="@style/TableRow">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="10dp"
+                app:cardUseCompatPadding="true">
 
-                <TextView
-                    style="@style/TextView.Row"
-                    android:text="@string/active_overdue_client_loans" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_active_overdue_client_loans"
-                    style="@style/TextView.Row.Value" />
-            </TableRow>
+                    <TextView
+                        style="@style/TextView.Client"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/red_app"
+                        android:gravity="center_horizontal"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="@string/summary_info"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
 
-        </TableLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <LinearLayout
+                            android:id="@+id/row_active_clients"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="5dp"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/active_clients"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_active_clients"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/row_active_group_loans"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="5dp"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/active_group_loans"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_active_group_loans"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/row_active_client_loans"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="5dp"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/active_client_loans"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_active_client_loans"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/row_active_group_borrowers"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="5dp"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/active_group_borrowers"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_active_group_borrowers"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/row_active_client_borrowers"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="5sp"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/active_client_borrowers"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_active_client_borrowers"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/row_active_overdue_group_loans"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="5dp"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/active_overdue_group_loans"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_active_overdue_group_loans"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/row_active_overdue_client_loans"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="5sp"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/active_overdue_client_loans"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_active_overdue_client_loans"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
 
     </ScrollView>
 
@@ -194,15 +368,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:visibility="gone"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <Button
             android:id="@+id/btn_activate_center"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="@string/activate_center"
-            android:background="@color/primary_dark" />
+            android:background="@color/primary_dark"
+            android:text="@string/activate_center" />
     </LinearLayout>
 
 </RelativeLayout>

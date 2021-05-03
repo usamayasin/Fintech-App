@@ -6,25 +6,27 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              style="@style/LinearLayout.Base">
+    style="@style/LinearLayout.Base"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp">
 
     <TextView
         android:id="@+id/tv_activate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
         android:paddingTop="16dp"
+        android:paddingBottom="10dp"
         android:text="@string/activation_date"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tv_activation_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
+        android:background="@color/light_grey"
         android:paddingTop="10dp"
-        android:textSize="20sp"
-        android:background="@color/light_grey" />
+        android:paddingBottom="16dp"
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/btn_activate"
@@ -32,6 +34,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/activate"
-        />
+        android:background="@drawable/login_button_rounded"/>
 
 </LinearLayout>

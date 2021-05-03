@@ -288,7 +288,11 @@ class SavingsAccountSummaryFragment : ProgressableFragment(), SavingsAccountSumm
         if (activity == null) return
         if (savingsAccountWithAssociations != null) {
             this.savingsAccountWithAssociations = savingsAccountWithAssociations
-            tv_clientName!!.text = savingsAccountWithAssociations.clientName
+            if (savingsAccountWithAssociations.clientName.isNullOrEmpty()) {
+                tv_clientName!!.text = savingsAccountWithAssociations.savingsProductName
+            } else {
+                tv_clientName!!.text = savingsAccountWithAssociations.clientName
+            }
             tv_savingsProductName!!.text = savingsAccountWithAssociations.savingsProductName
             tv_savingsAccountNumber!!.text = savingsAccountWithAssociations.accountNo
             if (savingsAccountWithAssociations.summary.totalInterestEarned != null) {
@@ -327,9 +331,9 @@ class SavingsAccountSummaryFragment : ProgressableFragment(), SavingsAccountSumm
                 val runningBalance = listOfAllTransactions[i].runningBalance
 
                 //Display them as a Formatted string in a toast message
-                Toast.makeText(activity, String.format(resources
-                        .getString(R.string.savings_transaction_detail), transactionId,
-                        runningBalance), Toast.LENGTH_LONG).show()
+                /* Toast.makeText(activity, String.format(resources
+                         .getString(R.string.savings_transaction_detail), transactionId,
+                         runningBalance), Toast.LENGTH_LONG).show()*/
             }
             if (savingsAccountWithAssociations.status.submittedAndPendingApproval) {
                 bt_approve_saving!!.isEnabled = true
@@ -358,8 +362,8 @@ class SavingsAccountSummaryFragment : ProgressableFragment(), SavingsAccountSumm
     }
 
     override fun showSavingsActivatedSuccessfully(genericResponse: GenericResponse?) {
-        Toast.makeText(activity, resources.getString(R.string.savings_account_activated),
-                Toast.LENGTH_LONG).show()
+        /*  Toast.makeText(activity, resources.getString(R.string.savings_account_activated),
+                  Toast.LENGTH_LONG).show()*/
         activity!!.supportFragmentManager.popBackStack()
     }
 
@@ -389,6 +393,7 @@ class SavingsAccountSummaryFragment : ProgressableFragment(), SavingsAccountSumm
         const val MENU_ITEM_DOCUMENTS = 1004
         private const val ACTION_APPROVE_SAVINGS = 4
         private const val ACTION_ACTIVATE_SAVINGS = 5
+
         @JvmStatic
         fun newInstance(savingsAccountNumber: Int,
                         type: DepositType?,

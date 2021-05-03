@@ -318,7 +318,12 @@ class LoanAccountSummaryFragment : ProgressableFragment(), LoanAccountSummaryMvp
         /* Activity is null - Fragment has been detached; no need to do anything. */
         if (activity == null) return
         clientLoanWithAssociations = loanWithAssociations
-        tv_clientName!!.text = loanWithAssociations.clientName
+        if (loanWithAssociations.clientName.isNullOrEmpty()) {
+            tv_clientName!!.text = loanWithAssociations.loanProductName
+
+        } else {
+            tv_clientName!!.text = loanWithAssociations.clientName
+        }
         tv_loan_product_short_name!!.text = loanWithAssociations.loanProductName
         tv_loanAccountNumber!!.text = "#" + loanWithAssociations.accountNo
         tv_loan_officer!!.text = loanWithAssociations.loanOfficerName

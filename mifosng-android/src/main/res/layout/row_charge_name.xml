@@ -17,28 +17,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="5dp">
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="8dp"
-            android:weightSum="2">
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="@string/charge_id" />
+                android:text="@string/charge_id"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_charger_id"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:textSize="14sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"/>
 
         </LinearLayout>
 
@@ -46,22 +47,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="8dp"
-            android:weightSum="2">
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:textStyle="bold"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/charge_name" />
+                android:text="@string/charge_name"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_chargeName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:textSize="14sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -72,17 +74,19 @@
 
             <TextView
                 android:id="@+id/tvn_charge_amount"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="@string/amount" />
+                android:text="@string/amount"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_charge_amount"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:textSize="14sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -90,21 +94,23 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="8dp"
-            android:weightSum="2">
+            >
 
             <TextView
                 android:id="@+id/textView8"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:text="@string/due_date"
                 android:textStyle="bold"
-                android:text="@string/due_date" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_charge_duedate"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:textSize="14sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp" />
 
 
         </LinearLayout>

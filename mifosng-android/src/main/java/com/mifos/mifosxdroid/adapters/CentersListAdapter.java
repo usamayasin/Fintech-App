@@ -57,7 +57,7 @@ public class CentersListAdapter extends SelectableAdapter<RecyclerView.ViewHolde
 
             ((ViewHolder) holder).tvAccountNumber.setText(String.format(context.
                     getString(R.string.centerList_account_prefix), center.getAccountNo()));
-            ((ViewHolder) holder).tvCenterId.setText(String.valueOf(center.getId()));
+            //((ViewHolder) holder).tvCenterId.setText(String.valueOf(center.getId()));
             ((ViewHolder) holder).tvCenterName.setText(center.getName());
             if (center.getStaffId() != null) {
                 ((ViewHolder) holder).tvStaffId.setText(String.valueOf(center.getStaffId()));
@@ -66,23 +66,29 @@ public class CentersListAdapter extends SelectableAdapter<RecyclerView.ViewHolde
                 ((ViewHolder) holder).tvStaffId.setText("");
                 ((ViewHolder) holder).tvStaffName.setText(R.string.no_staff);
             }
-            ((ViewHolder) holder).tvOfficeId.setText(String.valueOf(center.getOfficeId()));
+           // ((ViewHolder) holder).tvOfficeId.setText(String.valueOf(center.getOfficeId()));
             ((ViewHolder) holder).tvOfficeName.setText(center.getOfficeName());
             if (center.getActive()) {
-                ((ViewHolder) holder).ivStatusIndicator.setImageDrawable(
-                        Utils.setCircularBackground(R.color.light_green, context));
+                ((ViewHolder) holder).ivStatusIndicator.setColorFilter(
+                        ContextCompat.getColor(holder.itemView.getContext(), R.color.loan_status_disbursed)
+                );
+
+                /*view_status_indicator!!.setColorFilter(
+                        ContextCompat.getColor(activity!!, R.color.loan_status_disbursed))*/
             } else {
-                ((ViewHolder) holder).ivStatusIndicator.setImageDrawable(
-                        Utils.setCircularBackground(R.color.light_red, context));
+                ((ViewHolder) holder).ivStatusIndicator.setColorFilter(
+                        ContextCompat.getColor(holder.itemView.getContext(), R.color.light_red));
+                /*((ViewHolder) holder).ivStatusIndicator.setImageDrawable(
+                        Utils.setCircularBackground(R.color.light_red, context));*/
             }
 
             //Changing the Color of Selected Centers
-            ((ViewHolder) holder).viewSelectedOverlay
+          /*  ((ViewHolder) holder).viewSelectedOverlay
                     .setBackgroundColor(isSelected(position) ? ContextCompat.getColor(context,
-                            R.color.gray_light) : Color.WHITE);
+                            R.color.gray_light) : Color.WHITE);*/
 
-            ((ViewHolder) holder).ivSyncStatus
-                    .setVisibility(center.isSync() ? View.VISIBLE : View.INVISIBLE);
+          /*  ((ViewHolder) holder).ivSyncStatus
+                    .setVisibility(center.isSync() ? View.VISIBLE : View.INVISIBLE);*/
         }
     }
 
@@ -113,7 +119,7 @@ public class CentersListAdapter extends SelectableAdapter<RecyclerView.ViewHolde
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.iv_status_indicator)
-        CircularImageView ivStatusIndicator;
+       ImageView ivStatusIndicator;
 
         @BindView(R.id.tv_account_number)
         TextView tvAccountNumber;
@@ -121,8 +127,8 @@ public class CentersListAdapter extends SelectableAdapter<RecyclerView.ViewHolde
         @BindView(R.id.tv_center_name)
         TextView tvCenterName;
 
-        @BindView(R.id.tv_center_id)
-        TextView tvCenterId;
+        /*@BindView(R.id.tv_center_id)
+        TextView tvCenterId;*/
 
         @BindView(R.id.tv_staff_name)
         TextView tvStaffName;
@@ -133,14 +139,14 @@ public class CentersListAdapter extends SelectableAdapter<RecyclerView.ViewHolde
         @BindView(R.id.tv_office_name)
         TextView tvOfficeName;
 
-        @BindView(R.id.tv_office_id)
-        TextView tvOfficeId;
+      /*  @BindView(R.id.tv_office_id)
+        TextView tvOfficeId;*/
 
-        @BindView(R.id.linearLayout)
-        LinearLayout viewSelectedOverlay;
+     /*   @BindView(R.id.linearLayout)
+        LinearLayout viewSelectedOverlay;*/
 
-        @BindView(R.id.iv_sync_status)
-        ImageView ivSyncStatus;
+        /*@BindView(R.id.iv_sync_status)
+        ImageView ivSyncStatus;*/
 
         public ViewHolder(View v) {
             super(v);

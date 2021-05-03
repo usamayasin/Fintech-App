@@ -250,6 +250,7 @@ class CenterListFragment : MifosBaseFragment(), CenterListMvpView, RecyclerItemC
             swipeRefreshLayout!!.isRefreshing = false
         } else {
             pbCenter!!.visibility = View.GONE
+            swipeRefreshLayout!!.isRefreshing = false
         }
     }
 

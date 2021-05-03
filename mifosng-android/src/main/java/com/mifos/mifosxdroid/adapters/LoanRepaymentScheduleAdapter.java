@@ -93,6 +93,14 @@ public class LoanRepaymentScheduleAdapter extends BaseAdapter {
         return view;
     }
 
+    public List<Period> getLoanRepaymentScheduleList(){
+        return this.periodList;
+    }
+    public void setLoanRepaymentSchedulList(List<Period> periodsList){
+        this.periodList=periodsList;
+        notifyDataSetChanged();
+    }
+
     public static class ReusableViewHolder {
 
 
