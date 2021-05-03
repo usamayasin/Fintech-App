@@ -40,6 +40,7 @@ public class OfflineSyncClient extends Job {
         new JobRequest.Builder(Tags.OfflineSyncClient)
                 .setPeriodic(TimeUnit.MINUTES.toMillis(15),
                         TimeUnit.MINUTES.toMillis(5))
+                .setUpdateCurrent(true)
                 .build()
                 .schedule();
     }

@@ -28,6 +28,7 @@ import rx.functions.Func1;
 public class Utils {
 
     public static final String LOG_TAG = Utils.class.getSimpleName();
+    public static String BACK_PRESSED = "GenerateCollectionSheetActivity";
 
     /**
      * This Method transforming the PaymentTypeOption to String(PaymentTypeName).

@@ -46,7 +46,7 @@ class PaymentDetailsFragment : MifosBaseFragment(), View.OnClickListener, OnItem
 
     @JvmField
     @BindView(R.id.table_additional_details)
-    var tableAdditional: TableLayout? = null
+    var tableAdditional: LinearLayout? = null
 
     @JvmField
     @BindView(R.id.sp_payment_type_options)

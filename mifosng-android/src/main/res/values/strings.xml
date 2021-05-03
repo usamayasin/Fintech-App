@@ -33,7 +33,7 @@
     <string name="default_instance_url" translatable="false">demo.openmf.org</string>
     <string name="review_transaction">Review Transaction</string>
     <string name="amount">Amount</string>
-    <string name="date">Date</string>
+    <string name="date">Date:</string>
     <string name="date_colon">Date:</string>
     <string name="payment_type">Payment Type</string>
     <string name="mifos_instance_domain">Mifos Instance Domain</string>

@@ -87,126 +87,146 @@
 
     </LinearLayout>
 
-    <TableLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/table_additional_details"
-        android:layout_margin="5dp"
-        android:visibility="gone">
-        <TableRow>
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:id="@+id/table_additional_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
             <TextView
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:text="@string/payment_type"
-                android:layout_weight="0.5"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/payment_type" />
 
             <Spinner
                 android:id="@+id/sp_payment_type_options"
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:tag="payment_type"
-                android:layout_weight="0.5"/>
-        </TableRow>
-
-        <TableRow>
-            <TextView
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:text="@string/account_number"
-                android:layout_weight="0.5"/>
-
-            <EditText
-                android:id="@+id/et_account_number"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:hint="@string/account_number"
-                android:tag="account_number"
                 android:layout_weight="0.5"
-                android:imeOptions="actionNext"/>
-        </TableRow>
+                android:tag="payment_type" />
 
-        <TableRow>
-            <TextView
-                android:layout_height="wrap_content"
+            <View
                 android:layout_width="match_parent"
-                android:text="@string/cheque_number"
-                android:layout_weight="0.5"/>
+                android:layout_height="1dp"
+                android:background="@color/gray_dark" />
 
-            <EditText
-                android:id="@+id/et_cheque_number"
-                android:layout_height="wrap_content"
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:hint="@string/cheque_number"
-                android:tag="cheque_number"
-                android:layout_weight="0.5"
-                android:imeOptions="actionNext"/>
-        </TableRow>
+                android:layout_height="wrap_content">
 
-        <TableRow>
-            <TextView
-                android:layout_height="wrap_content"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_account_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="true"
+                    android:hint="@string/account_number"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    android:tag="account_number"
+                    android:nextFocusDown="@+id/et_cheque_number"
+                    android:textCursorDrawable="@drawable/cursor_color" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:text="@string/routing_code"
-                android:layout_weight="0.5"/>
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_cheque_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/cheque_number"
+                    android:cursorVisible="true"
+                    android:imeOptions="actionNext"
+                    android:tag="cheque_number"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:nextFocusDown="@+id/et_routing_code"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/et_routing_code"
-                android:layout_height="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:hint="@string/routing_code"
-                android:tag="routing_code"
-                android:layout_weight="0.5"
-                android:imeOptions="actionNext"/>
-        </TableRow>
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_routing_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="true"
+                    android:hint="@string/routing_code"
+                    android:imeOptions="actionNext"
+                    android:tag="routing_code"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:nextFocusDown="@+id/et_receipt_number"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <TableRow>
-            <TextView
-                android:layout_height="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:text="@string/receipt_number"
-                android:layout_weight="0.5"/>
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_receipt_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="true"
+                    android:hint="@string/receipt_number"
+                    android:imeOptions="actionNext"
+                    android:tag="receipt_number"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:nextFocusDown="@+id/et_bank_number"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/et_receipt_number"
-                android:layout_height="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:hint="@string/receipt_number"
-                android:tag="receipt_number"
-                android:layout_weight="0.5"
-                android:imeOptions="actionNext"/>
-        </TableRow>
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_bank_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="true"
+                    android:hint="@string/bank_number"
+                    android:tag="bank_number"
+                    android:imeOptions="actionNext"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <TableRow>
-            <TextView
-                android:layout_height="wrap_content"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:text="@string/bank_number"
-                android:layout_weight="0.5"/>
-
-            <EditText
-                android:id="@+id/et_bank_number"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:hint="@string/bank_number"
-                android:tag="bank_number"
-                android:layout_weight="0.5"/>
-        </TableRow>
+                android:layout_gravity="center"
+                android:orientation="horizontal">
 
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right">
-            <Button
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="@string/save"
-                android:id="@+id/btn_save_additional"/>
+                <Button
+                    android:id="@+id/btn_cancel_additional"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/login_button_rounded"
+                    android:text="@string/cancel"
+                    android:textColor="@color/primary" />
 
-            <Button
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="@string/cancel"
-                android:id="@+id/btn_cancel_additional"/>
-        </TableRow>
-    </TableLayout>
+                <Button
+                    android:id="@+id/btn_save_additional"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/login_button_rounded"
+                    android:text="@string/save"
+                    android:textColor="@color/primary" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
