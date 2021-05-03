@@ -19,6 +19,7 @@ import com.mifos.mifosxdroid.online.GenerateCollectionSheetActivity
 import com.mifos.objects.collectionsheet.IndividualCollectionSheet
 import com.mifos.objects.collectionsheet.LoanAndClientName
 import com.mifos.utils.Constants
+import com.mifos.utils.Utils
 import java.util.*
 import javax.inject.Inject
 
@@ -54,6 +55,11 @@ class IndividualCollectionSheetDetailsFragment : MifosBaseFragment(), Individual
         actualDisbursementDate = arguments!!.getString(Constants.DISBURSEMENT_DATE)
         transactionDate = arguments!!.getString(Constants.TRANSACTION_DATE)
         setHasOptionsMenu(true)
+    }
+
+    override fun onResume() {
+        Utils.BACK_PRESSED  = "IndividualCollectionSheetDetailsFragment"
+        super.onResume()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -103,10 +109,7 @@ class IndividualCollectionSheetDetailsFragment : MifosBaseFragment(), Individual
             }
         }
         val layoutManager = LinearLayoutManager(context)
-        val dividerItemDecoration = DividerItemDecoration(
-                recyclerSheets!!.context, layoutManager.orientation)
         recyclerSheets!!.layoutManager = layoutManager
-        recyclerSheets!!.addItemDecoration(dividerItemDecoration)
         recyclerSheets!!.adapter = sheetsAdapter
         sheetsAdapter!!.setSheetItemClickListener(this)
         sheetsAdapter!!.setLoans(loansAndClientNames)

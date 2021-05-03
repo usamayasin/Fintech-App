@@ -24,6 +24,7 @@ import com.mifos.objects.organisation.Staff
 import com.mifos.utils.Constants
 import com.mifos.utils.DateHelper
 import com.mifos.utils.FragmentConstants
+import com.mifos.utils.Utils
 import java.util.*
 import javax.inject.Inject
 
@@ -34,6 +35,10 @@ class NewIndividualCollectionSheetFragment : MifosBaseFragment(), IndividualColl
     @JvmField
     @BindView(R.id.btn_fetch_collection_sheet)
     var btnFetchSheet: Button? = null
+
+    @JvmField
+    @BindView(R.id.btn_clear)
+    var btnClear: Button? = null
 
     @JvmField
     @BindView(R.id.sp_office_list)
@@ -85,6 +90,11 @@ class NewIndividualCollectionSheetFragment : MifosBaseFragment(), IndividualColl
         return rootView
     }
 
+    override fun onResume() {
+        Utils.BACK_PRESSED =  "NewIndividualCollectionSheetFragment"
+        super.onResume()
+    }
+
     private fun setUpUi() {
         setRepaymentDate()
         officeNameList = ArrayList()
@@ -100,6 +110,7 @@ class NewIndividualCollectionSheetFragment : MifosBaseFragment(), IndividualColl
         spStaff!!.adapter = staffAdapter
         tvRepaymentDate!!.setOnClickListener(this)
         btnFetchSheet!!.setOnClickListener(this)
+        btnClear!!.setOnClickListener(this)
         presenter!!.fetchOffices()
     }
 
@@ -228,9 +239,16 @@ class NewIndividualCollectionSheetFragment : MifosBaseFragment(), IndividualColl
         when (view.id) {
             R.id.tv_repayment_date -> setTvRepaymentDate()
             R.id.btn_fetch_collection_sheet -> retrieveCollectionSheet()
+            R.id.btn_clear ->clearAll()
         }
     }
 
+    fun clearAll(){
+        spOffices?.setSelection(0)
+        val date = DateHelper.getDateAsStringUsedForCollectionSheetPayload(MFDatePicker.getDatePickedAsString())
+        tvRepaymentDate!!.text = date.replace('-', ' ')
+        spStaff?.setSelection(0)
+    }
     companion object {
         fun newInstance(): NewIndividualCollectionSheetFragment {
             val args = Bundle()
