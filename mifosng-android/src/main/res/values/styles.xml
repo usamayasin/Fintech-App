@@ -22,8 +22,8 @@
         <item name="android:windowBackground">@color/primary</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>
-    <style name="TraslucentActionBarTheme" parent="MaterialAppTheme">
-    </style>
+
+    <style name="TraslucentActionBarTheme" parent="MaterialAppTheme"></style>
 
     <style name="Widget.ActionMode" parent="Widget.AppCompat.ActionMode">
         <item name="background">@color/blue_light</item>
@@ -68,7 +68,7 @@
         <item name="android:paddingBottom">5dp</item>
         <item name="android:popupBackground">#FFFFFF</item>
     </style>
-    
+
     <style name="repayment_date" parent="spinner_style">
         <item name="android:background">@drawable/gradient_repayment</item>
     </style>
@@ -100,5 +100,9 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:background">#ECECEC</item>
+    </style>
+
+    <style name="spinner_loan_repayment" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/payment_spinner_background</item>
     </style>
 </resources>

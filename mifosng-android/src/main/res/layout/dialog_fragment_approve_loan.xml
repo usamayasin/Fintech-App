@@ -7,45 +7,57 @@
 <ScrollView style="@style/ScrollView.Base">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        style="@style/LinearLayout.Base">
+        style="@style/LinearLayout.Base"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_loan_approval_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingTop="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/approved_on"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_loan_approval_dates"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/light_grey"
+            android:layout_marginTop="10dp"
             android:imeOptions="actionNext"
-            android:paddingBottom="16dp"
-            android:paddingTop="10dp"
-            android:textSize="20sp" />
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/light_grey" />
 
         <TextView
             android:id="@+id/tv_expected_disbursement_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingTop="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/approval_disbursement_date"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_expected_disbursement_dates"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/light_grey"
+            android:layout_marginTop="10dp"
             android:imeOptions="actionNext"
-            android:paddingBottom="16dp"
-            android:paddingTop="10dp"
-            android:textSize="20sp" />
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/light_grey" />
 
         <com.google.android.material.textfield.TextInputLayout style="@style/TextInput.Base">
 
@@ -57,7 +69,7 @@
                 android:imeOptions="actionNext"
                 android:inputType="number"
                 android:maxLines="1"
-                android:paddingBottom="16dp" />
+                android:textSize="14sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout style="@style/TextInput.Base">
@@ -70,7 +82,7 @@
                 android:imeOptions="actionNext"
                 android:inputType="number"
                 android:maxLines="1"
-                android:paddingBottom="16dp" />
+                android:textSize="14sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout style="@style/TextInput.Base">
@@ -82,13 +94,14 @@
                 android:hint="@string/approval_note"
                 android:imeOptions="actionNext"
                 android:inputType="text"
-                android:paddingBottom="16dp" />
+                android:textSize="14sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/bt_approve_loan"
             style="@style/Button.Base"
             android:layout_marginTop="10dp"
+            android:background="@drawable/login_button_rounded"
             android:text="@string/submit" />
     </LinearLayout>
 </ScrollView>

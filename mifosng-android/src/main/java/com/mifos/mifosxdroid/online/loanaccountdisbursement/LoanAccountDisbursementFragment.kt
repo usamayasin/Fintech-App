@@ -23,10 +23,13 @@ import com.mifos.mifosxdroid.core.util.Toaster
 import com.mifos.mifosxdroid.uihelpers.MFDatePicker
 import com.mifos.mifosxdroid.uihelpers.MFDatePicker.OnDatePickListener
 import com.mifos.objects.accounts.loan.LoanDisbursement
+import com.mifos.objects.PaymentTypeOption
 import com.mifos.objects.templates.loans.LoanTransactionTemplate
 import com.mifos.utils.*
 import java.util.*
 import javax.inject.Inject
+import rx.Observable
+import kotlin.collections.ArrayList
 
 /**
  * Created by nellyk on 1/22/2016.
@@ -113,12 +116,12 @@ class LoanAccountDisbursementFragment : MifosBaseFragment(), OnDatePickListener,
         mfDatePicker = MFDatePicker.newInsance(this)
         tvLoanDisbursementDates!!.text = MFDatePicker.getDatePickedAsString()
         showDisbursementDate(tvLoanDisbursementDates!!.text.toString())
-        paymentTypeOptionAdapter = ArrayAdapter(activity,
+        /*paymentTypeOptionAdapter = ArrayAdapter(activity,
                 android.R.layout.simple_spinner_item, paymentTypeOptions)
         paymentTypeOptionAdapter!!
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spPaymentType!!.adapter = paymentTypeOptionAdapter
-        spPaymentType!!.onItemSelectedListener = this
+        spPaymentType!!.onItemSelectedListener = this*/
     }
 
     override fun showDisbursementDate(date: String?) {
@@ -139,9 +142,23 @@ class LoanAccountDisbursementFragment : MifosBaseFragment(), OnDatePickListener,
     override fun showLoanTransactionTemplate(loanTransactionTemplate: LoanTransactionTemplate) {
         this.loanTransactionTemplate = loanTransactionTemplate
         etDisbursedAmount!!.setText(loanTransactionTemplate.amount.toString())
-        paymentTypeOptions.addAll()
-        paymentTypeOptionAdapter!!.notifyDataSetChanged()
+        paymentTypeOptions = filterPaymentTypeOptions(this.loanTransactionTemplate!!.paymentTypeOptions as ArrayList<PaymentTypeOption>)
+        paymentTypeOptionAdapter = ArrayAdapter(activity,
+                android.R.layout.simple_spinner_item, paymentTypeOptions)
+        paymentTypeOptionAdapter!!
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spPaymentType!!.adapter = paymentTypeOptionAdapter
+        spPaymentType!!.onItemSelectedListener = this
+        // paymentTypeOptionAdapter!!.notifyDataSetChanged()
     }
+
+    fun filterPaymentTypeOptions(paymentTypeOptionsList: List<PaymentTypeOption>?): List<String> {
+        val paymentList: MutableList<String> = ArrayList()
+        Observable.from(paymentTypeOptionsList)
+                .subscribe { paymentTypeOption -> paymentList.add(paymentTypeOption.name) }
+        return paymentList
+    }
+
 
     override fun showDisburseLoanSuccessfully(genericResponse: GenericResponse?) {
         Toast.makeText(activity, R.string.loan_disburse_successfully,
