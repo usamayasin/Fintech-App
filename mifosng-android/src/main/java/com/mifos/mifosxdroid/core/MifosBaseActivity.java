@@ -25,6 +25,7 @@ import com.mifos.mifosxdroid.SplashScreenActivity;
 import com.mifos.mifosxdroid.injection.component.ActivityComponent;
 import com.mifos.mifosxdroid.injection.component.DaggerActivityComponent;
 import com.mifos.mifosxdroid.injection.module.ActivityModule;
+import com.mifos.mifosxdroid.passcode.NewPassCodeActivity;
 import com.mifos.mifosxdroid.passcode.PassCodeActivity;
 import com.mifos.mobile.passcode.BasePassCodeActivity;
 import com.mifos.utils.Constants;
@@ -178,6 +179,6 @@ public class MifosBaseActivity extends BasePassCodeActivity implements BaseActiv
 
     @Override
     public Class getPassCodeClass() {
-        return null;
+        return NewPassCodeActivity.class;
     }
 }

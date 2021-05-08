@@ -261,6 +261,10 @@ dependencies {
 
     //biometric
     implementation "androidx.biometric:biometric:1.1.0"
+
+    // custom navigation drawer
+    implementation 'com.yarolegovich:sliding-root-nav:1.1.1'
+
 }
 
 /*

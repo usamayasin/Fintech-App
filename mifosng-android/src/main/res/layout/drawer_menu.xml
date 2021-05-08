@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="260dp"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:gravity="center_vertical"
     android:orientation="vertical">
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="90dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:layout_marginRight="20dp"
         android:orientation="vertical">
 
         <com.mifos.mifosxdroid.views.CircularImageView
-            android:id="@+id/iv_user_picture"
+            android:id="@+id/iv_user_picturee"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:elevation="2dp"
@@ -26,19 +26,19 @@
             />
 
         <TextView
-            android:id="@+id/tv_user_name"
+            android:id="@+id/tv_user_namee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="1"
             android:gravity="center"
             android:layout_gravity="center"
-            android:text="Muhammad Usama Yasin Khan"
+            android:text="Muhammad Usama Yasin"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/black"/>
 
         <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/user_status_toggle"
+            android:id="@+id/user_status_togglee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/offline_mode"
@@ -50,4 +50,18 @@
             android:textOff="Off"/>
 
     </LinearLayout>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/layout_padding_30dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/drawer_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/layout_padding_30dp"/>
+
 </LinearLayout>

@@ -6,11 +6,20 @@
 package com.mifos.mifosxdroid.online;
 
 import android.content.Intent;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.annotation.VisibleForTesting;
+
 import com.google.android.material.navigation.NavigationView;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.IdlingResource;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -18,6 +27,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.SwitchCompat;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +39,7 @@ import com.mifos.mifosxdroid.AboutActivity;
 import com.mifos.mifosxdroid.R;
 import com.mifos.mifosxdroid.SettingsActivity;
 import com.mifos.mifosxdroid.activity.pathtracking.PathTrackingActivity;
+import com.mifos.mifosxdroid.adapters.DrawerAdapter;
 import com.mifos.mifosxdroid.core.MifosBaseActivity;
 import com.mifos.mifosxdroid.offline.offlinedashbarod.OfflineDashboardFragment;
 import com.mifos.mifosxdroid.offlinejobs.OfflineSyncCenter;
@@ -44,11 +55,18 @@ import com.mifos.mifosxdroid.online.createnewclient.CreateNewClientFragment;
 import com.mifos.mifosxdroid.online.createnewgroup.CreateNewGroupFragment;
 import com.mifos.mifosxdroid.online.groupslist.GroupsListFragment;
 import com.mifos.mifosxdroid.online.search.SearchFragment;
+import com.mifos.objects.DrawerItem;
+import com.mifos.objects.SimpleItem;
 import com.mifos.objects.user.User;
 import com.mifos.utils.Constants;
 import com.mifos.utils.EspressoIdlingResource;
 import com.mifos.utils.PrefManager;
+import com.yarolegovich.slidingrootnav.SlidingRootNav;
+import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 
+
+import java.util.Arrays;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,15 +75,32 @@ import butterknife.ButterKnife;
  * Created by ishankhanna on 09/02/14.
  */
 public class DashboardActivity extends MifosBaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements DrawerAdapter.OnItemSelectedListener {
 
     public static final String TAG = DashboardActivity.class.getSimpleName();
+    private static final int POS_DASHBOARD = 0;
+    private static final int POS_CLIENTS = 1;
+    private static final int POS_GROUPS = 2;
+    private static final int POS_CENTERS = 3;
+    private static final int POS_CHECKER_INBOX = 4;
+    private static final int POS_INDIVIDUAL_COLLECTION_REPORT = 5;
+    private static final int POS_COLLECTION_REPORT = 6;
+    private static final int POS_RUN_REPORTS = 7;
+    private static final int POS_PATH_TRACKER = 8;
+    private static final int POS_SETTINGS = 9;
+    private static final int POS_ABOUT = 10;
+    private static final int POS_OFFLINE_SYNC = 11;
 
-    @BindView(R.id.navigation_view)
-    NavigationView mNavigationView;
+    private String[] screenTitles;
+    private Drawable[] screenIcons;
 
-    @BindView(R.id.drawer)
-    DrawerLayout mDrawerLayout;
+    private SlidingRootNav slidingRootNav;
+
+//    @BindView(R.id.navigation_view)
+//    NavigationView mNavigationView;
+//
+//    @BindView(R.id.drawer)
+//    DrawerLayout mDrawerLayout;
 
 
     View mNavigationHeader;
@@ -83,13 +118,104 @@ public class DashboardActivity extends MifosBaseActivity
         runJobs();
         replaceFragment(new SearchFragment(), false, R.id.container);
 
-        // setup navigation drawer and Navigation Toggle click and Offline Mode SwitchButton
-        setupNavigationBar();
+        Toolbar toolbarr = findViewById(R.id.toolbarr);
+        setSupportActionBar(toolbar);
+
+        slidingRootNav = new SlidingRootNavBuilder(this)
+                .withToolbarMenuToggle(toolbarr)
+                .withMenuOpened(false)
+                .withContentClickableWhenMenuOpened(false)
+                .withSavedState(savedInstanceState)
+                .withMenuLayout(R.layout.drawer_menu)
+                .inject();
+
+        screenIcons = loadScreenIcons();
+        screenTitles = loadScreenTitles();
+
+        DrawerAdapter adapter = new DrawerAdapter(Arrays.asList(
+                createItemFor(POS_DASHBOARD).setChecked(true),
+                createItemFor(POS_CLIENTS),
+                createItemFor(POS_GROUPS),
+                createItemFor(POS_CENTERS),
+                createItemFor(POS_CHECKER_INBOX),
+                createItemFor(POS_INDIVIDUAL_COLLECTION_REPORT),
+                createItemFor(POS_COLLECTION_REPORT),
+                createItemFor(POS_RUN_REPORTS),
+                createItemFor(POS_PATH_TRACKER),
+                createItemFor(POS_SETTINGS),
+                createItemFor(POS_ABOUT),
+                createItemFor(POS_OFFLINE_SYNC)));
+        adapter.setListener(this);
+
+        RecyclerView list = findViewById(R.id.drawer_list);
+        list.setNestedScrollingEnabled(false);
+        list.setLayoutManager(new LinearLayoutManager(this));
+        list.setAdapter(adapter);
+
+        adapter.setSelected(POS_DASHBOARD);
+
+
+        final User loggedInUser = PrefManager.getUser();
+        TextView username =  findViewById(R.id.tv_user_namee);
+        username.setText(loggedInUser.getUsername());
+
+        // no profile picture credential, using dummy profile picture
+        ImageView imageViewUserPicture = findViewById(R.id.iv_user_picturee);
+        imageViewUserPicture.setImageResource(R.drawable.ic_dp_placeholder);
+
+        // Navigation Toggle click and Offline Mode SwitchButton
+        userStatusToggle = findViewById(R.id.user_status_togglee);
+        if (PrefManager.getUserStatus() == Constants.USER_OFFLINE) {
+            userStatusToggle.setChecked(true);
+        }
+
+        userStatusToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (PrefManager.getUserStatus() == Constants.USER_OFFLINE) {
+                    PrefManager.setUserStatus(Constants.USER_ONLINE);
+                    userStatusToggle.setChecked(false);
+                } else {
+                    PrefManager.setUserStatus(Constants.USER_OFFLINE);
+                    userStatusToggle.setChecked(true);
+                }
+            }
+        });
+
+//        if (slidingRootNav.isMenuOpened()) {
+//            setUserStatus(userStatusToggle);
+//        }
 
         //addOnBackStackChangedListener
         //to change title after Back Stack Changed
-        addOnBackStackChangedListener();
+//        addOnBackStackChangedListener();
     }
+
+    private DrawerItem createItemFor(int position) {
+        return new SimpleItem(screenIcons[position], screenTitles[position])
+                .withIconTint(R.color.red_app)
+                .withTextTint(R.color.black)
+                .withSelectedIconTint(R.color.deposit_green)
+                .withSelectedTextTint(R.color.deposit_green);
+    }
+
+    private String[] loadScreenTitles() {
+        return getResources().getStringArray(R.array.ld_activityScreenTitles);
+    }
+
+    private Drawable[] loadScreenIcons() {
+        TypedArray ta = getResources().obtainTypedArray(R.array.ld_activityScreenIcons);
+        Drawable[] icons = new Drawable[ta.length()];
+        for (int i = 0; i < ta.length(); i++) {
+            int id = ta.getResourceId(i, 0);
+            if (id != 0) {
+                icons[i] = ContextCompat.getDrawable(this, id);
+            }
+        }
+        ta.recycle();
+        return icons;
+    }
+
 
     private void runJobs() {
         OfflineSyncCenter.schedulePeriodic();
@@ -159,157 +285,220 @@ public class DashboardActivity extends MifosBaseActivity
         }
     }
 
-
-    /**
-     * sets up the navigation mDrawer in the activity
-     */
-    protected void setupNavigationBar() {
-
-        mNavigationHeader = mNavigationView.getHeaderView(0);
-        setupUserStatusToggle();
-        mNavigationView.setNavigationItemSelectedListener(this);
-
-        // setup drawer layout and sync to toolbar
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,
-                mDrawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer) {
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                setUserStatus(userStatusToggle);
-            }
-
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-                if (slideOffset != 0)
-                    hideKeyboard(mDrawerLayout);
-                super.onDrawerSlide(drawerView, slideOffset);
-            }
-        };
-        mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-
-        // make an API call to fetch logged in client's details
-        loadClientDetails();
-    }
-
-
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-
-        // ignore the current selected item
-        /*if (item.isChecked()) {
-            mDrawerLayout.closeDrawer(Gravity.LEFT);
-            return false;
-        }*/
-
-        // select which activity to open
+    public void onItemSelected(int position) {
+        slidingRootNav.closeMenu();
         clearFragmentBackStack();
         final Intent intent = new Intent();
-        switch (item.getItemId()) {
-            case R.id.item_dashboard:
+        switch (position) {
+            case 0:
                 replaceFragment(new SearchFragment(), false, R.id.container);
+                slidingRootNav.closeMenu();
                 break;
-            case R.id.item_clients:
+            case 1:
                 replaceFragment(ClientListFragment.newInstance(), false, R.id.container);
+                slidingRootNav.closeMenu();
                 break;
-            case R.id.item_groups:
+            case 2:
                 replaceFragment(GroupsListFragment.newInstance(), false, R.id.container);
+                slidingRootNav.closeMenu();
                 break;
-            case R.id.item_centers:
+            case 3:
                 replaceFragment(CenterListFragment.newInstance(), false, R.id.container);
+                slidingRootNav.closeMenu();
                 break;
-            case R.id.item_checker_inbox:
+            case 4:
+                slidingRootNav.closeMenu();
                 intent.setClass(this, CheckerInboxPendingTasksActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.item_path_tracker:
-                intent.setClass(getApplicationContext(), PathTrackingActivity.class);
-                startNavigationClickActivity(intent);
-                break;
-            case R.id.item_offline:
-                replaceFragment(OfflineDashboardFragment.newInstance(), false, R.id.container);
-                break;
-            case R.id.individual_collection_sheet:
+            case 5:
+                slidingRootNav.closeMenu();
                 intent.setClass(this, GenerateCollectionSheetActivity.class);
                 intent.putExtra(Constants.COLLECTION_TYPE, Constants.EXTRA_COLLECTION_INDIVIDUAL);
                 startActivity(intent);
                 break;
-            case R.id.collection_sheet:
+            case 6:
+                slidingRootNav.closeMenu();
                 intent.setClass(this, GenerateCollectionSheetActivity.class);
                 intent.putExtra(Constants.COLLECTION_TYPE, Constants.EXTRA_COLLECTION_COLLECTION);
                 startActivity(intent);
                 break;
-            case R.id.item_settings:
-                startActivity(new Intent(this, SettingsActivity.class));
-                break;
-            case R.id.runreport:
+            case 7:
+                slidingRootNav.closeMenu();
                 intent.setClass(this, RunReportsActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.about:
+            case 8:
+                slidingRootNav.closeMenu();
+                intent.setClass(getApplicationContext(), PathTrackingActivity.class);
+                startNavigationClickActivity(intent);
+                break;
+            case 9:
+                slidingRootNav.closeMenu();
+                startActivity(new Intent(this, SettingsActivity.class));
+                break;
+            case 10:
+                slidingRootNav.closeMenu();
                 intent.setClass(this, AboutActivity.class);
                 startActivity(intent);
                 break;
+            case 11:
+                replaceFragment(OfflineDashboardFragment.newInstance(), false, R.id.container);
+                slidingRootNav.closeMenu();
+                break;
         }
 
-        mDrawerLayout.closeDrawer(GravityCompat.START);
-        mNavigationView.setCheckedItem(R.id.item_dashboard);
-        return true;
     }
+    /**
+     * sets up the navigation mDrawer in the activity
+     */
+//    protected void setupNavigationBar() {
+//
+//        mNavigationHeader = mNavigationView.getHeaderView(0);
+//        setupUserStatusToggle();
+//        mNavigationView.setNavigationItemSelectedListener(this);
+//
+//        // setup drawer layout and sync to toolbar
+//        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,
+//                mDrawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer) {
+//
+//            @Override
+//            public void onDrawerClosed(View drawerView) {
+//                super.onDrawerClosed(drawerView);
+//            }
+//
+//            @Override
+//            public void onDrawerOpened(View drawerView) {
+//                super.onDrawerOpened(drawerView);
+//                setUserStatus(userStatusToggle);
+//            }
+//
+//            @Override
+//            public void onDrawerSlide(View drawerView, float slideOffset) {
+//                if (slideOffset != 0)
+//                    hideKeyboard(mDrawerLayout);
+//                super.onDrawerSlide(drawerView, slideOffset);
+//            }
+//        };
+//        mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
+//        actionBarDrawerToggle.syncState();
+//
+//        // make an API call to fetch logged in client's details
+//    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        String currentFragment = getSupportFragmentManager().findFragmentById(R.id.container)
-                .getClass().getSimpleName();
-        switch (currentFragment) {
-            case "SearchFragment":
-                mNavigationView.setCheckedItem(R.id.item_dashboard);
-                break;
-            case "ClientListFragment":
-                mNavigationView.setCheckedItem(R.id.item_clients);
-                break;
-            case "GroupsListFragment":
-                mNavigationView.setCheckedItem(R.id.item_groups);
-                break;
-            case "CenterListFragment":
-                mNavigationView.setCheckedItem(R.id.item_centers);
-                break;
-            case "OfflineDashboardFragment":
-                mNavigationView.setCheckedItem(R.id.item_offline);
-        }
-    }
+
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem item) {
+//
+//        // ignore the current selected item
+//        /*if (item.isChecked()) {
+//            mDrawerLayout.closeDrawer(Gravity.LEFT);
+//            return false;
+//        }*/
+//
+//        // select which activity to open
+//        clearFragmentBackStack();
+//        final Intent intent = new Intent();
+//        switch (item.getItemId()) {
+//            case R.id.item_dashboard:
+//                replaceFragment(new SearchFragment(), false, R.id.container);
+//                break;
+//            case R.id.item_clients:
+//                replaceFragment(ClientListFragment.newInstance(), false, R.id.container);
+//                break;
+//            case R.id.item_groups:
+//                replaceFragment(GroupsListFragment.newInstance(), false, R.id.container);
+//                break;
+//            case R.id.item_centers:
+//                replaceFragment(CenterListFragment.newInstance(), false, R.id.container);
+//                break;
+//            case R.id.item_checker_inbox:
+//                intent.setClass(this, CheckerInboxPendingTasksActivity.class);
+//                startActivity(intent);
+//                break;
+//            case R.id.item_path_tracker:
+//                intent.setClass(getApplicationContext(), PathTrackingActivity.class);
+//                startNavigationClickActivity(intent);
+//                break;
+//            case R.id.item_offline:
+//                replaceFragment(OfflineDashboardFragment.newInstance(), false, R.id.container);
+//                break;
+//            case R.id.individual_collection_sheet:
+//                intent.setClass(this, GenerateCollectionSheetActivity.class);
+//                intent.putExtra(Constants.COLLECTION_TYPE, Constants.EXTRA_COLLECTION_INDIVIDUAL);
+//                startActivity(intent);
+//                break;
+//            case R.id.collection_sheet:
+//                intent.setClass(this, GenerateCollectionSheetActivity.class);
+//                intent.putExtra(Constants.COLLECTION_TYPE, Constants.EXTRA_COLLECTION_COLLECTION);
+//                startActivity(intent);
+//                break;
+//            case R.id.item_settings:
+//                startActivity(new Intent(this, SettingsActivity.class));
+//                break;
+//            case R.id.runreport:
+//                intent.setClass(this, RunReportsActivity.class);
+//                startActivity(intent);
+//                break;
+//            case R.id.about:
+//                intent.setClass(this, AboutActivity.class);
+//                startActivity(intent);
+//                break;
+//        }
+//
+//        mDrawerLayout.closeDrawer(GravityCompat.START);
+//        mNavigationView.setCheckedItem(R.id.item_dashboard);
+//        return true;
+//    }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        String currentFragment = Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.container))
+//                .getClass().getSimpleName();
+//        switch (currentFragment) {
+//            case "SearchFragment":
+//                mNavigationView.setCheckedItem(R.id.item_dashboard);
+//                break;
+//            case "ClientListFragment":
+//                mNavigationView.setCheckedItem(R.id.item_clients);
+//                break;
+//            case "GroupsListFragment":
+//                mNavigationView.setCheckedItem(R.id.item_groups);
+//                break;
+//            case "CenterListFragment":
+//                mNavigationView.setCheckedItem(R.id.item_centers);
+//                break;
+//            case "OfflineDashboardFragment":
+//                mNavigationView.setCheckedItem(R.id.item_offline);
+//        }
+//    }
 
     /**
      * This SwitchCompat Toggle Handling the User Status.
      * Setting the User Status to Offline or Online
      */
-    public void setupUserStatusToggle() {
-        userStatusToggle
-                = mNavigationHeader.findViewById(R.id.user_status_toggle);
-        if (PrefManager.getUserStatus() == Constants.USER_OFFLINE) {
-            userStatusToggle.setChecked(true);
-        }
-
-        userStatusToggle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (PrefManager.getUserStatus() == Constants.USER_OFFLINE) {
-                    PrefManager.setUserStatus(Constants.USER_ONLINE);
-                    userStatusToggle.setChecked(false);
-                } else {
-                    PrefManager.setUserStatus(Constants.USER_OFFLINE);
-                    userStatusToggle.setChecked(true);
-                }
-            }
-        });
-    }
+//    public void setupUserStatusToggle() {
+//        userStatusToggle
+//                = mNavigationHeader.findViewById(R.id.user_status_toggle);
+//        if (PrefManager.getUserStatus() == Constants.USER_OFFLINE) {
+//            userStatusToggle.setChecked(true);
+//        }
+//
+//        userStatusToggle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (PrefManager.getUserStatus() == Constants.USER_OFFLINE) {
+//                    PrefManager.setUserStatus(Constants.USER_ONLINE);
+//                    userStatusToggle.setChecked(false);
+//                } else {
+//                    PrefManager.setUserStatus(Constants.USER_OFFLINE);
+//                    userStatusToggle.setChecked(true);
+//                }
+//            }
+//        });
+//    }
 
     public void startNavigationClickActivity(final Intent intent) {
         Handler handler = new Handler();
@@ -344,8 +533,8 @@ public class DashboardActivity extends MifosBaseActivity
     @Override
     public void onBackPressed() {
         // check if the nav mDrawer is open
-        if (mDrawerLayout != null && mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mDrawerLayout.closeDrawer(GravityCompat.START);
+        if (slidingRootNav != null && slidingRootNav.isMenuOpened()) {
+            slidingRootNav.closeMenu();
         } else {
             if (doubleBackToExitPressedOnce) {
                 setMenuCreateClient(true);
@@ -374,7 +563,6 @@ public class DashboardActivity extends MifosBaseActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        hideKeyboard(mDrawerLayout);
         menu.getItem(0).setEnabled(itemClient);
         menu.getItem(1).setEnabled(itemCenter);
         menu.getItem(2).setEnabled(itemGroup);
@@ -418,8 +606,5 @@ public class DashboardActivity extends MifosBaseActivity
         replaceFragment(CreateNewGroupFragment.newInstance(), true, R.id.container);
     }
 
-    @VisibleForTesting
-    public IdlingResource getCountingIdlingResource() {
-        return EspressoIdlingResource.getIdlingResource();
-    }
+
 }

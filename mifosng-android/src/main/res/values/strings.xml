@@ -874,4 +874,35 @@
         to fetch Phone State, without this permission currency might not be shown in proper format.
         Please enable it in settings
     </string>
+
+    <string-array name="ld_activityScreenTitles">
+        <item>Dashboard</item>
+        <item>Clients</item>
+        <item>Groups</item>
+        <item>Centers</item>
+        <item>Checker Inbox</item>
+        <item>Individual Collection Report</item>
+        <item>Collection Report</item>
+        <item>Run Reports</item>
+        <item>Path Tracker</item>
+        <item>Settings</item>
+        <item>About</item>
+        <item>Offline Sync</item>
+    </string-array>
+
+    <array name="ld_activityScreenIcons">
+        <item>@drawable/ic_dashboard_black_24dp</item>
+        <item>@drawable/ic_person_black_24dp</item>
+        <item>@drawable/ic_group_black_24dp</item>
+        <item>@drawable/ic_centers_24dp</item>
+        <item>@drawable/ic_check_box_black_24dp</item>
+        <item>@drawable/ic_assignment_black_24dp</item>
+        <item>@drawable/ic_assignment_black_24dp</item>
+        <item>@drawable/ic_report_item</item>
+        <item>@drawable/ic_path_tracker</item>
+        <item>@drawable/ic_settings</item>
+        <item>@drawable/ic_about</item>
+        <item>@drawable/ic_offline</item>
+    </array>
+
 </resources>
