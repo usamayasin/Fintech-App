@@ -295,7 +295,7 @@ class LoanRepaymentFragment : MifosBaseFragment(), OnDatePickListener, LoanRepay
     /**
      * Cancel button on Home UI
      */
-    @OnClick(R.id.bt_cancelPayment)
+    @OnClick(R.id.tv_payment_cancel)
     fun onCancelPaymentButtonClicked() {
         activity!!.supportFragmentManager.popBackStackImmediate()
     }

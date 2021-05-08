@@ -8,7 +8,9 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp">
 
     <TextView
         android:id="@+id/tv_approval_date_on"
@@ -17,7 +19,7 @@
         android:paddingBottom="10dp"
         android:paddingTop="16dp"
         android:text="@string/approved_on"
-        android:textSize="16sp"/>
+        android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/tv_approval_date"
@@ -27,7 +29,6 @@
         android:paddingBottom="16dp"
         android:paddingTop="10dp"
         android:textSize="20sp"
-        android:background="@color/light_grey"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -50,7 +51,7 @@
         android:layout_height="wrap_content"
         android:text="@string/save"
         android:id="@+id/btn_approve_savings"
-        android:background="@color/primary"
+        android:background="@drawable/login_button_rounded"
         android:layout_below="@+id/et_savings_approval_reason"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

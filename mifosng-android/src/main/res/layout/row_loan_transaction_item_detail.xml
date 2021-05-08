@@ -8,7 +8,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/red_border_background">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -37,6 +38,27 @@
                 android:textColor="@color/black" />
 
             <TextView
+                android:id="@+id/tv_title_office"
+                style="@android:style/TextAppearance.Medium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:text="@string/office"
+                android:textSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10dp"
+                android:textColor="@color/black" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
                 android:id="@+id/tv_transaction_id"
                 style="@android:style/TextAppearance.Medium"
                 android:layout_width="0dp"
@@ -50,27 +72,6 @@
                 android:autoSizeMinTextSize="10dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"/>
-
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <TextView
-                android:id="@+id/tv_title_office"
-                style="@android:style/TextAppearance.Medium"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:gravity="center"
-                android:text="@string/office"
-                android:textSize="14sp"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMaxTextSize="14sp"
-                android:autoSizeMinTextSize="10dp"
-                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/tv_office_name"
@@ -96,6 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/break_down"
+        android:textColor="@color/red_app"
         android:textSize="14sp"
         android:autoSizeTextType="uniform"
         android:autoSizeMaxTextSize="14sp"
@@ -120,7 +122,9 @@
             android:id="@+id/tableRow3"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@color/total_color">
+            android:background="@drawable/login_button_rounded"
+            android:padding="2dp"
+            android:layout_marginBottom="10dp">
 
             <TextView
                 android:id="@+id/tv_title_principal"
@@ -134,7 +138,7 @@
                 android:autoSizeTextType="uniform"
                 android:autoSizeMaxTextSize="14sp"
                 android:autoSizeMinTextSize="10dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 />
 
             <TextView
@@ -149,7 +153,7 @@
                 android:autoSizeTextType="uniform"
                 android:autoSizeMaxTextSize="14sp"
                 android:autoSizeMinTextSize="10dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                  />
 
             <TextView
@@ -164,7 +168,7 @@
                 android:autoSizeTextType="uniform"
                 android:autoSizeMaxTextSize="14sp"
                 android:autoSizeMinTextSize="10dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/tv_title_penalties"
@@ -178,7 +182,7 @@
                 android:autoSizeTextType="uniform"
                 android:autoSizeMaxTextSize="14sp"
                 android:autoSizeMinTextSize="10dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/white" />
 
         </TableRow>
 
