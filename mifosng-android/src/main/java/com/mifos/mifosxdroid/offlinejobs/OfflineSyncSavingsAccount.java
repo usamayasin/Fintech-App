@@ -44,6 +44,7 @@ public class OfflineSyncSavingsAccount extends Job {
         new JobRequest.Builder(Tags.OfflineSyncSavingsAccount)
                 .setPeriodic(TimeUnit.MINUTES.toMillis(15),
                         TimeUnit.MINUTES.toMillis(5))
+                .setUpdateCurrent(true)
                 .build()
                 .schedule();
     }

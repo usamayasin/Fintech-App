@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.annotation.VisibleForTesting;
+
+import com.google.android.material.internal.NavigationMenuView;
 import com.google.android.material.navigation.NavigationView;
 import androidx.test.espresso.IdlingResource;
 import androidx.fragment.app.Fragment;
@@ -21,6 +23,8 @@ import androidx.appcompat.widget.SwitchCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +53,8 @@ import com.mifos.utils.Constants;
 import com.mifos.utils.EspressoIdlingResource;
 import com.mifos.utils.PrefManager;
 
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -89,6 +95,14 @@ public class DashboardActivity extends MifosBaseActivity
         //addOnBackStackChangedListener
         //to change title after Back Stack Changed
         addOnBackStackChangedListener();
+
+        if (mNavigationView != null) {
+            NavigationMenuView navigationMenuView = (NavigationMenuView) mNavigationView.getChildAt(0);
+            if (navigationMenuView != null) {
+                navigationMenuView.setVerticalScrollBarEnabled(false);
+            }
+        }
+
     }
 
     private void runJobs() {
@@ -266,8 +280,8 @@ public class DashboardActivity extends MifosBaseActivity
     @Override
     protected void onResume() {
         super.onResume();
-        String currentFragment = getSupportFragmentManager().findFragmentById(R.id.container)
-                .getClass().getSimpleName();
+        String currentFragment = Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.container)
+                .getClass().getSimpleName());
         switch (currentFragment) {
             case "SearchFragment":
                 mNavigationView.setCheckedItem(R.id.item_dashboard);
