@@ -18,7 +18,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@drawable/login_button_rounded"/>
+                android:background="@color/red_app"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rc_runreport"
