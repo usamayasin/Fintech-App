@@ -2,7 +2,12 @@ package com.mifos.mifosxdroid.online.runreports.report;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,12 +15,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mifos.mifosxdroid.R;
+import com.mifos.mifosxdroid.adapters.RunReportListAdapter;
 import com.mifos.mifosxdroid.core.MifosBaseActivity;
 import com.mifos.mifosxdroid.core.MifosBaseFragment;
 import com.mifos.objects.runreports.ColumnHeader;
@@ -34,8 +41,14 @@ import butterknife.ButterKnife;
 
 public class ReportFragment extends MifosBaseFragment implements ReportMvpView {
 
-    @BindView(R.id.table_report)
-    TableLayout tableReport;
+  /*  @BindView(R.id.table_report)
+    TableLayout tableReport;*/
+
+    @BindView(R.id.ll_headers)
+    LinearLayout ll_headers;
+
+    @BindView(R.id.rc_runreport)
+    RecyclerView rc_runreport;
 
     @Inject
     ReportPresenter presenter;
@@ -75,15 +88,21 @@ public class ReportFragment extends MifosBaseFragment implements ReportMvpView {
     }
 
     private void setUpUi() {
-        showProgressbar(true);
-        setUpHeading();
-        if (report.getData().size() > 0) {
-            setUpValues();
-        } else {
-            Toast.makeText(getActivity(), getString(R.string.msg_report_empty), Toast.LENGTH_SHORT)
-                    .show();
+        try {
+            showProgressbar(true);
+            //setUpHeading();
+            setUpHeadings();
+            if (report.getData().size() > 0) {
+                //setUpValues();
+                setRunReportList();
+            } else {
+                Toast.makeText(getActivity(), getString(R.string.msg_report_empty), Toast.LENGTH_SHORT)
+                        .show();
+            }
+            showProgressbar(false);
+        } catch (Exception e) {
+            Log.e("Error", e.getMessage());
         }
-        showProgressbar(false);
     }
 
     private void setUpHeading() {
@@ -105,7 +124,37 @@ public class ReportFragment extends MifosBaseFragment implements ReportMvpView {
                     break;
             }
         }
-        tableReport.addView(row);
+        // tableReport.addView(row);
+    }
+
+    private void setUpHeadings() {
+        try {
+            LinearLayout.LayoutParams headingRowParams = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            //headingRowParams.gravity = Gravity.CENTER;
+            headingRowParams.setMargins(0, 0, 0, 0);
+            ll_headers.setLayoutParams(headingRowParams);
+            ll_headers.setWeightSum(report.getColumnHeaders().size() - 1);
+
+            for (ColumnHeader column : report.getColumnHeaders()) {
+                switch (column.getColumnDisplayType()) {
+                    case "STRING":
+                        TextView tv = new TextView(getContext());
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
+                        tv.setLayoutParams(params);
+                        tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
+                        tv.setGravity(Gravity.CENTER);
+                        tv.setText(column.getColumnName());
+                        ll_headers.addView(tv);
+                        break;
+                }
+            }
+        } catch (Exception e) {
+            Log.e("Error", e.getMessage());
+        }
+        // tableReport.addView(row);
     }
 
     private void setUpValues() {
@@ -137,7 +186,20 @@ public class ReportFragment extends MifosBaseFragment implements ReportMvpView {
                         break;
                 }
             }
-            tableReport.addView(row);
+            // tableReport.addView(row);
+        }
+    }
+
+    private void setRunReportList() {
+        try {
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+           // mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            rc_runreport.setLayoutManager(mLayoutManager);
+            rc_runreport.setHasFixedSize(true);
+            RunReportListAdapter adapter = new RunReportListAdapter(report.getData(),report.getColumnHeaders());
+            rc_runreport.setAdapter(adapter);
+        } catch (Exception e) {
+            Log.e("Error", e.getMessage());
         }
     }
 
