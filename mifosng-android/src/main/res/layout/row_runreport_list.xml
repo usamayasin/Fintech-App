@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:id="@+id/ll_runreport_list"
+    android:layout_gravity="center"
+    android:gravity="center"
     android:layout_marginBottom="10dp"
-    android:background="@drawable/red_border_background">
+    android:background="@drawable/round_no_stroke">
 
 </LinearLayout>

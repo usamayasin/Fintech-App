@@ -51,6 +51,7 @@ public class RunReportListAdapter extends RecyclerView.Adapter<RunReportListAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         try {
             DataRow item = rowDataList.get(position);
+            holder.setIsRecyclable(false);
 
             LinearLayout.LayoutParams headingRowParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -61,29 +62,22 @@ public class RunReportListAdapter extends RecyclerView.Adapter<RunReportListAdap
             holder.ll_runreport_list.setWeightSum(item.getRow().size() - 1);
             holder.ll_runreport_list.setOrientation(LinearLayout.HORIZONTAL);
 
-            for (int i = 0; i < item.getRow().size(); i++) {
-                switch (columnHeadersList.get(i).getColumnDisplayType()) {
-                    case "STRING": {
-                        TextView tv = new TextView(getContext());
-                        LinearLayout.LayoutParams rowParams = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
-                        tv.setGravity(Gravity.CENTER);
-                        //rowParams.setMargins(5, 5, 5, 5);
-                        tv.setLayoutParams(rowParams);
-                        tv.setPadding(5, 5, 5, 5);
-                        tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
-                        tv.setGravity(Gravity.CENTER);
-                        if (item.getRow().get(i) != null) {
-                            Log.e("Data ", item.getRow().get(i));
-                            tv.setText(item.getRow().get(i));
-                        } else {
-                            tv.setText("-");
-                        }
-                        holder.ll_runreport_list.addView(tv);
-                        break;
+            for (int i = 0; i < columnHeadersList.size(); i++) {
+                if ("STRING".equals(columnHeadersList.get(i).getColumnDisplayType())) {
+                    TextView tv = new TextView(getContext());
+                    LinearLayout.LayoutParams rowParams = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
+                    tv.setGravity(Gravity.CENTER);
+                    tv.setLayoutParams(rowParams);
+                    tv.setPadding(5, 5, 5, 5);
+                    tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
+                    if (item.getRow().get(i) != null) {
+                        tv.setText(item.getRow().get(i));
+                    } else {
+                        tv.setText("-");
                     }
-
+                    holder.ll_runreport_list.addView(tv);
                 }
             }
 
@@ -99,6 +93,15 @@ public class RunReportListAdapter extends RecyclerView.Adapter<RunReportListAdap
         return rowDataList.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return  position;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 

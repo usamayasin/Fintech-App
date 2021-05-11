@@ -4,6 +4,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -130,7 +131,7 @@ public class ReportFragment extends MifosBaseFragment implements ReportMvpView {
     private void setUpHeadings() {
         try {
             LinearLayout.LayoutParams headingRowParams = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             //headingRowParams.gravity = Gravity.CENTER;
             headingRowParams.setMargins(0, 0, 0, 0);
             ll_headers.setLayoutParams(headingRowParams);
@@ -147,6 +148,7 @@ public class ReportFragment extends MifosBaseFragment implements ReportMvpView {
                         tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
                         tv.setGravity(Gravity.CENTER);
                         tv.setText(column.getColumnName());
+                        tv.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
                         ll_headers.addView(tv);
                         break;
                 }

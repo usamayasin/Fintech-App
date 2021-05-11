@@ -17,14 +17,20 @@
                 android:id="@+id/ll_headers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" />
+                android:orientation="horizontal"
+                android:background="@drawable/login_button_rounded"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rc_runreport"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:scrollbars="none">
+                android:scrollbars="none"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 
