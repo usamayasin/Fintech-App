@@ -11,12 +11,19 @@
 
         <include layout="@layout/item_client_runreport"/>
 
+        <LinearLayout
+            android:id="@+id/ll_runreport_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/table_details"
             android:layout_margin="5dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:visibility="gone">
 
         </TableLayout>
     </LinearLayout>

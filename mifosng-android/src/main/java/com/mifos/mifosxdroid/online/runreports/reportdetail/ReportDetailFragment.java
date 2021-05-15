@@ -1,9 +1,13 @@
 package com.mifos.mifosxdroid.online.runreports.reportdetail;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -61,6 +66,9 @@ public class ReportDetailFragment extends MifosBaseFragment
 
     @BindView(R.id.table_details)
     TableLayout tableDetails;
+
+    @BindView(R.id.ll_runreport_details)
+    LinearLayout ll_runreport_details;
 
     @Inject
     ReportDetailPresenter presenter;
@@ -230,6 +238,124 @@ public class ReportDetailFragment extends MifosBaseFragment
         tableDetails.addView(row);
     }
 
+    private void setReportInfo(FullParameterListResponse data, String identifier) {
+
+        TextView tvLabel = new TextView(getContext());
+        LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        textViewParams.setMargins(20, 20, 0, 5);
+        tvLabel.setLayoutParams(textViewParams);
+        //tvLabel.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.total_color));
+        //ll_runreport_details.addView(tvLabel);
+
+
+        final Spinner spinner = new Spinner(getContext());
+        LinearLayout.LayoutParams spinnerParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        spinnerParams.setMargins(20, 5, 0, 0);
+        spinner.setLayoutParams(spinnerParams);
+       // ll_runreport_details.addView(spinner);
+
+        View divider = new View(getContext());
+        LinearLayout.LayoutParams dividerParams=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,2);
+        dividerParams.setMargins(20,0,20,20);
+        divider.setLayoutParams(dividerParams);
+       // divider.setLayoutParams(dividerParams);
+        divider.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.black));
+        //ll_runreport_details.addView(divider);
+
+
+        ArrayList<String> spinnerValues = new ArrayList<>();
+
+        // Add the parameter keys as the text so that we can identify the spinner
+        // and can later add the corresponding values in the parameter-list while
+        // requesting the report.
+        switch (identifier) {
+            case Constants.LOAN_OFFICER_ID_SELECT:
+                spinner.setTag(Constants.R_LOAN_OFFICER_ID);
+                loanOfficerMap = presenter.filterIntHashMapForSpinner(data.getData(),
+                        spinnerValues);
+                tvLabel.setText(getString(R.string.loan_officer));
+                break;
+            case Constants.LOAN_PRODUCT_ID_SELECT:
+                spinner.setTag(Constants.R_LOAN_PRODUCT_ID);
+                loanProductMap = presenter.filterIntHashMapForSpinner(data.getData(),
+                        spinnerValues);
+                tvLabel.setText(getString(R.string.loanproduct));
+                break;
+            case Constants.LOAN_PURPOSE_ID_SELECT:
+                spinner.setTag(Constants.R_LOAN_PURPOSE_ID);
+                loanPurposeMap = presenter.filterIntHashMapForSpinner(data.getData(),
+                        spinnerValues);
+                tvLabel.setText(getString(R.string.report_loan_purpose));
+                break;
+            case Constants.FUND_ID_SELECT:
+                spinner.setTag(Constants.R_FUND_ID);
+                fundMap = presenter.filterIntHashMapForSpinner(data.getData(), spinnerValues);
+                tvLabel.setText(getString(R.string.loan_fund));
+                break;
+            case Constants.CURRENCY_ID_SELECT:
+                spinner.setTag(Constants.R_CURRENCY_ID);
+                currencyMap = presenter.filterStringHashMapForSpinner(data.getData(),
+                        spinnerValues);
+                tvLabel.setText(getString(R.string.currency));
+                break;
+            case Constants.OFFICE_ID_SELECT:
+                spinner.setTag(Constants.R_OFFICE_ID);
+                officeMap = presenter.filterIntHashMapForSpinner(data.getData(), spinnerValues);
+                tvLabel.setText(getString(R.string.office));
+                break;
+            case Constants.PAR_TYPE_SELECT:
+                spinner.setTag(Constants.R_PAR_TYPE);
+                parMap = presenter.filterIntHashMapForSpinner(data.getData(), spinnerValues);
+                tvLabel.setText(getString(R.string.par_calculation));
+                break;
+            case Constants.SAVINGS_ACCOUNT_SUB_STATUS:
+                spinner.setTag(Constants.R_SUB_STATUS);
+                subStatusMap = presenter.filterIntHashMapForSpinner(data.getData(), spinnerValues);
+                tvLabel.setText(getString(R.string.savings_acc_deposit));
+                break;
+            case Constants.SELECT_GL_ACCOUNT_NO:
+                spinner.setTag(Constants.R_ACCOUNT);
+                glAccountNoMap = presenter.
+                        filterIntHashMapForSpinner(data.getData(), spinnerValues);
+                tvLabel.setText(getString(R.string.glaccount));
+                break;
+            case Constants.OBLIG_DATE_TYPE_SELECT:
+                spinner.setTag(Constants.R_OBLIG_DATE_TYPE);
+                obligDateTypeMap = presenter.
+                        filterIntHashMapForSpinner(data.getData(), spinnerValues);
+                tvLabel.setText(getString(R.string.obligation_date_type));
+
+        }
+        ArrayAdapter adapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_item, spinnerValues);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (spinner.getTag().toString().equals(Constants.R_OFFICE_ID) && fetchLoanOfficer) {
+                    int officeId = officeMap.get(spinner.getSelectedItem().toString());
+                    presenter.fetchOffices(Constants.LOAN_OFFICER_ID_SELECT, officeId, true);
+                } else if (spinner.getTag().toString().
+                        equals(Constants.R_CURRENCY_ID) && fetchLoanProduct) {
+                    String currencyId = currencyMap.get(spinner.getSelectedItem().toString());
+                    presenter.fetchProduct(Constants.LOAN_PRODUCT_ID_SELECT, currencyId, true);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        ll_runreport_details.addView(tvLabel);
+        ll_runreport_details.addView(spinner);
+        ll_runreport_details.addView(divider);
+        //tableDetails.addView(row);
+    }
+
     private void runReport() {
         if (tableDetails.getChildCount() < 1) {
             Toaster.show(rootView, getString(R.string.msg_report_empty));
@@ -356,7 +482,9 @@ public class ReportDetailFragment extends MifosBaseFragment
                 return;
             }
         }
-        addTableRow(response, identifier);
+
+        //addTableRow(response, identifier);
+        setReportInfo(response,identifier);
 
     }
 
@@ -379,7 +507,8 @@ public class ReportDetailFragment extends MifosBaseFragment
                 return;
             }
         }
-        addTableRow(response, identifier);
+        //addTableRow(response, identifier);
+        setReportInfo(response,identifier);
     }
 
     @Override
@@ -497,7 +626,8 @@ public class ReportDetailFragment extends MifosBaseFragment
 
     @Override
     public void showParameterDetails(FullParameterListResponse response, String identifier) {
-        addTableRow(response, identifier);
+        //addTableRow(response, identifier);
+        setReportInfo(response,identifier);
     }
 
     @Override
