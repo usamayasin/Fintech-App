@@ -1,9 +1,11 @@
 package com.mifos.mifosxdroid.online.runreports.reportdetail;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -254,14 +256,14 @@ public class ReportDetailFragment extends MifosBaseFragment
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         spinnerParams.setMargins(20, 5, 0, 0);
         spinner.setLayoutParams(spinnerParams);
-       // ll_runreport_details.addView(spinner);
+        // ll_runreport_details.addView(spinner);
 
         View divider = new View(getContext());
-        LinearLayout.LayoutParams dividerParams=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,2);
-        dividerParams.setMargins(20,0,20,20);
+        LinearLayout.LayoutParams dividerParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2);
+        dividerParams.setMargins(20, 0, 20, 20);
         divider.setLayoutParams(dividerParams);
-       // divider.setLayoutParams(dividerParams);
-        divider.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.black));
+        // divider.setLayoutParams(dividerParams);
+        divider.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.black));
         //ll_runreport_details.addView(divider);
 
 
@@ -357,7 +359,7 @@ public class ReportDetailFragment extends MifosBaseFragment
     }
 
     private void runReport() {
-        if (tableDetails.getChildCount() < 1) {
+        if (ll_runreport_details.getChildCount() < 1) {
             Toaster.show(rootView, getString(R.string.msg_report_empty));
         } else {
             Integer fundId;
@@ -377,10 +379,10 @@ public class ReportDetailFragment extends MifosBaseFragment
               Hence, create a Map instead of hardcoding the number of
               query parameters in the Retrofit Service.*/
 
-            for (int i = 0; i < tableDetails.getChildCount(); i++) {
-                TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
-                if (tableRow.getChildAt(1) instanceof Spinner) {
-                    Spinner sp = (Spinner) tableRow.getChildAt(1);
+            for (int i = 0; i < ll_runreport_details.getChildCount(); i++) {
+                //TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
+                if (ll_runreport_details.getChildAt(1) instanceof Spinner) {
+                    Spinner sp = (Spinner) ll_runreport_details.getChildAt(1);
                     switch (sp.getTag().toString()) {
                         case Constants.R_LOAN_OFFICER_ID:
                             loanOfficeId = loanOfficerMap.get(sp.getSelectedItem().toString());
@@ -443,8 +445,8 @@ public class ReportDetailFragment extends MifosBaseFragment
                             }
                             break;
                     }
-                } else if (tableRow.getChildAt(1) instanceof EditText) {
-                    EditText et = (EditText) tableRow.getChildAt(1);
+                } else if (ll_runreport_details.getChildAt(1) instanceof EditText) {
+                    EditText et = (EditText) ll_runreport_details.getChildAt(1);
                     map.put(et.getTag().toString(), et.getText().toString());
                 }
             }
@@ -465,12 +467,12 @@ public class ReportDetailFragment extends MifosBaseFragment
 
     @Override
     public void showOffices(FullParameterListResponse response, String identifier) {
-        for (int i = 0; i < tableDetails.getChildCount(); i++) {
-            TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
-            if (tableRow.getChildAt(1) instanceof EditText) {
+        for (int i = 0; i < ll_runreport_details.getChildCount(); i++) {
+            //TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
+            if (ll_runreport_details.getChildAt(1) instanceof EditText) {
                 continue;
             }
-            Spinner sp = (Spinner) tableRow.getChildAt(1);
+            Spinner sp = (Spinner) ll_runreport_details.getChildAt(1);
             if (sp.getTag().toString().equals(Constants.R_LOAN_OFFICER_ID)) {
                 ArrayList<String> spinnerValues = new ArrayList<>();
                 loanOfficerMap = presenter.filterIntHashMapForSpinner(response.getData(),
@@ -484,18 +486,18 @@ public class ReportDetailFragment extends MifosBaseFragment
         }
 
         //addTableRow(response, identifier);
-        setReportInfo(response,identifier);
+        setReportInfo(response, identifier);
 
     }
 
     @Override
     public void showProduct(FullParameterListResponse response, String identifier) {
-        for (int i = 0; i < tableDetails.getChildCount(); i++) {
-            TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
-            if (tableRow.getChildAt(1) instanceof EditText) {
+        for (int i = 0; i < ll_runreport_details.getChildCount(); i++) {
+            //TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
+            if (ll_runreport_details.getChildAt(1) instanceof EditText) {
                 continue;
             }
-            Spinner sp = (Spinner) tableRow.getChildAt(1);
+            Spinner sp = (Spinner) ll_runreport_details.getChildAt(1);
             if (sp.getTag().toString().equals(Constants.R_LOAN_PRODUCT_ID)) {
                 ArrayList<String> spinnerValues = new ArrayList<>();
                 loanProductMap = presenter.filterIntHashMapForSpinner(response.getData(),
@@ -508,7 +510,7 @@ public class ReportDetailFragment extends MifosBaseFragment
             }
         }
         //addTableRow(response, identifier);
-        setReportInfo(response,identifier);
+        setReportInfo(response, identifier);
     }
 
     @Override
@@ -568,18 +570,23 @@ public class ReportDetailFragment extends MifosBaseFragment
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void addTextView(String identifier) {
 
-        TableRow row = new TableRow(getContext());
-        TableRow.LayoutParams rowParams = new TableRow.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        rowParams.gravity = Gravity.CENTER;
-        rowParams.setMargins(0, 0, 0, 10);
-        row.setLayoutParams(rowParams);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(20, 25, 0, 0);
         final TextView tvLabel = new TextView(getContext());
-        row.addView(tvLabel);
+        tvLabel.setLayoutParams(layoutParams);
+
+        LinearLayout.LayoutParams editTextLayoutParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        editTextLayoutParams.setMargins(20, -10, 0, 10);
         tvField = new EditText(getContext());
-        row.addView(tvField);
+        tvField.setLayoutParams(editTextLayoutParams);
+        tvField.setBackgroundTintList(ContextCompat.getColorStateList(getContext(),R.color.black));
+
+
         switch (identifier) {
             case Constants.START_DATE_SELECT:
                 tvField.setTag(Constants.R_START_DATE);
@@ -621,13 +628,16 @@ public class ReportDetailFragment extends MifosBaseFragment
                 }
             }
         });
-        tableDetails.addView(row);
+        // tableDetails.addView(row);
+        ll_runreport_details.addView(tvLabel);
+        ll_runreport_details.addView(tvField);
+
     }
 
     @Override
     public void showParameterDetails(FullParameterListResponse response, String identifier) {
         //addTableRow(response, identifier);
-        setReportInfo(response,identifier);
+        setReportInfo(response, identifier);
     }
 
     @Override
@@ -641,12 +651,12 @@ public class ReportDetailFragment extends MifosBaseFragment
 
     @Override
     public void onDatePicked(String date) {
-        for (int i = 0; i < tableDetails.getChildCount(); i++) {
-            TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
-            if (tableRow.getChildAt(1) instanceof Spinner) {
+        for (int i = 0; i < ll_runreport_details.getChildCount(); i++) {
+            //TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
+            if (ll_runreport_details.getChildAt(1) instanceof Spinner) {
                 continue;
             }
-            EditText et = (EditText) tableRow.getChildAt(1);
+            EditText et = (EditText) ll_runreport_details.getChildAt(1);
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
             Date dateModified = null;
             try {
