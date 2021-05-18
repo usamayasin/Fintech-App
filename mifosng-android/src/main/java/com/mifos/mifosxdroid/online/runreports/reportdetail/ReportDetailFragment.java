@@ -280,10 +280,15 @@ public class ReportDetailFragment extends MifosBaseFragment
                 tvLabel.setText(getString(R.string.loan_officer));
                 break;
             case Constants.LOAN_PRODUCT_ID_SELECT:
-                spinner.setTag(Constants.R_LOAN_PRODUCT_ID);
-                loanProductMap = presenter.filterIntHashMapForSpinner(data.getData(),
-                        spinnerValues);
-                tvLabel.setText(getString(R.string.loanproduct));
+                if(fetchLoanProduct){
+                    spinner.setTag(Constants.R_LOAN_PRODUCT_ID);
+                    loanProductMap = presenter.filterIntHashMapForSpinner(data.getData(),
+                            spinnerValues);
+                    tvLabel.setText(getString(R.string.loanproduct));
+                    fetchLoanProduct = false;
+                } else {
+                    spinner.setVisibility(View.GONE);
+                }
                 break;
             case Constants.LOAN_PURPOSE_ID_SELECT:
                 spinner.setTag(Constants.R_LOAN_PURPOSE_ID);
