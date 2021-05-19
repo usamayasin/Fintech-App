@@ -420,6 +420,8 @@ public class ReportDetailFragment extends MifosBaseFragment
                                 if (loanPurposeId != -1) {
                                     map.put(sp.getTag().toString(), String.valueOf(loanPurposeId));
                                 }
+                            } else {
+                                showRunReport = false;
                             }
                             break;
                         case Constants.R_FUND_ID:
@@ -428,6 +430,8 @@ public class ReportDetailFragment extends MifosBaseFragment
                                 if (fundId != -1) {
                                     map.put(sp.getTag().toString(), String.valueOf(fundId));
                                 }
+                            } else {
+                                showRunReport = false;
                             }
                             break;
                         case Constants.R_CURRENCY_ID:
@@ -436,6 +440,8 @@ public class ReportDetailFragment extends MifosBaseFragment
                                 if (!currencyId.equals("")) {
                                     map.put(sp.getTag().toString(), currencyId);
                                 }
+                            } else {
+                                showRunReport = false;
                             }
                             break;
                         case Constants.R_OFFICE_ID:
@@ -444,6 +450,8 @@ public class ReportDetailFragment extends MifosBaseFragment
                                 if (officeId != -1) {
                                     map.put(sp.getTag().toString(), String.valueOf(officeId));
                                 }
+                            } else {
+                                showRunReport = false;
                             }
                             break;
                         case Constants.R_PAR_TYPE:
@@ -452,6 +460,8 @@ public class ReportDetailFragment extends MifosBaseFragment
                                 if (parId != -1) {
                                     map.put(sp.getTag().toString(), String.valueOf(parId));
                                 }
+                            } else {
+                                showRunReport = false;
                             }
                             break;
                         case Constants.R_ACCOUNT:
@@ -460,6 +470,8 @@ public class ReportDetailFragment extends MifosBaseFragment
                                 if (glAccountId != -1) {
                                     map.put(sp.getTag().toString(), String.valueOf(glAccountId));
                                 }
+                            } else {
+                                showRunReport = false;
                             }
                             break;
                         case Constants.R_SUB_STATUS:
@@ -468,6 +480,8 @@ public class ReportDetailFragment extends MifosBaseFragment
                                 if (subId != -1) {
                                     map.put(sp.getTag().toString(), String.valueOf(subId));
                                 }
+                            } else {
+                                showRunReport = false;
                             }
                             break;
                         case Constants.R_OBLIG_DATE_TYPE:
@@ -476,6 +490,8 @@ public class ReportDetailFragment extends MifosBaseFragment
                                 if (obligId != -1) {
                                     map.put(sp.getTag().toString(), String.valueOf(obligId));
                                 }
+                            } else {
+                                showRunReport = false;
                             }
                             break;
                     }
@@ -484,7 +500,12 @@ public class ReportDetailFragment extends MifosBaseFragment
                     map.put(et.getTag().toString(), et.getText().toString());
                 }
             }
-            presenter.fetchRunReportWithQuery(reportItem.getReportName(), map);
+            if (showRunReport) {
+                presenter.fetchRunReportWithQuery(reportItem.getReportName(), map);
+            }
+            else{
+                showError("Insufficient data");
+            }
         }
     }
 
