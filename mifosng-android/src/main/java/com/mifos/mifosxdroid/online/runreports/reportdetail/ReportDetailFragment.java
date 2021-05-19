@@ -1,6 +1,7 @@
 package com.mifos.mifosxdroid.online.runreports.reportdetail;
 
 import android.annotation.SuppressLint;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -25,6 +26,7 @@ import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mifos.mifosxdroid.R;
 import com.mifos.mifosxdroid.core.MifosBaseActivity;
@@ -247,6 +249,7 @@ public class ReportDetailFragment extends MifosBaseFragment
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         textViewParams.setMargins(20, 20, 0, 5);
         tvLabel.setLayoutParams(textViewParams);
+        tvLabel.setTypeface(null, Typeface.BOLD);
         //tvLabel.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.total_color));
         //ll_runreport_details.addView(tvLabel);
 
@@ -280,14 +283,12 @@ public class ReportDetailFragment extends MifosBaseFragment
                 tvLabel.setText(getString(R.string.loan_officer));
                 break;
             case Constants.LOAN_PRODUCT_ID_SELECT:
-                if(fetchLoanProduct){
+                if (fetchLoanProduct) {
                     spinner.setTag(Constants.R_LOAN_PRODUCT_ID);
                     loanProductMap = presenter.filterIntHashMapForSpinner(data.getData(),
                             spinnerValues);
                     tvLabel.setText(getString(R.string.loanproduct));
                     fetchLoanProduct = false;
-                } else {
-                    spinner.setVisibility(View.GONE);
                 }
                 break;
             case Constants.LOAN_PURPOSE_ID_SELECT:
@@ -360,6 +361,11 @@ public class ReportDetailFragment extends MifosBaseFragment
         ll_runreport_details.addView(tvLabel);
         ll_runreport_details.addView(spinner);
         ll_runreport_details.addView(divider);
+       /* if (!fetchLoanProduct) {
+            spinner.setVisibility(View.GONE);
+            tvLabel.setVisibility(View.GONE);
+            divider.setVisibility(View.GONE);
+        }*/
         //tableDetails.addView(row);
     }
 
@@ -383,70 +389,93 @@ public class ReportDetailFragment extends MifosBaseFragment
              /* There are variable number of parameters in the request query.
               Hence, create a Map instead of hardcoding the number of
               query parameters in the Retrofit Service.*/
-
+            boolean showRunReport = true;
             for (int i = 0; i < ll_runreport_details.getChildCount(); i++) {
                 //TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
-                if (ll_runreport_details.getChildAt(1) instanceof Spinner) {
-                    Spinner sp = (Spinner) ll_runreport_details.getChildAt(1);
+                if (ll_runreport_details.getChildAt(i) instanceof Spinner) {
+                    Spinner sp = (Spinner) ll_runreport_details.getChildAt(i);
                     switch (sp.getTag().toString()) {
                         case Constants.R_LOAN_OFFICER_ID:
-                            loanOfficeId = loanOfficerMap.get(sp.getSelectedItem().toString());
-                            if (loanOfficeId != -1) {
-                                map.put(sp.getTag().toString(), String.valueOf(loanOfficeId));
+                            if (sp.getCount() > 0) {
+                                loanOfficeId = loanOfficerMap.get(sp.getSelectedItem().toString());
+                                if (loanOfficeId != -1) {
+                                    map.put(sp.getTag().toString(), String.valueOf(loanOfficeId));
+                                }
                             }
                             break;
                         case Constants.R_LOAN_PRODUCT_ID:
-                            loanProductId = loanProductMap.get(sp.getSelectedItem().toString());
-                            if (loanProductId != -1) {
-                                map.put(sp.getTag().toString(), String.valueOf(loanProductId));
+                            if (sp.getCount() > 0) {
+                                loanProductId = loanProductMap.get(sp.getSelectedItem().toString());
+                                if (loanProductId != -1) {
+                                    map.put(sp.getTag().toString(), String.valueOf(loanProductId));
+                                }
+                            } else {
+                                //Toast.makeText(getContext(), "Product is required", Toast.LENGTH_SHORT).show();
+                                showRunReport = false;
                             }
                             break;
                         case Constants.R_LOAN_PURPOSE_ID:
-                            loanPurposeId = loanPurposeMap.get(sp.getSelectedItem().toString());
-                            if (loanPurposeId != -1) {
-                                map.put(sp.getTag().toString(), String.valueOf(loanPurposeId));
+                            if (sp.getCount() > 0) {
+                                loanPurposeId = loanPurposeMap.get(sp.getSelectedItem().toString());
+                                if (loanPurposeId != -1) {
+                                    map.put(sp.getTag().toString(), String.valueOf(loanPurposeId));
+                                }
                             }
                             break;
                         case Constants.R_FUND_ID:
-                            fundId = fundMap.get(sp.getSelectedItem().toString());
-                            if (fundId != -1) {
-                                map.put(sp.getTag().toString(), String.valueOf(fundId));
+                            if (sp.getCount() > 0) {
+                                fundId = fundMap.get(sp.getSelectedItem().toString());
+                                if (fundId != -1) {
+                                    map.put(sp.getTag().toString(), String.valueOf(fundId));
+                                }
                             }
                             break;
                         case Constants.R_CURRENCY_ID:
-                            currencyId = currencyMap.get(sp.getSelectedItem().toString());
-                            if (!currencyId.equals("")) {
-                                map.put(sp.getTag().toString(), currencyId);
+                            if (sp.getCount() > 0) {
+                                currencyId = currencyMap.get(sp.getSelectedItem().toString());
+                                if (!currencyId.equals("")) {
+                                    map.put(sp.getTag().toString(), currencyId);
+                                }
                             }
                             break;
                         case Constants.R_OFFICE_ID:
-                            officeId = officeMap.get(sp.getSelectedItem().toString());
-                            if (officeId != -1) {
-                                map.put(sp.getTag().toString(), String.valueOf(officeId));
+                            if (sp.getCount() > 0) {
+                                officeId = officeMap.get(sp.getSelectedItem().toString());
+                                if (officeId != -1) {
+                                    map.put(sp.getTag().toString(), String.valueOf(officeId));
+                                }
                             }
                             break;
                         case Constants.R_PAR_TYPE:
-                            parId = parMap.get(sp.getSelectedItem().toString());
-                            if (parId != -1) {
-                                map.put(sp.getTag().toString(), String.valueOf(parId));
+                            if (sp.getCount() > 0) {
+                                parId = parMap.get(sp.getSelectedItem().toString());
+                                if (parId != -1) {
+                                    map.put(sp.getTag().toString(), String.valueOf(parId));
+                                }
                             }
                             break;
                         case Constants.R_ACCOUNT:
-                            glAccountId = glAccountNoMap.get(sp.getSelectedItem().toString());
-                            if (glAccountId != -1) {
-                                map.put(sp.getTag().toString(), String.valueOf(glAccountId));
+                            if (sp.getCount() > 0) {
+                                glAccountId = glAccountNoMap.get(sp.getSelectedItem().toString());
+                                if (glAccountId != -1) {
+                                    map.put(sp.getTag().toString(), String.valueOf(glAccountId));
+                                }
                             }
                             break;
                         case Constants.R_SUB_STATUS:
-                            subId = subStatusMap.get(sp.getSelectedItem().toString());
-                            if (subId != -1) {
-                                map.put(sp.getTag().toString(), String.valueOf(subId));
+                            if (sp.getCount() > 0) {
+                                subId = subStatusMap.get(sp.getSelectedItem().toString());
+                                if (subId != -1) {
+                                    map.put(sp.getTag().toString(), String.valueOf(subId));
+                                }
                             }
                             break;
                         case Constants.R_OBLIG_DATE_TYPE:
-                            obligId = obligDateTypeMap.get(sp.getSelectedItem().toString());
-                            if (obligId != -1) {
-                                map.put(sp.getTag().toString(), String.valueOf(obligId));
+                            if (sp.getCount() > 0) {
+                                obligId = obligDateTypeMap.get(sp.getSelectedItem().toString());
+                                if (obligId != -1) {
+                                    map.put(sp.getTag().toString(), String.valueOf(obligId));
+                                }
                             }
                             break;
                     }
@@ -583,13 +612,14 @@ public class ReportDetailFragment extends MifosBaseFragment
         layoutParams.setMargins(20, 25, 0, 0);
         final TextView tvLabel = new TextView(getContext());
         tvLabel.setLayoutParams(layoutParams);
+        tvLabel.setTypeface(null, Typeface.BOLD);
 
         LinearLayout.LayoutParams editTextLayoutParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         editTextLayoutParams.setMargins(20, -10, 0, 10);
         tvField = new EditText(getContext());
         tvField.setLayoutParams(editTextLayoutParams);
-        tvField.setBackgroundTintList(ContextCompat.getColorStateList(getContext(),R.color.black));
+        tvField.setBackgroundTintList(ContextCompat.getColorStateList(getContext(), R.color.black));
 
 
         switch (identifier) {
