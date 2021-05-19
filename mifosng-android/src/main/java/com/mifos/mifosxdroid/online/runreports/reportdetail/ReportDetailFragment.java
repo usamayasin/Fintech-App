@@ -231,6 +231,8 @@ public class ReportDetailFragment extends MifosBaseFragment
                         equals(Constants.R_CURRENCY_ID) && fetchLoanProduct) {
                     String currencyId = currencyMap.get(spinner.getSelectedItem().toString());
                     presenter.fetchProduct(Constants.LOAN_PRODUCT_ID_SELECT, currencyId, true);
+                } else {
+
                 }
             }
 
@@ -281,6 +283,7 @@ public class ReportDetailFragment extends MifosBaseFragment
                 loanOfficerMap = presenter.filterIntHashMapForSpinner(data.getData(),
                         spinnerValues);
                 tvLabel.setText(getString(R.string.loan_officer));
+                //fetchLoanOfficer = false;
                 break;
             case Constants.LOAN_PRODUCT_ID_SELECT:
                 if (fetchLoanProduct) {
@@ -288,7 +291,7 @@ public class ReportDetailFragment extends MifosBaseFragment
                     loanProductMap = presenter.filterIntHashMapForSpinner(data.getData(),
                             spinnerValues);
                     tvLabel.setText(getString(R.string.loanproduct));
-                    fetchLoanProduct = false;
+                  //  fetchLoanProduct = false;
                 }
                 break;
             case Constants.LOAN_PURPOSE_ID_SELECT:
@@ -361,11 +364,6 @@ public class ReportDetailFragment extends MifosBaseFragment
         ll_runreport_details.addView(tvLabel);
         ll_runreport_details.addView(spinner);
         ll_runreport_details.addView(divider);
-       /* if (!fetchLoanProduct) {
-            spinner.setVisibility(View.GONE);
-            tvLabel.setVisibility(View.GONE);
-            divider.setVisibility(View.GONE);
-        }*/
         //tableDetails.addView(row);
     }
 
@@ -502,8 +500,7 @@ public class ReportDetailFragment extends MifosBaseFragment
             }
             if (showRunReport) {
                 presenter.fetchRunReportWithQuery(reportItem.getReportName(), map);
-            }
-            else{
+            } else {
                 showError("Insufficient data");
             }
         }
@@ -524,19 +521,21 @@ public class ReportDetailFragment extends MifosBaseFragment
     public void showOffices(FullParameterListResponse response, String identifier) {
         for (int i = 0; i < ll_runreport_details.getChildCount(); i++) {
             //TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
-            if (ll_runreport_details.getChildAt(1) instanceof EditText) {
+            if (ll_runreport_details.getChildAt(i) instanceof EditText) {
                 continue;
             }
-            Spinner sp = (Spinner) ll_runreport_details.getChildAt(1);
-            if (sp.getTag().toString().equals(Constants.R_LOAN_OFFICER_ID)) {
-                ArrayList<String> spinnerValues = new ArrayList<>();
-                loanOfficerMap = presenter.filterIntHashMapForSpinner(response.getData(),
-                        spinnerValues);
-                ArrayAdapter adapter = new ArrayAdapter<>(getActivity(),
-                        android.R.layout.simple_spinner_item, spinnerValues);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                sp.setAdapter(adapter);
-                return;
+            if(ll_runreport_details.getChildAt(i) instanceof Spinner) {
+                Spinner sp = (Spinner) ll_runreport_details.getChildAt(i);
+                if (sp.getTag().toString().equals(Constants.R_LOAN_OFFICER_ID)) {
+                    ArrayList<String> spinnerValues = new ArrayList<>();
+                    loanOfficerMap = presenter.filterIntHashMapForSpinner(response.getData(),
+                            spinnerValues);
+                    ArrayAdapter adapter = new ArrayAdapter<>(getActivity(),
+                            android.R.layout.simple_spinner_item, spinnerValues);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    sp.setAdapter(adapter);
+                    return;
+                }
             }
         }
 
@@ -549,19 +548,21 @@ public class ReportDetailFragment extends MifosBaseFragment
     public void showProduct(FullParameterListResponse response, String identifier) {
         for (int i = 0; i < ll_runreport_details.getChildCount(); i++) {
             //TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
-            if (ll_runreport_details.getChildAt(1) instanceof EditText) {
+            if (ll_runreport_details.getChildAt(i) instanceof EditText) {
                 continue;
             }
-            Spinner sp = (Spinner) ll_runreport_details.getChildAt(1);
-            if (sp.getTag().toString().equals(Constants.R_LOAN_PRODUCT_ID)) {
-                ArrayList<String> spinnerValues = new ArrayList<>();
-                loanProductMap = presenter.filterIntHashMapForSpinner(response.getData(),
-                        spinnerValues);
-                ArrayAdapter adapter = new ArrayAdapter<>(getActivity(),
-                        android.R.layout.simple_spinner_item, spinnerValues);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                sp.setAdapter(adapter);
-                return;
+            if (ll_runreport_details.getChildAt(i) instanceof Spinner) {
+                Spinner sp = (Spinner) ll_runreport_details.getChildAt(i);
+                if (sp.getTag().toString().equals(Constants.R_LOAN_PRODUCT_ID)) {
+                    ArrayList<String> spinnerValues = new ArrayList<>();
+                    loanProductMap = presenter.filterIntHashMapForSpinner(response.getData(),
+                            spinnerValues);
+                    ArrayAdapter adapter = new ArrayAdapter<>(getActivity(),
+                            android.R.layout.simple_spinner_item, spinnerValues);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    sp.setAdapter(adapter);
+                    return;
+                }
             }
         }
         //addTableRow(response, identifier);
