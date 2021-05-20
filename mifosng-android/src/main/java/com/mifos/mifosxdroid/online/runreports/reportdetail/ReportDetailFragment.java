@@ -11,6 +11,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -286,13 +288,11 @@ public class ReportDetailFragment extends MifosBaseFragment
                 //fetchLoanOfficer = false;
                 break;
             case Constants.LOAN_PRODUCT_ID_SELECT:
-                if (fetchLoanProduct) {
                     spinner.setTag(Constants.R_LOAN_PRODUCT_ID);
                     loanProductMap = presenter.filterIntHashMapForSpinner(data.getData(),
                             spinnerValues);
                     tvLabel.setText(getString(R.string.loanproduct));
-                  //  fetchLoanProduct = false;
-                }
+                    //  fetchLoanProduct = false;
                 break;
             case Constants.LOAN_PURPOSE_ID_SELECT:
                 spinner.setTag(Constants.R_LOAN_PURPOSE_ID);
@@ -361,6 +361,9 @@ public class ReportDetailFragment extends MifosBaseFragment
 
             }
         });
+        if (tvLabel.getText().equals("")) {
+            return;
+        }
         ll_runreport_details.addView(tvLabel);
         ll_runreport_details.addView(spinner);
         ll_runreport_details.addView(divider);
@@ -524,7 +527,7 @@ public class ReportDetailFragment extends MifosBaseFragment
             if (ll_runreport_details.getChildAt(i) instanceof EditText) {
                 continue;
             }
-            if(ll_runreport_details.getChildAt(i) instanceof Spinner) {
+            if (ll_runreport_details.getChildAt(i) instanceof Spinner) {
                 Spinner sp = (Spinner) ll_runreport_details.getChildAt(i);
                 if (sp.getTag().toString().equals(Constants.R_LOAN_OFFICER_ID)) {
                     ArrayList<String> spinnerValues = new ArrayList<>();
@@ -640,6 +643,8 @@ public class ReportDetailFragment extends MifosBaseFragment
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         editTextLayoutParams.setMargins(20, -10, 0, 10);
         tvField = new EditText(getContext());
+        tvField.setInputType(InputType.TYPE_NULL);
+        //tvField.setClickable(true);
         tvField.setLayoutParams(editTextLayoutParams);
         tvField.setBackgroundTintList(ContextCompat.getColorStateList(getContext(), R.color.black));
 
@@ -677,11 +682,15 @@ public class ReportDetailFragment extends MifosBaseFragment
         tvField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dateField = v.getTag().toString();
-                if (dateField.equals(Constants.R_START_DATE) ||
-                        dateField.equals(Constants.R_END_DATE)) {
-                    datePicker.show(getActivity().getSupportFragmentManager(),
-                            FragmentConstants.DFRAG_DATE_PICKER);
+                try {
+                    dateField = v.getTag().toString();
+                    if (dateField.equals(Constants.R_START_DATE) ||
+                            dateField.equals(Constants.R_END_DATE)) {
+                        datePicker.show(getActivity().getSupportFragmentManager(),
+                                FragmentConstants.DFRAG_DATE_PICKER);
+                    }
+                } catch (Exception e) {
+                    Log.e("Error ", e.getMessage());
                 }
             }
         });
@@ -708,24 +717,32 @@ public class ReportDetailFragment extends MifosBaseFragment
 
     @Override
     public void onDatePicked(String date) {
-        for (int i = 0; i < ll_runreport_details.getChildCount(); i++) {
-            //TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
-            if (ll_runreport_details.getChildAt(1) instanceof Spinner) {
-                continue;
-            }
-            EditText et = (EditText) ll_runreport_details.getChildAt(1);
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            Date dateModified = null;
-            try {
-                dateModified = simpleDateFormat.parse(date);
-            } catch (ParseException e) {
+        try {
+            for (int i = 0; i < ll_runreport_details.getChildCount(); i++) {
+                //TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
+                if (ll_runreport_details.getChildAt(i) instanceof Spinner) {
+                    continue;
+                }
+                if (ll_runreport_details.getChildAt(i) instanceof EditText) {
+                    EditText et = (EditText) ll_runreport_details.getChildAt(i);
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                    Date dateModified = null;
+                    try {
+                        dateModified = simpleDateFormat.parse(date);
+                    } catch (ParseException e) {
 
+                    }
+                    SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+                    if (et.getTag().toString().equals(dateField)) {
+                        et.setInputType(InputType.TYPE_CLASS_TEXT);
+                        et.setText(simpleDateFormat1.format(dateModified));
+                        et.setInputType(InputType.TYPE_NULL);
+                        break;
+                    }
+                }
             }
-            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
-            if (et.getTag().toString().equals(dateField)) {
-                et.setText(simpleDateFormat1.format(dateModified));
-                break;
-            }
+        } catch (Exception e) {
+            Log.e("Error ", e.getMessage());
         }
     }
 }
