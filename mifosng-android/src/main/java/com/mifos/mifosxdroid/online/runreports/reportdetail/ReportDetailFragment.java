@@ -84,6 +84,7 @@ public class ReportDetailFragment extends MifosBaseFragment
 
     private boolean fetchLoanOfficer = false;
     private boolean fetchLoanProduct = false;
+    private boolean isLoanProductSpinnerExists=false;
 
     private HashMap<String, Integer> fundMap;
     private HashMap<String, Integer> loanOfficerMap;
@@ -288,11 +289,10 @@ public class ReportDetailFragment extends MifosBaseFragment
                 //fetchLoanOfficer = false;
                 break;
             case Constants.LOAN_PRODUCT_ID_SELECT:
-                    spinner.setTag(Constants.R_LOAN_PRODUCT_ID);
-                    loanProductMap = presenter.filterIntHashMapForSpinner(data.getData(),
-                            spinnerValues);
-                    tvLabel.setText(getString(R.string.loanproduct));
-                    //  fetchLoanProduct = false;
+                spinner.setTag(Constants.R_LOAN_PRODUCT_ID);
+                loanProductMap = presenter.filterIntHashMapForSpinner(data.getData(),
+                        spinnerValues);
+                tvLabel.setText(getString(R.string.loanproduct));
                 break;
             case Constants.LOAN_PURPOSE_ID_SELECT:
                 spinner.setTag(Constants.R_LOAN_PURPOSE_ID);
@@ -337,6 +337,7 @@ public class ReportDetailFragment extends MifosBaseFragment
                 obligDateTypeMap = presenter.
                         filterIntHashMapForSpinner(data.getData(), spinnerValues);
                 tvLabel.setText(getString(R.string.obligation_date_type));
+                break;
 
         }
         ArrayAdapter adapter = new ArrayAdapter<>(getActivity(),
@@ -362,6 +363,9 @@ public class ReportDetailFragment extends MifosBaseFragment
             }
         });
         if (tvLabel.getText().equals("")) {
+            return;
+        }
+        if (identifier.equals(Constants.LOAN_PRODUCT_ID_SELECT) && isLoanProductSpinnerExists) {
             return;
         }
         ll_runreport_details.addView(tvLabel);
@@ -564,12 +568,13 @@ public class ReportDetailFragment extends MifosBaseFragment
                             android.R.layout.simple_spinner_item, spinnerValues);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     sp.setAdapter(adapter);
+                    isLoanProductSpinnerExists=true;
                     return;
                 }
             }
         }
         //addTableRow(response, identifier);
-        setReportInfo(response, identifier);
+        //setReportInfo(response, identifier);
     }
 
     @Override
@@ -593,6 +598,7 @@ public class ReportDetailFragment extends MifosBaseFragment
         Toaster.show(rootView, error);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void showFullParameterResponse(FullParameterListResponse response) {
         for (DataRow row : response.getData()) {
@@ -643,7 +649,6 @@ public class ReportDetailFragment extends MifosBaseFragment
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         editTextLayoutParams.setMargins(20, -10, 0, 10);
         tvField = new EditText(getContext());
-        tvField.setInputType(InputType.TYPE_NULL);
         //tvField.setClickable(true);
         tvField.setLayoutParams(editTextLayoutParams);
         tvField.setBackgroundTintList(ContextCompat.getColorStateList(getContext(), R.color.black));
@@ -653,10 +658,12 @@ public class ReportDetailFragment extends MifosBaseFragment
             case Constants.START_DATE_SELECT:
                 tvField.setTag(Constants.R_START_DATE);
                 tvLabel.setText(getString(R.string.start_date));
+                tvField.setInputType(InputType.TYPE_NULL);
                 break;
             case Constants.END_DATE_SELECT:
                 tvField.setTag(Constants.R_END_DATE);
                 tvLabel.setText(getString(R.string.end_date));
+                tvField.setInputType(InputType.TYPE_NULL);
                 break;
             case Constants.SELECT_ACCOUNT:
                 tvField.setTag(Constants.R_ACCOUNT_NO);

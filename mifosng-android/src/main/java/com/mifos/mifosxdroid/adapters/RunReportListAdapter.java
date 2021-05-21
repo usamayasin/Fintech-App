@@ -59,7 +59,6 @@ public class RunReportListAdapter extends RecyclerView.Adapter<RunReportListAdap
             headingRowParams.gravity = Gravity.CENTER;
             headingRowParams.setMargins(0, 0, 0, 10);
             holder.ll_runreport_list.setLayoutParams(headingRowParams);
-            holder.ll_runreport_list.setWeightSum(item.getRow().size() - 1);
             holder.ll_runreport_list.setOrientation(LinearLayout.HORIZONTAL);
 
             for (int i = 0; i < columnHeadersList.size(); i++) {
@@ -80,6 +79,7 @@ public class RunReportListAdapter extends RecyclerView.Adapter<RunReportListAdap
                     holder.ll_runreport_list.addView(tv);
                 }
             }
+            holder.ll_runreport_list.setWeightSum(holder.ll_runreport_list.getChildCount());
 
         } catch (Exception e) {
             Log.e("Error ", e.getMessage());

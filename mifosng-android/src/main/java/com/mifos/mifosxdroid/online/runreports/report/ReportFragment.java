@@ -92,8 +92,8 @@ public class ReportFragment extends MifosBaseFragment implements ReportMvpView {
         try {
             showProgressbar(true);
             //setUpHeading();
-            setUpHeadings();
             if (report.getData().size() > 0) {
+                setUpHeadings();
                 //setUpValues();
                 setRunReportList();
             } else {
@@ -135,7 +135,6 @@ public class ReportFragment extends MifosBaseFragment implements ReportMvpView {
             //headingRowParams.gravity = Gravity.CENTER;
             headingRowParams.setMargins(0, 0, 0, 0);
             ll_headers.setLayoutParams(headingRowParams);
-            ll_headers.setWeightSum(report.getColumnHeaders().size() - 1);
 
             for (ColumnHeader column : report.getColumnHeaders()) {
                 switch (column.getColumnDisplayType()) {
@@ -153,6 +152,9 @@ public class ReportFragment extends MifosBaseFragment implements ReportMvpView {
                         break;
                 }
             }
+            ll_headers.setWeightSum(ll_headers.getChildCount());
+            int headers=ll_headers.getChildCount();
+            Log.e("count", String.valueOf(headers));
         } catch (Exception e) {
             Log.e("Error", e.getMessage());
         }
