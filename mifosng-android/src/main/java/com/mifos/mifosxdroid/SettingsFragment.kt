@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.preference.ListPreference
+import android.preference.Preference
 import android.preference.PreferenceFragment
 import android.preference.SwitchPreference
 import android.view.LayoutInflater
@@ -13,6 +15,7 @@ import com.mifos.mifosxdroid.dialogfragments.syncsurveysdialog.SyncSurveysDialog
 import com.mifos.utils.FragmentConstants
 import com.mifos.utils.ThemeHelper
 import kotlinx.android.synthetic.main.fragment_settings.*
+
 
 /**
  * Created by mayankjindal on 22/07/17.
