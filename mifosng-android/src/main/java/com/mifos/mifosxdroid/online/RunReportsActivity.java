@@ -36,13 +36,14 @@ public class RunReportsActivity extends MifosBaseActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        spinner = findViewById(R.id.sp_report_types);
+        spinner = new Spinner(getSupportActionBar().getThemedContext());
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.array_runreport, R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-        toolbar.setTitle("Reports");
+        toolbar.addView(spinner);
         intent = new Intent(Constants.ACTION_REPORT);
         ReportCategoryFragment fragment = new ReportCategoryFragment();
         replaceFragment(fragment, false, R.id.container);

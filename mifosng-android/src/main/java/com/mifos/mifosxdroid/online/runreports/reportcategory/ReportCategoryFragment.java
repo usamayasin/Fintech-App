@@ -111,7 +111,10 @@ public class ReportCategoryFragment extends MifosBaseFragment
         reportTypeItems = reportTypes;
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+                rvReports.getContext(), layoutManager.getOrientation());
         rvReports.setLayoutManager(layoutManager);
+        rvReports.addItemDecoration(dividerItemDecoration);
         rvReports.setAdapter(reportAdapter);
         rvReports.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), this));
 
