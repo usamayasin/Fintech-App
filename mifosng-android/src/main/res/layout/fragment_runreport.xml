@@ -8,6 +8,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/recycler_report"
         android:layout_gravity="center"
-        android:layout_margin="5dp"/>
+        android:layout_margin="15dp"/>
 
 </LinearLayout>

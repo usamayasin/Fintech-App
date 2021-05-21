@@ -1,5 +1,7 @@
 package com.mifos.mifosxdroid.online.runreports.reportdetail;
 
+import android.util.Log;
+
 import com.mifos.api.datamanager.DataManagerRunReport;
 import com.mifos.mifosxdroid.base.BasePresenter;
 import com.mifos.objects.runreports.DataRow;
@@ -209,15 +211,18 @@ public class ReportDetailPresenter extends BasePresenter<ReportDetailMvpView> {
                     @Override
                     public void onError(Throwable e) {
                         getMvpView().showProgressbar(false);
+                        String errorMessage="";
                         try {
                             if (e instanceof HttpException) {
-                                String errorMessage = ((HttpException) e).response().errorBody()
+                                errorMessage = ((HttpException) e).response().errorBody()
                                         .string();
                                 getMvpView().showError(new JSONObject(errorMessage)
                                         .getString("developerMessage"));
                             }
                         } catch (Throwable throwable) {
                             RxJavaPlugins.getInstance().getErrorHandler().handleError(e);
+                            Log.e("Error",throwable.getMessage());
+                            getMvpView().showError(errorMessage);
                         }
                     }
 

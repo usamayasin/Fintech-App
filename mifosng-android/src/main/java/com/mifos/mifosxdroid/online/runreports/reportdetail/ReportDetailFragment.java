@@ -1,9 +1,18 @@
 package com.mifos.mifosxdroid.online.runreports.reportdetail;
 
+import android.annotation.SuppressLint;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,10 +23,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mifos.mifosxdroid.R;
 import com.mifos.mifosxdroid.core.MifosBaseActivity;
@@ -62,6 +73,9 @@ public class ReportDetailFragment extends MifosBaseFragment
     @BindView(R.id.table_details)
     TableLayout tableDetails;
 
+    @BindView(R.id.ll_runreport_details)
+    LinearLayout ll_runreport_details;
+
     @Inject
     ReportDetailPresenter presenter;
 
@@ -70,6 +84,7 @@ public class ReportDetailFragment extends MifosBaseFragment
 
     private boolean fetchLoanOfficer = false;
     private boolean fetchLoanProduct = false;
+    private boolean isLoanProductSpinnerExists=false;
 
     private HashMap<String, Integer> fundMap;
     private HashMap<String, Integer> loanOfficerMap;
@@ -219,6 +234,8 @@ public class ReportDetailFragment extends MifosBaseFragment
                         equals(Constants.R_CURRENCY_ID) && fetchLoanProduct) {
                     String currencyId = currencyMap.get(spinner.getSelectedItem().toString());
                     presenter.fetchProduct(Constants.LOAN_PRODUCT_ID_SELECT, currencyId, true);
+                } else {
+
                 }
             }
 
@@ -230,8 +247,135 @@ public class ReportDetailFragment extends MifosBaseFragment
         tableDetails.addView(row);
     }
 
+    private void setReportInfo(FullParameterListResponse data, String identifier) {
+
+        TextView tvLabel = new TextView(getContext());
+        LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        textViewParams.setMargins(20, 20, 0, 5);
+        tvLabel.setLayoutParams(textViewParams);
+        tvLabel.setTypeface(null, Typeface.BOLD);
+        //tvLabel.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.total_color));
+        //ll_runreport_details.addView(tvLabel);
+
+
+        final Spinner spinner = new Spinner(getContext());
+        LinearLayout.LayoutParams spinnerParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        spinnerParams.setMargins(20, 5, 0, 0);
+        spinner.setLayoutParams(spinnerParams);
+        // ll_runreport_details.addView(spinner);
+
+        View divider = new View(getContext());
+        LinearLayout.LayoutParams dividerParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2);
+        dividerParams.setMargins(20, 0, 20, 20);
+        divider.setLayoutParams(dividerParams);
+        // divider.setLayoutParams(dividerParams);
+        divider.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.black));
+        //ll_runreport_details.addView(divider);
+
+
+        ArrayList<String> spinnerValues = new ArrayList<>();
+
+        // Add the parameter keys as the text so that we can identify the spinner
+        // and can later add the corresponding values in the parameter-list while
+        // requesting the report.
+        switch (identifier) {
+            case Constants.LOAN_OFFICER_ID_SELECT:
+                spinner.setTag(Constants.R_LOAN_OFFICER_ID);
+                loanOfficerMap = presenter.filterIntHashMapForSpinner(data.getData(),
+                        spinnerValues);
+                tvLabel.setText(getString(R.string.loan_officer));
+                //fetchLoanOfficer = false;
+                break;
+            case Constants.LOAN_PRODUCT_ID_SELECT:
+                spinner.setTag(Constants.R_LOAN_PRODUCT_ID);
+                loanProductMap = presenter.filterIntHashMapForSpinner(data.getData(),
+                        spinnerValues);
+                tvLabel.setText(getString(R.string.loanproduct));
+                break;
+            case Constants.LOAN_PURPOSE_ID_SELECT:
+                spinner.setTag(Constants.R_LOAN_PURPOSE_ID);
+                loanPurposeMap = presenter.filterIntHashMapForSpinner(data.getData(),
+                        spinnerValues);
+                tvLabel.setText(getString(R.string.report_loan_purpose));
+                break;
+            case Constants.FUND_ID_SELECT:
+                spinner.setTag(Constants.R_FUND_ID);
+                fundMap = presenter.filterIntHashMapForSpinner(data.getData(), spinnerValues);
+                tvLabel.setText(getString(R.string.loan_fund));
+                break;
+            case Constants.CURRENCY_ID_SELECT:
+                spinner.setTag(Constants.R_CURRENCY_ID);
+                currencyMap = presenter.filterStringHashMapForSpinner(data.getData(),
+                        spinnerValues);
+                tvLabel.setText(getString(R.string.currency));
+                break;
+            case Constants.OFFICE_ID_SELECT:
+                spinner.setTag(Constants.R_OFFICE_ID);
+                officeMap = presenter.filterIntHashMapForSpinner(data.getData(), spinnerValues);
+                tvLabel.setText(getString(R.string.office));
+                break;
+            case Constants.PAR_TYPE_SELECT:
+                spinner.setTag(Constants.R_PAR_TYPE);
+                parMap = presenter.filterIntHashMapForSpinner(data.getData(), spinnerValues);
+                tvLabel.setText(getString(R.string.par_calculation));
+                break;
+            case Constants.SAVINGS_ACCOUNT_SUB_STATUS:
+                spinner.setTag(Constants.R_SUB_STATUS);
+                subStatusMap = presenter.filterIntHashMapForSpinner(data.getData(), spinnerValues);
+                tvLabel.setText(getString(R.string.savings_acc_deposit));
+                break;
+            case Constants.SELECT_GL_ACCOUNT_NO:
+                spinner.setTag(Constants.R_ACCOUNT);
+                glAccountNoMap = presenter.
+                        filterIntHashMapForSpinner(data.getData(), spinnerValues);
+                tvLabel.setText(getString(R.string.glaccount));
+                break;
+            case Constants.OBLIG_DATE_TYPE_SELECT:
+                spinner.setTag(Constants.R_OBLIG_DATE_TYPE);
+                obligDateTypeMap = presenter.
+                        filterIntHashMapForSpinner(data.getData(), spinnerValues);
+                tvLabel.setText(getString(R.string.obligation_date_type));
+                break;
+
+        }
+        ArrayAdapter adapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_item, spinnerValues);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (spinner.getTag().toString().equals(Constants.R_OFFICE_ID) && fetchLoanOfficer) {
+                    int officeId = officeMap.get(spinner.getSelectedItem().toString());
+                    presenter.fetchOffices(Constants.LOAN_OFFICER_ID_SELECT, officeId, true);
+                } else if (spinner.getTag().toString().
+                        equals(Constants.R_CURRENCY_ID) && fetchLoanProduct) {
+                    String currencyId = currencyMap.get(spinner.getSelectedItem().toString());
+                    presenter.fetchProduct(Constants.LOAN_PRODUCT_ID_SELECT, currencyId, true);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        if (tvLabel.getText().equals("")) {
+            return;
+        }
+        if (identifier.equals(Constants.LOAN_PRODUCT_ID_SELECT) && isLoanProductSpinnerExists) {
+            return;
+        }
+        ll_runreport_details.addView(tvLabel);
+        ll_runreport_details.addView(spinner);
+        ll_runreport_details.addView(divider);
+        //tableDetails.addView(row);
+    }
+
     private void runReport() {
-        if (tableDetails.getChildCount() < 1) {
+        if (ll_runreport_details.getChildCount() < 1) {
             Toaster.show(rootView, getString(R.string.msg_report_empty));
         } else {
             Integer fundId;
@@ -250,79 +394,122 @@ public class ReportDetailFragment extends MifosBaseFragment
              /* There are variable number of parameters in the request query.
               Hence, create a Map instead of hardcoding the number of
               query parameters in the Retrofit Service.*/
-
-            for (int i = 0; i < tableDetails.getChildCount(); i++) {
-                TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
-                if (tableRow.getChildAt(1) instanceof Spinner) {
-                    Spinner sp = (Spinner) tableRow.getChildAt(1);
+            boolean showRunReport = true;
+            for (int i = 0; i < ll_runreport_details.getChildCount(); i++) {
+                //TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
+                if (ll_runreport_details.getChildAt(i) instanceof Spinner) {
+                    Spinner sp = (Spinner) ll_runreport_details.getChildAt(i);
                     switch (sp.getTag().toString()) {
                         case Constants.R_LOAN_OFFICER_ID:
-                            loanOfficeId = loanOfficerMap.get(sp.getSelectedItem().toString());
-                            if (loanOfficeId != -1) {
-                                map.put(sp.getTag().toString(), String.valueOf(loanOfficeId));
+                            if (sp.getCount() > 0) {
+                                loanOfficeId = loanOfficerMap.get(sp.getSelectedItem().toString());
+                                if (loanOfficeId != -1) {
+                                    map.put(sp.getTag().toString(), String.valueOf(loanOfficeId));
+                                }
                             }
                             break;
                         case Constants.R_LOAN_PRODUCT_ID:
-                            loanProductId = loanProductMap.get(sp.getSelectedItem().toString());
-                            if (loanProductId != -1) {
-                                map.put(sp.getTag().toString(), String.valueOf(loanProductId));
+                            if (sp.getCount() > 0) {
+                                loanProductId = loanProductMap.get(sp.getSelectedItem().toString());
+                                if (loanProductId != -1) {
+                                    map.put(sp.getTag().toString(), String.valueOf(loanProductId));
+                                }
+                            } else {
+                                //Toast.makeText(getContext(), "Product is required", Toast.LENGTH_SHORT).show();
+                                showRunReport = false;
                             }
                             break;
                         case Constants.R_LOAN_PURPOSE_ID:
-                            loanPurposeId = loanPurposeMap.get(sp.getSelectedItem().toString());
-                            if (loanPurposeId != -1) {
-                                map.put(sp.getTag().toString(), String.valueOf(loanPurposeId));
+                            if (sp.getCount() > 0) {
+                                loanPurposeId = loanPurposeMap.get(sp.getSelectedItem().toString());
+                                if (loanPurposeId != -1) {
+                                    map.put(sp.getTag().toString(), String.valueOf(loanPurposeId));
+                                }
+                            } else {
+                                showRunReport = false;
                             }
                             break;
                         case Constants.R_FUND_ID:
-                            fundId = fundMap.get(sp.getSelectedItem().toString());
-                            if (fundId != -1) {
-                                map.put(sp.getTag().toString(), String.valueOf(fundId));
+                            if (sp.getCount() > 0) {
+                                fundId = fundMap.get(sp.getSelectedItem().toString());
+                                if (fundId != -1) {
+                                    map.put(sp.getTag().toString(), String.valueOf(fundId));
+                                }
+                            } else {
+                                showRunReport = false;
                             }
                             break;
                         case Constants.R_CURRENCY_ID:
-                            currencyId = currencyMap.get(sp.getSelectedItem().toString());
-                            if (!currencyId.equals("")) {
-                                map.put(sp.getTag().toString(), currencyId);
+                            if (sp.getCount() > 0) {
+                                currencyId = currencyMap.get(sp.getSelectedItem().toString());
+                                if (!currencyId.equals("")) {
+                                    map.put(sp.getTag().toString(), currencyId);
+                                }
+                            } else {
+                                showRunReport = false;
                             }
                             break;
                         case Constants.R_OFFICE_ID:
-                            officeId = officeMap.get(sp.getSelectedItem().toString());
-                            if (officeId != -1) {
-                                map.put(sp.getTag().toString(), String.valueOf(officeId));
+                            if (sp.getCount() > 0) {
+                                officeId = officeMap.get(sp.getSelectedItem().toString());
+                                if (officeId != -1) {
+                                    map.put(sp.getTag().toString(), String.valueOf(officeId));
+                                }
+                            } else {
+                                showRunReport = false;
                             }
                             break;
                         case Constants.R_PAR_TYPE:
-                            parId = parMap.get(sp.getSelectedItem().toString());
-                            if (parId != -1) {
-                                map.put(sp.getTag().toString(), String.valueOf(parId));
+                            if (sp.getCount() > 0) {
+                                parId = parMap.get(sp.getSelectedItem().toString());
+                                if (parId != -1) {
+                                    map.put(sp.getTag().toString(), String.valueOf(parId));
+                                }
+                            } else {
+                                showRunReport = false;
                             }
                             break;
                         case Constants.R_ACCOUNT:
-                            glAccountId = glAccountNoMap.get(sp.getSelectedItem().toString());
-                            if (glAccountId != -1) {
-                                map.put(sp.getTag().toString(), String.valueOf(glAccountId));
+                            if (sp.getCount() > 0) {
+                                glAccountId = glAccountNoMap.get(sp.getSelectedItem().toString());
+                                if (glAccountId != -1) {
+                                    map.put(sp.getTag().toString(), String.valueOf(glAccountId));
+                                }
+                            } else {
+                                showRunReport = false;
                             }
                             break;
                         case Constants.R_SUB_STATUS:
-                            subId = subStatusMap.get(sp.getSelectedItem().toString());
-                            if (subId != -1) {
-                                map.put(sp.getTag().toString(), String.valueOf(subId));
+                            if (sp.getCount() > 0) {
+                                subId = subStatusMap.get(sp.getSelectedItem().toString());
+                                if (subId != -1) {
+                                    map.put(sp.getTag().toString(), String.valueOf(subId));
+                                }
+                            } else {
+                                showRunReport = false;
                             }
                             break;
                         case Constants.R_OBLIG_DATE_TYPE:
-                            obligId = obligDateTypeMap.get(sp.getSelectedItem().toString());
-                            if (obligId != -1) {
-                                map.put(sp.getTag().toString(), String.valueOf(obligId));
+                            if (sp.getCount() > 0) {
+                                obligId = obligDateTypeMap.get(sp.getSelectedItem().toString());
+                                if (obligId != -1) {
+                                    map.put(sp.getTag().toString(), String.valueOf(obligId));
+                                }
+                            } else {
+                                showRunReport = false;
                             }
                             break;
                     }
-                } else if (tableRow.getChildAt(1) instanceof EditText) {
-                    EditText et = (EditText) tableRow.getChildAt(1);
+                } else if (ll_runreport_details.getChildAt(1) instanceof EditText) {
+                    EditText et = (EditText) ll_runreport_details.getChildAt(1);
                     map.put(et.getTag().toString(), et.getText().toString());
                 }
             }
-            presenter.fetchRunReportWithQuery(reportItem.getReportName(), map);
+            if (showRunReport) {
+                presenter.fetchRunReportWithQuery(reportItem.getReportName(), map);
+            } else {
+                showError("Insufficient data");
+            }
         }
     }
 
@@ -339,47 +526,55 @@ public class ReportDetailFragment extends MifosBaseFragment
 
     @Override
     public void showOffices(FullParameterListResponse response, String identifier) {
-        for (int i = 0; i < tableDetails.getChildCount(); i++) {
-            TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
-            if (tableRow.getChildAt(1) instanceof EditText) {
+        for (int i = 0; i < ll_runreport_details.getChildCount(); i++) {
+            //TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
+            if (ll_runreport_details.getChildAt(i) instanceof EditText) {
                 continue;
             }
-            Spinner sp = (Spinner) tableRow.getChildAt(1);
-            if (sp.getTag().toString().equals(Constants.R_LOAN_OFFICER_ID)) {
-                ArrayList<String> spinnerValues = new ArrayList<>();
-                loanOfficerMap = presenter.filterIntHashMapForSpinner(response.getData(),
-                        spinnerValues);
-                ArrayAdapter adapter = new ArrayAdapter<>(getActivity(),
-                        android.R.layout.simple_spinner_item, spinnerValues);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                sp.setAdapter(adapter);
-                return;
+            if (ll_runreport_details.getChildAt(i) instanceof Spinner) {
+                Spinner sp = (Spinner) ll_runreport_details.getChildAt(i);
+                if (sp.getTag().toString().equals(Constants.R_LOAN_OFFICER_ID)) {
+                    ArrayList<String> spinnerValues = new ArrayList<>();
+                    loanOfficerMap = presenter.filterIntHashMapForSpinner(response.getData(),
+                            spinnerValues);
+                    ArrayAdapter adapter = new ArrayAdapter<>(getActivity(),
+                            android.R.layout.simple_spinner_item, spinnerValues);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    sp.setAdapter(adapter);
+                    return;
+                }
             }
         }
-        addTableRow(response, identifier);
+
+        //addTableRow(response, identifier);
+        setReportInfo(response, identifier);
 
     }
 
     @Override
     public void showProduct(FullParameterListResponse response, String identifier) {
-        for (int i = 0; i < tableDetails.getChildCount(); i++) {
-            TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
-            if (tableRow.getChildAt(1) instanceof EditText) {
+        for (int i = 0; i < ll_runreport_details.getChildCount(); i++) {
+            //TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
+            if (ll_runreport_details.getChildAt(i) instanceof EditText) {
                 continue;
             }
-            Spinner sp = (Spinner) tableRow.getChildAt(1);
-            if (sp.getTag().toString().equals(Constants.R_LOAN_PRODUCT_ID)) {
-                ArrayList<String> spinnerValues = new ArrayList<>();
-                loanProductMap = presenter.filterIntHashMapForSpinner(response.getData(),
-                        spinnerValues);
-                ArrayAdapter adapter = new ArrayAdapter<>(getActivity(),
-                        android.R.layout.simple_spinner_item, spinnerValues);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                sp.setAdapter(adapter);
-                return;
+            if (ll_runreport_details.getChildAt(i) instanceof Spinner) {
+                Spinner sp = (Spinner) ll_runreport_details.getChildAt(i);
+                if (sp.getTag().toString().equals(Constants.R_LOAN_PRODUCT_ID)) {
+                    ArrayList<String> spinnerValues = new ArrayList<>();
+                    loanProductMap = presenter.filterIntHashMapForSpinner(response.getData(),
+                            spinnerValues);
+                    ArrayAdapter adapter = new ArrayAdapter<>(getActivity(),
+                            android.R.layout.simple_spinner_item, spinnerValues);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    sp.setAdapter(adapter);
+                    isLoanProductSpinnerExists=true;
+                    return;
+                }
             }
         }
-        addTableRow(response, identifier);
+        //addTableRow(response, identifier);
+        //setReportInfo(response, identifier);
     }
 
     @Override
@@ -403,6 +598,7 @@ public class ReportDetailFragment extends MifosBaseFragment
         Toaster.show(rootView, error);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void showFullParameterResponse(FullParameterListResponse response) {
         for (DataRow row : response.getData()) {
@@ -439,26 +635,35 @@ public class ReportDetailFragment extends MifosBaseFragment
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void addTextView(String identifier) {
 
-        TableRow row = new TableRow(getContext());
-        TableRow.LayoutParams rowParams = new TableRow.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        rowParams.gravity = Gravity.CENTER;
-        rowParams.setMargins(0, 0, 0, 10);
-        row.setLayoutParams(rowParams);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(20, 25, 0, 0);
         final TextView tvLabel = new TextView(getContext());
-        row.addView(tvLabel);
+        tvLabel.setLayoutParams(layoutParams);
+        tvLabel.setTypeface(null, Typeface.BOLD);
+
+        LinearLayout.LayoutParams editTextLayoutParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        editTextLayoutParams.setMargins(20, -10, 0, 10);
         tvField = new EditText(getContext());
-        row.addView(tvField);
+        //tvField.setClickable(true);
+        tvField.setLayoutParams(editTextLayoutParams);
+        tvField.setBackgroundTintList(ContextCompat.getColorStateList(getContext(), R.color.black));
+
+
         switch (identifier) {
             case Constants.START_DATE_SELECT:
                 tvField.setTag(Constants.R_START_DATE);
                 tvLabel.setText(getString(R.string.start_date));
+                tvField.setInputType(InputType.TYPE_NULL);
                 break;
             case Constants.END_DATE_SELECT:
                 tvField.setTag(Constants.R_END_DATE);
                 tvLabel.setText(getString(R.string.end_date));
+                tvField.setInputType(InputType.TYPE_NULL);
                 break;
             case Constants.SELECT_ACCOUNT:
                 tvField.setTag(Constants.R_ACCOUNT_NO);
@@ -484,20 +689,28 @@ public class ReportDetailFragment extends MifosBaseFragment
         tvField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dateField = v.getTag().toString();
-                if (dateField.equals(Constants.R_START_DATE) ||
-                        dateField.equals(Constants.R_END_DATE)) {
-                    datePicker.show(getActivity().getSupportFragmentManager(),
-                            FragmentConstants.DFRAG_DATE_PICKER);
+                try {
+                    dateField = v.getTag().toString();
+                    if (dateField.equals(Constants.R_START_DATE) ||
+                            dateField.equals(Constants.R_END_DATE)) {
+                        datePicker.show(getActivity().getSupportFragmentManager(),
+                                FragmentConstants.DFRAG_DATE_PICKER);
+                    }
+                } catch (Exception e) {
+                    Log.e("Error ", e.getMessage());
                 }
             }
         });
-        tableDetails.addView(row);
+        // tableDetails.addView(row);
+        ll_runreport_details.addView(tvLabel);
+        ll_runreport_details.addView(tvField);
+
     }
 
     @Override
     public void showParameterDetails(FullParameterListResponse response, String identifier) {
-        addTableRow(response, identifier);
+        //addTableRow(response, identifier);
+        setReportInfo(response, identifier);
     }
 
     @Override
@@ -511,24 +724,32 @@ public class ReportDetailFragment extends MifosBaseFragment
 
     @Override
     public void onDatePicked(String date) {
-        for (int i = 0; i < tableDetails.getChildCount(); i++) {
-            TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
-            if (tableRow.getChildAt(1) instanceof Spinner) {
-                continue;
-            }
-            EditText et = (EditText) tableRow.getChildAt(1);
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            Date dateModified = null;
-            try {
-                dateModified = simpleDateFormat.parse(date);
-            } catch (ParseException e) {
+        try {
+            for (int i = 0; i < ll_runreport_details.getChildCount(); i++) {
+                //TableRow tableRow = (TableRow) tableDetails.getChildAt(i);
+                if (ll_runreport_details.getChildAt(i) instanceof Spinner) {
+                    continue;
+                }
+                if (ll_runreport_details.getChildAt(i) instanceof EditText) {
+                    EditText et = (EditText) ll_runreport_details.getChildAt(i);
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                    Date dateModified = null;
+                    try {
+                        dateModified = simpleDateFormat.parse(date);
+                    } catch (ParseException e) {
 
+                    }
+                    SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+                    if (et.getTag().toString().equals(dateField)) {
+                        et.setInputType(InputType.TYPE_CLASS_TEXT);
+                        et.setText(simpleDateFormat1.format(dateModified));
+                        et.setInputType(InputType.TYPE_NULL);
+                        break;
+                    }
+                }
             }
-            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
-            if (et.getTag().toString().equals(dateField)) {
-                et.setText(simpleDateFormat1.format(dateModified));
-                break;
-            }
+        } catch (Exception e) {
+            Log.e("Error ", e.getMessage());
         }
     }
 }
