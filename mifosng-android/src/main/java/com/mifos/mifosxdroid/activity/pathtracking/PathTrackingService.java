@@ -91,12 +91,16 @@ public class PathTrackingService extends Service implements GoogleApiClient.Conn
      * LocationServices API.
      */
     protected synchronized void buildGoogleApiClient() {
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-        createLocationRequest();
+        try {
+            googleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+            createLocationRequest();
+        } catch (Exception e) {
+            Log.e("Error ", e.getMessage());
+        }
     }
 
     protected void createLocationRequest() {
@@ -107,35 +111,39 @@ public class PathTrackingService extends Service implements GoogleApiClient.Conn
     }
 
     protected void startLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission
-                .ACCESS_FINE_LOCATION) != PackageManager
-                .PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest
-                .permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
+        try {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission
+                    .ACCESS_FINE_LOCATION) != PackageManager
+                    .PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest
+                    .permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission
+                    .ACCESS_FINE_LOCATION) != PackageManager
+                    .PERMISSION_GRANTED && ActivityCompat
+                    .checkSelfPermission(this, Manifest.permission
+                            .ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            LocationServices.FusedLocationApi.requestLocationUpdates(
+                    googleApiClient, locationRequest, this);
+        } catch (Exception e) {
+            Log.e("Error ", e.getMessage());
         }
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission
-                .ACCESS_FINE_LOCATION) != PackageManager
-                .PERMISSION_GRANTED && ActivityCompat
-                .checkSelfPermission(this, Manifest.permission
-                        .ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        LocationServices.FusedLocationApi.requestLocationUpdates(
-                googleApiClient, locationRequest, this);
     }
 
     protected void stopLocationUpdates() {
@@ -155,51 +163,66 @@ public class PathTrackingService extends Service implements GoogleApiClient.Conn
 
     @Override
     public void onConnected(Bundle bundle) {
-        if (currentLocation == null) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest
-                    .permission.ACCESS_FINE_LOCATION) != PackageManager
-                    .PERMISSION_GRANTED && ActivityCompat
-                    .checkSelfPermission(this, Manifest.permission
-                            .ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
+        try {
+            if (currentLocation == null) {
+                if (ActivityCompat.checkSelfPermission(this, Manifest
+                        .permission.ACCESS_FINE_LOCATION) != PackageManager
+                        .PERMISSION_GRANTED && ActivityCompat
+                        .checkSelfPermission(this, Manifest.permission
+                                .ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                if (ActivityCompat.checkSelfPermission(this, Manifest
+                        .permission.ACCESS_FINE_LOCATION) != PackageManager
+                        .PERMISSION_GRANTED && ActivityCompat
+                        .checkSelfPermission(this, Manifest.permission
+                                .ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+                if (currentLocation != null) {
+                    latLngs.add(new UserLatLng(currentLocation.getLatitude(),
+                            currentLocation.getLongitude()));
+                }
             }
-            if (ActivityCompat.checkSelfPermission(this, Manifest
-                    .permission.ACCESS_FINE_LOCATION) != PackageManager
-                    .PERMISSION_GRANTED && ActivityCompat
-                    .checkSelfPermission(this, Manifest.permission
-                            .ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-            currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
-            latLngs.add(new UserLatLng(currentLocation.getLatitude(),
-                    currentLocation.getLongitude()));
+            startLocationUpdates();
+        } catch (Exception e) {
+            Log.e("Error ", e.getMessage());
         }
-        startLocationUpdates();
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-        googleApiClient.connect();
+        try {
+            googleApiClient.connect();
+        } catch (Exception e) {
+            Log.e("Error ", e.getMessage());
+        }
+
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        currentLocation = location;
-        latLngs.add(new UserLatLng(currentLocation.getLatitude(), currentLocation.getLongitude()));
+        try {
+            currentLocation = location;
+            latLngs.add(new UserLatLng(currentLocation.getLatitude(), currentLocation.getLongitude()));
+        } catch (Exception e) {
+            Log.e("Error ", e.getMessage());
+        }
     }
 
     @Override
@@ -213,23 +236,27 @@ public class PathTrackingService extends Service implements GoogleApiClient.Conn
     }
 
     public void startNotification() {
-        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notification = new NotificationCompat.Builder(this)
-                .setContentTitle(getString(R.string.mifos_path_tracker))
-                .setAutoCancel(false)
-                .setOngoing(true)
-                .setContentText(getString(R.string.description_location_tracking))
-                .setSmallIcon(R.drawable.ic_launcher);
+        try {
+            notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notification = new NotificationCompat.Builder(this)
+                    .setContentTitle(getString(R.string.mifos_path_tracker))
+                    .setAutoCancel(false)
+                    .setOngoing(true)
+                    .setContentText(getString(R.string.description_location_tracking))
+                    .setSmallIcon(R.drawable.ic_launcher);
 
-        Intent resultIntent = new Intent();
-        resultIntent.setAction(Constants.STOP_TRACKING);
-        PendingIntent intentBroadCast = PendingIntent.getBroadcast(this, 0, resultIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-        notification.addAction(R.drawable.ic_assignment_turned_in_black_24dp,
-                getString(R.string.stop_tracking), intentBroadCast);
+            Intent resultIntent = new Intent();
+            resultIntent.setAction(Constants.STOP_TRACKING);
+            PendingIntent intentBroadCast = PendingIntent.getBroadcast(this, 0, resultIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+            notification.addAction(R.drawable.ic_assignment_turned_in_black_24dp,
+                    getString(R.string.stop_tracking), intentBroadCast);
 
-        notification.setContentIntent(intentBroadCast);
-        notificationManager.notify(NOTIFICATION, notification.build());
+            notification.setContentIntent(intentBroadCast);
+            notificationManager.notify(NOTIFICATION, notification.build());
+        } catch (Exception e) {
+            Log.e("Error ", e.getMessage());
+        }
     }
 
     public void stopNotification() {
@@ -238,67 +265,90 @@ public class PathTrackingService extends Service implements GoogleApiClient.Conn
 
     @Override
     public void onDestroy() {
-        if (subscription != null) subscription.unsubscribe();
-        stopLocationUpdates();
-        googleApiClient.disconnect();
-        stopNotification();
-        unregisterReceiver(notificationReceiver);
-        PrefManager.putBoolean(Constants.SERVICE_STATUS, false);
-        stopTime = DateHelper.getCurrentDateTime(DateHelper.TIME_FORMAT_VALUE);
-        addPathTracking(PrefManager.getUserId(), buildUserLocation());
-        super.onDestroy();
+        try {
+            if (subscription != null) subscription.unsubscribe();
+            stopLocationUpdates();
+            googleApiClient.disconnect();
+            stopNotification();
+            unregisterReceiver(notificationReceiver);
+            PrefManager.putBoolean(Constants.SERVICE_STATUS, false);
+            stopTime = DateHelper.getCurrentDateTime(DateHelper.TIME_FORMAT_VALUE);
+            addPathTracking(PrefManager.getUserId(), buildUserLocation());
+            super.onDestroy();
+        } catch (Exception e) {
+            Log.e("Error ", e.getMessage());
+        }
     }
 
     public void createNotificationReceiver() {
-        notificationReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                String action = intent.getAction();
-                if (Constants.STOP_TRACKING.equals(action)) {
-                    onDestroy();
+        try {
+            notificationReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    String action = intent.getAction();
+                    if (Constants.STOP_TRACKING.equals(action)) {
+                        onDestroy();
+                    }
                 }
-            }
-        };
-        registerReceiver(notificationReceiver, new IntentFilter(Constants.STOP_TRACKING));
+            };
+            registerReceiver(notificationReceiver, new IntentFilter(Constants.STOP_TRACKING));
+        } catch (Exception e) {
+            Log.e("Error ", e.getMessage());
+        }
     }
 
     public UserLocation buildUserLocation() {
         UserLocation userLocation = new UserLocation();
-        userLocation.setLatlng(latLngs.toString());
-        userLocation.setStartTime(startTime);
-        userLocation.setStopTime(stopTime);
-        userLocation.setDate(date);
-        userLocation.setUserId(PrefManager.getUserId());
+        try {
+            //UserLocation userLocation = new UserLocation();
+            userLocation.setLatlng(latLngs.toString());
+            userLocation.setStartTime(startTime);
+            userLocation.setStopTime(stopTime);
+            userLocation.setDate(date);
+            userLocation.setUserId(PrefManager.getUserId());
+        } catch (Exception e) {
+            Log.e("Error ", e.getMessage());
+        }
         return userLocation;
     }
 
     public void addPathTracking(int userId, UserLocation userLocation) {
-        if (subscription != null && !subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
+        try {
+            if (subscription != null && !subscription.isUnsubscribed()) {
+                subscription.unsubscribe();
+            }
+            subscription = dataManagerDataTable
+                    .addUserPathTracking(userId, userLocation)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io()).subscribe(
+                            new Subscriber<GenericResponse>() {
+                                @Override
+                                public void onCompleted() {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Location Submission Completed \n",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    Log.e("Error ", e.getMessage());
+                                    Toast.makeText(getApplicationContext(),
+                                            "Location Submission Error \n" + e.getMessage(),
+                                            Toast.LENGTH_SHORT).show();
+
+                                }
+
+                                @Override
+                                public void onNext(GenericResponse
+                                                           genericResponse) {
+                                    Toast.makeText(getApplicationContext(),
+                                            getString(R.string.tracks_submitted),
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                    );
+        } catch (Exception e) {
+            Log.e("Error", e.getMessage());
         }
-        subscription = dataManagerDataTable
-                .addUserPathTracking(userId, userLocation)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io()).subscribe(
-                        new Subscriber<GenericResponse>() {
-                            @Override
-                            public void onCompleted() {
-
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-
-                            }
-
-                            @Override
-                            public void onNext(GenericResponse
-                                                       genericResponse) {
-                                Toast.makeText(getApplicationContext(),
-                                        getString(R.string.tracks_submitted),
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                );
     }
 }
