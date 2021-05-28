@@ -70,6 +70,8 @@
     <color name="summer_sky">#29B6F6</color>
     <color name="foreground">#ffffffff</color>
 
+    <color name="coal_black">#36454f</color>
+
     <!--Swipe Refresh Colors-->
     <array name="swipeRefreshColors">
         <item>@color/blue_light</item>

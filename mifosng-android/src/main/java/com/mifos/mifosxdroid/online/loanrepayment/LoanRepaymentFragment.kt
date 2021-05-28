@@ -4,7 +4,10 @@
  */
 package com.mifos.mifosxdroid.online.loanrepayment
 
+import android.app.Dialog
 import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,6 +15,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
 import androidx.fragment.app.DialogFragment
@@ -277,7 +281,8 @@ class LoanRepaymentFragment : MifosBaseFragment(), OnDatePickListener, LoanRepay
                     .append(data[5][0].toString() + " : " + data[5][1])
                     .append("\n")
                     .append(data[6][0].toString() + " : " + data[6][1]).toString()
-            MaterialDialog.Builder().init(activity)
+            showPayNowDialog(formReviewString,getString(R.string.review_payment))
+         /*   MaterialDialog.Builder().init(activity)
                     .setTitle(R.string.review_payment)
                     .setMessage(formReviewString)
                     .setPositiveButton(R.string.dialog_action_pay_now
@@ -285,7 +290,7 @@ class LoanRepaymentFragment : MifosBaseFragment(), OnDatePickListener, LoanRepay
                     .setNegativeButton(R.string.dialog_action_back
                     ) { dialog, which -> dialog.dismiss() }
                     .createMaterialDialog()
-                    .show()
+                    .show()*/
         } catch (npe: NullPointerException) {
             Toaster.show(rootView, "Please make sure every field has a value, before submitting " +
                     "repayment!")
@@ -298,6 +303,26 @@ class LoanRepaymentFragment : MifosBaseFragment(), OnDatePickListener, LoanRepay
     @OnClick(R.id.tv_payment_cancel)
     fun onCancelPaymentButtonClicked() {
         activity!!.supportFragmentManager.popBackStackImmediate()
+    }
+    private fun showPayNowDialog(msg:String, title:String){
+
+        val dialog = Dialog(activity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setContentView(R.layout.custom_dialoge_review_payment)
+
+        val dialogMessage = dialog.findViewById(R.id.tv_message) as TextView
+        val dialogTitle = dialog.findViewById(R.id.tv_title) as TextView
+        dialogMessage.text = msg
+        dialogTitle.text=title
+
+        val dialogButton = dialog.findViewById(R.id.btn_dialogePayNow) as Button
+        dialogButton.setOnClickListener {
+            submitPayment()
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     /**
