@@ -4,11 +4,15 @@
  */
 package com.mifos.mifosxdroid.online.savingaccounttransaction
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
 import androidx.fragment.app.DialogFragment
@@ -180,7 +184,8 @@ class SavingsAccountTransactionFragment : ProgressableFragment(), OnDatePickList
             }
             formReviewStringBuilder.append('\n')
         }
-        MaterialDialog.Builder().init(activity)
+        showCustomDialog(formReviewStringBuilder.toString(),getString(R.string.review_transaction_details),getString(R.string.process_transaction))
+       /* MaterialDialog.Builder().init(activity)
                 .setTitle(resources.getString(R.string.review_transaction_details))
                 .setMessage(formReviewStringBuilder.toString())
                 .setPositiveButton(resources.getString(R.string.process_transaction)
@@ -188,7 +193,28 @@ class SavingsAccountTransactionFragment : ProgressableFragment(), OnDatePickList
                 .setNegativeButton(resources.getString(R.string.dialog_action_cancel)
                 ) { dialogInterface, i -> dialogInterface.dismiss() }
                 .createMaterialDialog()
-                .show()
+                .show()*/
+    }
+    private fun showCustomDialog(msg:String, title:String,buttonText:String){
+
+        val dialog = Dialog(activity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setContentView(R.layout.custom_dialoge_review_payment)
+
+        val dialogMessage = dialog.findViewById(R.id.tv_message) as TextView
+        val dialogTitle = dialog.findViewById(R.id.tv_title) as TextView
+        dialogMessage.text = msg
+        dialogTitle.text=title
+
+        val dialogButton = dialog.findViewById(R.id.btn_dialogePayNow) as Button
+        dialogButton.text=buttonText
+        dialogButton.setOnClickListener {
+            processTransaction()
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     fun processTransaction() {

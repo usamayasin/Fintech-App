@@ -43,13 +43,13 @@ class SettingsFragment : PreferenceFragment() {
     fun showDarkModeDialog() {
         val alertDialog: AlertDialog.Builder = AlertDialog.Builder(rootView.context)
         alertDialog.setTitle("AlertDialog")
-        val items = arrayOf("Light", "Dark", "Default")
+        val items = arrayOf("Light", "Dark"/*, "Default"*/)
         val checkedItem = 0
         alertDialog.setSingleChoiceItems(items, checkedItem, DialogInterface.OnClickListener { dialog, which ->
             when (which) {
                 0 -> ThemeHelper.applyTheme(ThemeHelper.LIGHT_MODE)
                 1 -> ThemeHelper.applyTheme(ThemeHelper.DARK_MODE)
-                2 -> ThemeHelper.applyTheme(ThemeHelper.DEFAULT_MODE)
+                /*2 -> ThemeHelper.applyTheme(ThemeHelper.DEFAULT_MODE)*/
             }
             startActivity(Intent(activity, activity.javaClass))
         })
