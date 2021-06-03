@@ -4,22 +4,117 @@
   ~ This project is licensed under the open source MPL V2.
   ~ See https://github.com/openMF/android-client/blob/master/LICENSE.md
   -->
-<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/view_flipper"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:inAnimation="@android:anim/fade_in"
-    android:outAnimation="@android:anim/fade_out">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/white_rounded_edge_background">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        android:layout_marginTop="20dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/sp_charge_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_grey"
+        android:layout_marginTop="10dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_dark"
+        android:layout_marginBottom="10dp"/>
+
+   <!-- <TextView
+        android:id="@+id/tv_amount_due_charge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/amount"
+        android:textAppearance="?android:attr/textAppearanceMedium" />-->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+
+        <EditText
+            android:id="@+id/amount_due_charge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/amount"
+            android:inputType="numberDecimal"
+            android:textColor="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+
+        <EditText
+            android:id="@+id/et_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/due_date"
+            android:inputType="numberDecimal"
+            android:textColor="@color/black"
+            android:focusable="false" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+
+        <EditText
+            android:id="@+id/et_charge_locale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/locale"
+            android:inputType="numberDecimal"
+            android:textColor="@color/black"
+            android:focusable="false"
+            android:text="@string/en_code"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/bt_save_charge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/login_button_rounded"
+        android:text="@string/save"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        />
+
+   <!-- <EditText
+        android:id="@+id/amount_due_charge"
+        android:inputType="numberDecimal"
+        style="@style/DialogFragmentChargeEditText"/>-->
+
+
+
+
 
     <!-- Comment this out when editing the actual content -->
-    <ProgressBar
+    <!--<ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_gravity="center" />-->
 
     <!-- Actual content -->
-    <RelativeLayout
+   <!-- <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -37,7 +132,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
 
-                <TextView
+               &lt;!&ndash; <TextView
                     android:id="@+id/textView2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -50,7 +145,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/light_grey" />
+                    android:background="@color/light_grey" />&ndash;&gt;
             </TableRow>
 
             <TableRow
@@ -60,7 +155,7 @@
                 android:layout_marginTop="16dp">
 
 
-                <TextView
+               &lt;!&ndash; <TextView
                     android:id="@+id/tv_amount_due_charge"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -71,7 +166,7 @@
                 <EditText
                     android:id="@+id/amount_due_charge"
                     android:inputType="numberDecimal"
-                    style="@style/DialogFragmentChargeEditText"/>
+                    style="@style/DialogFragmentChargeEditText"/>&ndash;&gt;
 
 </TableRow>
 
@@ -81,7 +176,7 @@
                 android:layout_height="fill_parent"
                 android:layout_marginTop="16dp">
 
-                <TextView
+               &lt;!&ndash; <TextView
                     android:id="@+id/charge_due_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -92,7 +187,7 @@
                 <EditText
                     android:id="@+id/et_date"
                     android:focusable="false"
-                    style="@style/DialogFragmentChargeEditText"/>
+                    style="@style/DialogFragmentChargeEditText"/>&ndash;&gt;
 
             </TableRow>
 
@@ -102,15 +197,15 @@
                 android:layout_height="fill_parent"
                 android:layout_marginTop="16dp">
 
-                <TextView
+              &lt;!&ndash;  <TextView
                     android:id="@+id/tv_charge_locale"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/locale"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:textAppearance="?android:attr/textAppearanceMedium" />&ndash;&gt;
 
-                <EditText
+               &lt;!&ndash; <EditText
                     android:id="@+id/et_charge_locale"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -118,7 +213,7 @@
                     android:background="@color/light_grey"
                     android:focusable="false"
                     android:text="@string/en_code" />
-
+&ndash;&gt;
             </TableRow>
 
             <Button
@@ -129,5 +224,5 @@
                 android:background="@color/blue"
                 android:text="@string/save" />
         </TableLayout>
-    </RelativeLayout>
-</ViewFlipper>
+    </RelativeLayout>-->
+</LinearLayout>

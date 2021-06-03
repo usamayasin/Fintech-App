@@ -5,11 +5,12 @@
   ~ See https://github.com/openMF/android-client/blob/master/LICENSE.md
   -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="10dp">
 
 
     <ScrollView
@@ -19,14 +20,21 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ll_data_table_entry_form"
-            android:padding="4dp">
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
 
         </LinearLayout>
 
     </ScrollView>
 
 
-</RelativeLayout>
+</androidx.cardview.widget.CardView>

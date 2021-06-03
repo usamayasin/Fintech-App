@@ -59,6 +59,7 @@ public class CollectionSheetDialogFragment extends BottomSheetDialogFragment {
         ((MifosBaseActivity) getActivity()).getActivityComponent().inject(this);
         date = getArguments().getString(Constants.REPAYMENT_DATE);
         members = getArguments().getInt(Constants.MEMBERS);
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
         super.onCreate(savedInstanceState);
     }
 
