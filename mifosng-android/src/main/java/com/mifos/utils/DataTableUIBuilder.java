@@ -9,6 +9,8 @@ package com.mifos.utils;
 import android.content.Context;
 import android.graphics.Color;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -21,6 +23,7 @@ import android.widget.TextView;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.mifos.mifosxdroid.R;
 import com.mifos.objects.noncore.DataTable;
 
 import java.util.Iterator;
@@ -65,10 +68,10 @@ public class DataTableUIBuilder {
                     LayoutParams.MATCH_PARENT,
                     LayoutParams.MATCH_PARENT
             );
-            params.setMargins(8, 8, 8, 8);
+            params.setMargins(25, 10, 25, 10);
             cardView.setLayoutParams(params);
-            cardView.setRadius(8);
-            cardView.setPadding(16, 16, 16, 16);
+            cardView.setRadius(10);
+            cardView.setPadding(25, 25, 25, 25);
             cardView.setCardElevation(2);
 
 
@@ -91,7 +94,7 @@ public class DataTableUIBuilder {
                         .MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 tableRow.setPadding(10, 10, 10, 10);
                 if (rowIndex % 2 == 0) {
-                    tableRow.setBackgroundColor(Color.LTGRAY);
+                    tableRow.setBackgroundColor(ContextCompat.getColor(context, R.color.total_color));
                 } else {
                     tableRow.setBackgroundColor(Color.WHITE);
                 }
@@ -99,7 +102,9 @@ public class DataTableUIBuilder {
                 TextView key = new TextView(context);
                 key.setText(dataTable.getColumnHeaderData().get(rowIndex).getColumnName());
                 key.setGravity(Gravity.LEFT);
+                key.setPadding(5,5,5,5);
                 TextView value = new TextView(context);
+                value.setPadding(5,5,5,5);
                 value.setGravity(Gravity.RIGHT);
                 if (jsonElement.getAsJsonObject().get(dataTable.getColumnHeaderData().get
                         (rowIndex).getColumnName()).toString().contains("\"")) {

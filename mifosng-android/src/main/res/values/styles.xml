@@ -77,9 +77,8 @@
     <style name="DialogFragmentChargeEditText">
         <item name="android:background">@color/light_grey</item>
         <item name="android:maxLines">1</item>
-        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
     </style>
 
     <style name="MaterialDatePickerTheme" parent="Theme.AppCompat.Light.Dialog">
@@ -104,5 +103,12 @@
 
     <style name="spinner_loan_repayment" parent="android:Widget.Spinner">
         <item name="android:background">@drawable/payment_spinner_background</item>
+    </style>
+    <style name="CustomBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
+    </style>
+
+    <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
     </style>
 </resources>

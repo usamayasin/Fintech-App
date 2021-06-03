@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.mifos.mifosxdroid.R;
 import com.mifos.mifosxdroid.core.MifosBaseActivity;
 import com.mifos.mifosxdroid.core.ProgressableDialogFragment;
@@ -36,7 +37,7 @@ import butterknife.OnClick;
 /**
  * Created by Rajan Maurya on 01/10/16.
  */
-public class IdentifierDialogFragment extends ProgressableDialogFragment implements
+public class IdentifierDialogFragment extends BottomSheetDialogFragment implements
         IdentifierDialogMvpView, AdapterView.OnItemSelectedListener {
 
     @BindView(R.id.sp_identifier_type)
@@ -87,6 +88,7 @@ public class IdentifierDialogFragment extends ProgressableDialogFragment impleme
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
         ((MifosBaseActivity) getActivity()).getActivityComponent().inject(this);
         if (getArguments() != null) {
             clientId = getArguments().getInt(Constants.CLIENT_ID);
@@ -135,7 +137,7 @@ public class IdentifierDialogFragment extends ProgressableDialogFragment impleme
         } else if (mListIdentifierType.size() == 0) {
             showError(R.string.empty_identifier_document_type);
         } else {
-            hideKeyboard(btnIdentifier);
+            //hideKeyboard(btnIdentifier);
             IdentifierPayload identifierPayload = new IdentifierPayload();
             identifierPayload.setDocumentTypeId(identifierDocumentTypeId);
             identifierPayload.setStatus(status);
@@ -193,7 +195,7 @@ public class IdentifierDialogFragment extends ProgressableDialogFragment impleme
 
     @Override
     public void showProgressbar(boolean show) {
-        showProgress(show);
+       // showProgress(show);
     }
 
     @Override

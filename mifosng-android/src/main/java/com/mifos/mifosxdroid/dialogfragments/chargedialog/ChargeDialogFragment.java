@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.mifos.mifosxdroid.R;
 import com.mifos.mifosxdroid.core.MifosBaseActivity;
 import com.mifos.mifosxdroid.core.ProgressableDialogFragment;
@@ -45,7 +46,7 @@ import butterknife.OnClick;
  * <p/>
  * Use this Dialog Fragment to Create and/or Update charges
  */
-public class ChargeDialogFragment extends ProgressableDialogFragment implements
+public class ChargeDialogFragment extends BottomSheetDialogFragment implements
         MFDatePicker.OnDatePickListener, ChargeDialogMvpView,
         AdapterView.OnItemSelectedListener {
 
@@ -96,6 +97,7 @@ public class ChargeDialogFragment extends ProgressableDialogFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((MifosBaseActivity) getActivity()).getActivityComponent().inject(this);
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
         if (getArguments() != null)
             clientId = getArguments().getInt(Constants.CLIENT_ID);
     }
@@ -244,7 +246,7 @@ public class ChargeDialogFragment extends ProgressableDialogFragment implements
 
     @Override
     public void showProgressbar(boolean b) {
-        showProgress(b);
+        //showProgress(b);
     }
 
     @Override

@@ -24,6 +24,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.mifos.api.GenericResponse;
 import com.mifos.exceptions.RequiredFieldException;
 import com.mifos.mifosxdroid.R;
@@ -49,7 +51,7 @@ import butterknife.OnClick;
  * <p/>
  * Use this Dialog Fragment to Create and/or Update Documents
  */
-public class DocumentDialogFragment extends DialogFragment implements DocumentDialogMvpView {
+public class DocumentDialogFragment extends BottomSheetDialogFragment implements DocumentDialogMvpView {
 
     private static final int FILE_SELECT_CODE = 0;
 
@@ -105,6 +107,7 @@ public class DocumentDialogFragment extends DialogFragment implements DocumentDi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
         ((MifosBaseActivity) getActivity()).getActivityComponent().inject(this);
         safeUIBlockingUtility = new SafeUIBlockingUtility(getActivity(),
                 getString(R.string.document_dialog_fragment_loading_message));
