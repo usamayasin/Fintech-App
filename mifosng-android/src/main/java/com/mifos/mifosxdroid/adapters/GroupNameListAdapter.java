@@ -70,6 +70,9 @@ public class GroupNameListAdapter extends SelectableAdapter<RecyclerView.ViewHol
         this.groups = groups;
         notifyDataSetChanged();
     }
+    public List<Group> getGroups(){
+        return groups;
+    }
 
     public void setContext(Context context) {
         this.context = context;

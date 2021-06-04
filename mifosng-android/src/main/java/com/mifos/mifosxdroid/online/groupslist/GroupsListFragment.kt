@@ -105,9 +105,14 @@ class GroupsListFragment : MifosBaseFragment(), GroupsListMvpView, RecyclerItemC
             toggleSelection(position)
         } else {
             val groupActivityIntent = Intent(activity, GroupsActivity::class.java)
-            groupActivityIntent.putExtra(Constants.GROUP_ID, mGroupList!![position].id)
+            groupActivityIntent.putExtra(Constants.GROUP_ID, mGroupListAdapter!!.groups[position].id)
             startActivity(groupActivityIntent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        et_group_search?.text?.clear();
     }
 
     override fun onItemLongPress(childView: View, position: Int) {

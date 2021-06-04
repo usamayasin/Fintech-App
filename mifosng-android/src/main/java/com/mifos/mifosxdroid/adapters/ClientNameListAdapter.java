@@ -109,6 +109,10 @@ public class ClientNameListAdapter extends SelectableAdapter<RecyclerView.ViewHo
         pageItems = clients;
     }
 
+    public List<Client>  getClientsList(){
+        return this.pageItems;
+    }
+
     public void updateItem(int position) {
         notifyItemChanged(position);
     }

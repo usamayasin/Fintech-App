@@ -104,7 +104,7 @@ class ClientListFragment : MifosBaseFragment(), RecyclerItemClickListener.OnItem
             toggleSelection(position)
         } else {
             val clientActivityIntent = Intent(activity, ClientActivity::class.java)
-            clientActivityIntent.putExtra(Constants.CLIENT_ID, clientList!![position].id)
+            clientActivityIntent.putExtra(Constants.CLIENT_ID, mClientNameListAdapter!!.clientsList[position].id)
             startActivity(clientActivityIntent)
             clickedPosition = position
         }
@@ -199,7 +199,9 @@ class ClientListFragment : MifosBaseFragment(), RecyclerItemClickListener.OnItem
         super.onResume()
         if (clickedPosition != -1) {
             mClientNameListAdapter!!.updateItem(clickedPosition)
+
         }
+        et_client_search?.text?.clear()
     }
 
     /**
