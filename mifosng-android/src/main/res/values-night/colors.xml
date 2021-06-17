@@ -9,7 +9,7 @@
     <color name="deposit_green">#ff14c416</color>
     <color name="light_green">#ff8bf98a</color>
     <color name="light_yellow">#fff9ac06</color>
-    <color name="light_blue">#33999999</color>
+    <color name="light_blue">#FF87DBF9</color>
     <color name="light_red">#fff9393c</color>
     <color name="light_grey">#ffd1d1d1</color>
     <color name="transaction_detail_bg">#8ad3da44</color>
@@ -58,7 +58,7 @@
 
     <!-- Material design colors -->
 
-    <color name="primary">#2196F3</color>
+    <!--<color name="primary">#2196F3</color>
     <color name="primary_dark">#1976D2</color>
     <color name="primary_light">#16754e</color>
     <color name="accent">#03A9F4</color>
@@ -67,7 +67,21 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
     <color name="summer_sky">#29B6F6</color>
-    <color name="foreground">#555555</color>
+    <color name="foreground">#555555</color>-->
+
+
+    <color name="primary">#262833</color>
+    <color name="primary_dark">#262833</color>
+    <color name="primary_light">#262833</color>
+    <color name="accent">#262833</color>
+    <color name="red_app">#D93C3F</color>
+    <color name="red_light_app">#F2E4EC</color>
+    <color name="primary_text">#ffffff</color>
+    <color name="secondary_text">#727272</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+    <color name="summer_sky">#29B6F6</color>
+    <color name="foreground">#ffffffff</color>
 
     <!--Swipe Refresh Colors-->
     <array name="swipeRefreshColors">

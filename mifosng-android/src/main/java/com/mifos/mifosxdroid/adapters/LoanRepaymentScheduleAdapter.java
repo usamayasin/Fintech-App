@@ -82,7 +82,7 @@ public class LoanRepaymentScheduleAdapter extends BaseAdapter {
                 && (periodList.get(i).getTotalOverdue() != null && periodList.get(i)
                 .getTotalOverdue() > 0)) {
             reusableViewHolder.view_status_indicator.setBackgroundColor(
-                    ContextCompat.getColor(context, R.color.light_red));
+                    ContextCompat.getColor(context, R.color.red_app));
         } else {
             reusableViewHolder.view_status_indicator.setBackgroundColor(
                     ContextCompat.getColor(context, R.color.light_blue));
