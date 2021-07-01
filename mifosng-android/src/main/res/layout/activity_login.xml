@@ -116,7 +116,8 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/portWrapper"
                         style="@style/TextInput.Base.Weight"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:visibility="gone">
 
                         <EditText
                             android:id="@+id/et_instancePort"
@@ -134,7 +135,8 @@
                     android:id="@+id/tv_constructed_instance_url"
                     style="@style/TextView.Base"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="16dp" />
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone"/>
 
 
                 <com.google.android.material.textfield.TextInputLayout style="@style/TextInput.Base">
@@ -190,6 +192,7 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/fingerprint_button_rounded"
                 android:gravity="center"
+                android:visibility="gone"
                 android:orientation="horizontal">
 
                 <ImageView

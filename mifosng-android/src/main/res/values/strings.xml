@@ -6,7 +6,7 @@
 <resources>
 
     <!-- General Terms Begin Here -->
-    <string name="app_name">MifosXDroid</string>
+    <string name="app_name">AHEAD DFA</string>
     <string name="mifos_account">Mifos Account</string>
     <string name="enter_credentials"><b>Please enter your credentials.</b></string>
     <string name="datatables">DataTable</string>
@@ -523,7 +523,7 @@
     <string name="default_port" translatable="false">80</string>
     <string name="port">Port</string>
     <string name="default_tenant" translatable="false">default</string>
-    <string name="tenant_identifier">Tenant Identifier</string>
+    <string name="tenant_identifier">Intance</string>
     <string name="dashboard">Dashboard</string>
     <string name="menu_take_photo">Take new photo</string>
     <string name="menu_upload_photo">Upload new photo</string>
@@ -779,7 +779,7 @@
     <string name="incorrect_passcode_more_than_three">You have entered incorrect Passcode more than 3 times. Please login again.</string>
     <string name="error_passcode">Passcode should be of 4 digit</string>
     <string name="title_activity_sync_client_payload" translatable="false">SyncClientPayloadActivity</string>
-    <string name="hint_instance_url">Instance URL</string>
+    <string name="hint_instance_url">End Point</string>
     <string name="hint_port">Port</string>
     <string name="next">Next</string>
     <string name="en_code">en</string>
