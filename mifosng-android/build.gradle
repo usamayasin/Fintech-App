@@ -261,6 +261,9 @@ dependencies {
 
     //biometric
     implementation "androidx.biometric:biometric:1.1.0"
+
+    //sweetalert
+    implementation 'com.github.f0ris.sweetalert:library:1.5.6'
 }
 
 /*

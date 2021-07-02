@@ -25,10 +25,11 @@ import com.mifos.mifosxdroid.SplashScreenActivity;
 import com.mifos.mifosxdroid.injection.component.ActivityComponent;
 import com.mifos.mifosxdroid.injection.component.DaggerActivityComponent;
 import com.mifos.mifosxdroid.injection.module.ActivityModule;
-import com.mifos.mifosxdroid.passcode.PassCodeActivity;
 import com.mifos.mobile.passcode.BasePassCodeActivity;
 import com.mifos.utils.Constants;
 import com.mifos.utils.PrefManager;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * @author fomenkoo
@@ -179,5 +180,24 @@ public class MifosBaseActivity extends BasePassCodeActivity implements BaseActiv
     @Override
     public Class getPassCodeClass() {
         return null;
+    }
+
+    public static boolean showAlertDialogForSuccess(Context context, final String message) {
+        new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
+                .setTitleText("Alert")
+                .setContentText(message)
+                .setConfirmText("Ok")
+                .setConfirmClickListener(SweetAlertDialog::dismissWithAnimation)
+                .show();
+        return true;
+    }
+
+    public static void showAlertDialogForError(Context context, final String message) {
+        new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                .setTitleText("Alert")
+                .setContentText(message)
+                .setConfirmText("Ok")
+                .setConfirmClickListener(SweetAlertDialog::dismissWithAnimation)
+                .show();
     }
 }

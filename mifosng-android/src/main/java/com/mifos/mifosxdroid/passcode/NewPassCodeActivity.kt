@@ -14,8 +14,10 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.biometric.BiometricPrompt
 import androidx.biometric.BiometricPrompt.PromptInfo
 import androidx.core.content.ContextCompat
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.mifos.mifosxdroid.R
 import com.mifos.mifosxdroid.core.MaterialDialog
+import com.mifos.mifosxdroid.core.MifosBaseActivity
 import com.mifos.mifosxdroid.online.DashboardActivity
 import com.mifos.mobile.passcode.utils.PassCodeConstants.PASSCODE_INITIAL_LOGIN
 import com.mifos.mobile.passcode.utils.PasscodePreferencesHelper
@@ -63,44 +65,54 @@ class NewPassCodeActivity : AppCompatActivity() {
         isInitialScreen = intent.getBooleanExtra(PASSCODE_INITIAL_LOGIN, false)
 
         setupPassCodeButton()
-        if (!CheckSelfPermissionAndRequest.checkSelfPermission(this,
-                        Manifest.permission.READ_PHONE_STATE)) {
+        if (!CheckSelfPermissionAndRequest.checkSelfPermission(
+                this,
+                Manifest.permission.READ_PHONE_STATE
+            )
+        ) {
             requestPermission()
         }
         executor = ContextCompat.getMainExecutor(this)
         biometricPrompt = BiometricPrompt(this@NewPassCodeActivity,
-                executor!!, object : BiometricPrompt.AuthenticationCallback() {
-            override fun onAuthenticationError(errorCode: Int,
-                                               errString: CharSequence) {
-                super.onAuthenticationError(errorCode, errString)
-                Toast.makeText(applicationContext,
-                        "Authentication error: $errString", Toast.LENGTH_SHORT)
-                        .show()
-                //                showAlertDialogForError(PassCodeActivity.this,"Authentication Error");
-            }
+            executor!!, object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationError(
+                    errorCode: Int,
+                    errString: CharSequence
+                ) {
+                    super.onAuthenticationError(errorCode, errString)
+                    MifosBaseActivity.showAlertDialogForError(
+                        this@NewPassCodeActivity,
+                        "Authentication Error"
+                    );
+                }
 
-            override fun onAuthenticationSucceeded(
-                    result: BiometricPrompt.AuthenticationResult) {
-                super.onAuthenticationSucceeded(result)
-                startHomeActivity()
-                Toast.makeText(applicationContext,
-                        "Authentication succeeded!", Toast.LENGTH_SHORT).show()
-            }
+                override fun onAuthenticationSucceeded(
+                    result: BiometricPrompt.AuthenticationResult
+                ) {
+                    super.onAuthenticationSucceeded(result)
+                    startHomeActivity()
+                    Toast.makeText(
+                        applicationContext,
+                        "Authentication succeeded!", Toast.LENGTH_SHORT
+                    ).show()
+                }
 
-            override fun onAuthenticationFailed() {
-                super.onAuthenticationFailed()
-                Toast.makeText(applicationContext, "Authentication failed",
-                        Toast.LENGTH_SHORT)
+                override fun onAuthenticationFailed() {
+                    super.onAuthenticationFailed()
+                    Toast.makeText(
+                        applicationContext, "Authentication failed",
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
-                // showAlertDialogForError(this@NewPassCodeActivity, "Authentication failed")
-            }
-        })
+                    // showAlertDialogForError(this@NewPassCodeActivity, "Authentication failed")
+                }
+            })
 
         promptInfo = PromptInfo.Builder()
-                .setTitle("Biometric login")
-                .setSubtitle("Log in using your biometric")
-                .setNegativeButtonText(" ")
-                .build()
+            .setTitle("Biometric login")
+            .setSubtitle("Log in using your biometric")
+            .setNegativeButtonText(" ")
+            .build()
     }
 
     private fun setupPassCodeButton() {
@@ -117,30 +129,27 @@ class NewPassCodeActivity : AppCompatActivity() {
 
     private fun requestPermission() {
         CheckSelfPermissionAndRequest.requestPermission(
-                this,
-                Manifest.permission.READ_PHONE_STATE,
-                PERMISSIONS_REQUEST_READ_PHONE_STATE,
-                resources.getString(
-                        R.string.dialog_message_phone_state_permission_denied_prompt),
-                resources.getString(R.string.dialog_message_phone_state_permission_never_ask_again),
-                PERMISSIONS_READ_PHONE_STATE_STATUS)
+            this,
+            Manifest.permission.READ_PHONE_STATE,
+            PERMISSIONS_REQUEST_READ_PHONE_STATE,
+            resources.getString(
+                R.string.dialog_message_phone_state_permission_denied_prompt
+            ),
+            resources.getString(R.string.dialog_message_phone_state_permission_never_ask_again),
+            PERMISSIONS_READ_PHONE_STATE_STATUS
+        )
     }
 
     private fun isPassCodeLengthCorrect(): Boolean {
         if (passCodeString.length == 4) {
             return true
         }
-        Toast.makeText(this, "Invalid PassCode!", Toast.LENGTH_SHORT).show()
-        /* SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                 .setTitleText("Alert")
-                 .setContentText("Invalid PassCode!")
-                 .setConfirmText("Ok")
-                 .setConfirmClickListener(object : OnSweetClickListener() {
-                     fun onClick(sDialog: SweetAlertDialog) {
-                         sDialog.dismissWithAnimation()
-                     }
-                 })
-                 .show()*/
+        SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+            .setTitleText("Alert")
+            .setContentText("Invalid PassCode!")
+            .setConfirmText("Ok")
+            .setConfirmClickListener(SweetAlertDialog::dismissWithAnimation)
+            .show()
         return false
     }
 
@@ -166,9 +175,18 @@ class NewPassCodeActivity : AppCompatActivity() {
                 if (AESEncryption.decrypt(savedPasscode).equals(passCodeString)) {
                     startHomeActivity()
                 } else {
-                    Toast.makeText(this,
-                            resources.getString(R.string.incorrect_passcode),
-                            Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        resources.getString(R.string.incorrect_passcode),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Alert")
+                        .setContentText(resources.getString(R.string.incorrect_passcode))
+                        .setConfirmText("Ok")
+                        .setConfirmClickListener(SweetAlertDialog::dismissWithAnimation)
+                        .show()
+
                     //showAlertDialogForError(this, resources.getString(R.string.incorrect_passcode))
                 }
             }
@@ -177,10 +195,14 @@ class NewPassCodeActivity : AppCompatActivity() {
 
     fun changePassCodeVisibility(view: View?) {
         if (!showPassCodeFlag) {
-            passCodeFirstDigit!!.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            passCodeSecondDigit!!.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            passCodeThirdDigit!!.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            passCodeFourthDigit!!.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            passCodeFirstDigit!!.inputType =
+                InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            passCodeSecondDigit!!.inputType =
+                InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            passCodeThirdDigit!!.inputType =
+                InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            passCodeFourthDigit!!.inputType =
+                InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
             showPassCodeFlag = true
         } else {
             passCodeFirstDigit!!.inputType = InputType.TYPE_CLASS_TEXT
@@ -248,22 +270,30 @@ class NewPassCodeActivity : AppCompatActivity() {
 
     private fun showChangePasscodeDialog() {
         MaterialDialog.Builder().init(this@NewPassCodeActivity)
-                .setCancelable(false)
-                .setMessage("Are you sure to change the passcode?")
-                .setPositiveButton("Yes",
-                        DialogInterface.OnClickListener { dialog, which ->
-                            try {
-                                passcodePreferencesHelper!!.savePassCode(AESEncryption.encrypt(passCodeString))
-                                Toast.makeText(this@NewPassCodeActivity, "passcode change succesfully", Toast.LENGTH_SHORT).show()
-                                clearPassCode(View(this@NewPassCodeActivity))
-                                onBackPressed()
-                            } catch (e: java.lang.Exception) {
-                                e.printStackTrace()
-                            }
-                        })
-                .setNegativeButton("No",
-                        DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
-                .createMaterialDialog()
-                .show()
+            .setCancelable(false)
+            .setMessage("Are you sure to change the passcode?")
+            .setPositiveButton("Yes",
+                DialogInterface.OnClickListener { dialog, which ->
+                    try {
+                        passcodePreferencesHelper!!.savePassCode(
+                            AESEncryption.encrypt(
+                                passCodeString
+                            )
+                        )
+                        Toast.makeText(
+                            this@NewPassCodeActivity,
+                            "passcode change succesfully",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        clearPassCode(View(this@NewPassCodeActivity))
+                        onBackPressed()
+                    } catch (e: java.lang.Exception) {
+                        e.printStackTrace()
+                    }
+                })
+            .setNegativeButton("No",
+                DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
+            .createMaterialDialog()
+            .show()
     }
 }

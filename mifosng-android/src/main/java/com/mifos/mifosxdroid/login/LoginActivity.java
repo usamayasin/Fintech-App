@@ -212,7 +212,7 @@ public class LoginActivity extends MifosBaseActivity implements LoginMvpView {
 
     @Override
     public void onLoginError(String errorMessage) {
-        showToastMessage(errorMessage);
+        MifosBaseActivity.showAlertDialogForError(this,errorMessage);
     }
 
     @Override

@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/tv_payload_name"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textAlignment="center"
         android:maxLines="3"
         android:layout_gravity="center"/>
@@ -32,7 +32,7 @@
         android:layout_below="@+id/tv_payload_name"
         android:layout_alignLeft="@+id/tv_payload_name"
         android:layout_alignStart="@+id/tv_payload_name"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_marginTop="28dp"/>
 
 </androidx.cardview.widget.CardView>

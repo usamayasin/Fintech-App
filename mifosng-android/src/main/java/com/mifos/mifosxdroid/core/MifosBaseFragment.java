@@ -17,6 +17,8 @@ import android.view.inputmethod.InputMethodManager;
 import com.mifos.mifosxdroid.R;
 import com.mifos.utils.Network;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 /**
  * @author fomenkoo
  */
@@ -109,4 +111,14 @@ public class MifosBaseFragment extends Fragment {
     protected Boolean isOnline() {
         return Network.isOnline(getActivity());
     }
+
+    public static void showAlertDialogForError(Context context, final String message) {
+        new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                .setTitleText("Alert")
+                .setContentText(message)
+                .setConfirmText("Ok")
+                .setConfirmClickListener(SweetAlertDialog::dismissWithAnimation)
+                .show();
+    }
+
 }

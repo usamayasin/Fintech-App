@@ -128,7 +128,8 @@ public class ActivateFragment extends MifosBaseFragment implements ActivateMvpVi
 
     @Override
     public void showError(String errorMessage) {
-        Toaster.show(rootView, errorMessage, Toaster.INDEFINITE);
+        showAlertDialogForError(getContext(),errorMessage);
+//        Toaster.show(rootView, errorMessage, Toaster.INDEFINITE);
     }
 
     @Override
