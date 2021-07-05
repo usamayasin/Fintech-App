@@ -99,9 +99,10 @@ public class IndividualCollectionSheetDetailsAdapter extends
             }
 
             if (loanCollectionSheetItem.getTotalDue() != null) {
-                holder.etTotalDues.setText(
+                /*holder.etTotalDues.setText(
                         String.format(Locale.getDefault(), "%f",
-                                loanCollectionSheetItem.getTotalDue()));
+                                loanCollectionSheetItem.getTotalDue()));*/
+                holder.etTotalDues.setText(Utils.getFormatedCurrency(loanCollectionSheetItem.getTotalDue().toString()));
             }
 
             ImageLoaderUtils.loadImage(c, loanAndClientNameItem.getId(),
