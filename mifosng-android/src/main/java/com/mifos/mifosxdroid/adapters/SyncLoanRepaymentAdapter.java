@@ -56,7 +56,9 @@ public class SyncLoanRepaymentAdapter extends
             holder.tv_payment_type.setText(paymentTypeName);
         }
 
-        holder.tv_transaction_amount.setText(loanRepaymentRequest.getTransactionAmount());
+        holder.tv_transaction_amount.setText(
+                Utils.getFormatedCurrency(loanRepaymentRequest.getTransactionAmount())
+        );
         holder.tv_transaction_date.setText(loanRepaymentRequest.getTransactionDate());
 
         if (loanRepaymentRequest.getErrorMessage() != null) {

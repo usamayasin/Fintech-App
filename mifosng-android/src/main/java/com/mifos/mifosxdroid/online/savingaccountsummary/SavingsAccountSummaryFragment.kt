@@ -28,6 +28,7 @@ import com.mifos.objects.accounts.savings.Status
 import com.mifos.objects.accounts.savings.Transaction
 import com.mifos.utils.Constants
 import com.mifos.utils.FragmentConstants
+import com.mifos.utils.Utils
 import java.util.*
 import javax.inject.Inject
 import kotlin.properties.Delegates
@@ -296,22 +297,27 @@ class SavingsAccountSummaryFragment : ProgressableFragment(), SavingsAccountSumm
             tv_savingsProductName!!.text = savingsAccountWithAssociations.savingsProductName
             tv_savingsAccountNumber!!.text = savingsAccountWithAssociations.accountNo
             if (savingsAccountWithAssociations.summary.totalInterestEarned != null) {
-                tv_interestEarned!!.text = savingsAccountWithAssociations
-                        .summary.totalInterestEarned.toString()
+                tv_interestEarned!!.text = Utils.getFormatedCurrency(
+                        savingsAccountWithAssociations.summary.totalInterestEarned.toString()
+                )
             } else {
                 tv_interestEarned!!.text = "0.0"
             }
-            tv_savingsAccountBalance!!.text = savingsAccountWithAssociations
-                    .summary.accountBalance.toString()
+            tv_savingsAccountBalance!!.text = Utils.getFormatedCurrency(
+                    savingsAccountWithAssociations
+                            .summary.accountBalance.toString()
+            )
             if (savingsAccountWithAssociations.summary.totalDeposits != null) {
-                tv_totalDeposits!!.text = savingsAccountWithAssociations
-                        .summary.totalDeposits.toString()
+                tv_totalDeposits!!.text = Utils.getFormatedCurrency(
+                        savingsAccountWithAssociations.summary.totalDeposits.toString()
+                )
             } else {
                 tv_totalDeposits!!.text = "0.0"
             }
             if (savingsAccountWithAssociations.summary.totalWithdrawals != null) {
-                tv_totalWithdrawals!!.text = savingsAccountWithAssociations
-                        .summary.totalWithdrawals.toString()
+                tv_totalWithdrawals!!.text = Utils.getFormatedCurrency(
+                        savingsAccountWithAssociations.summary.totalWithdrawals.toString()
+                )
             } else {
                 tv_totalWithdrawals!!.text = "0.0"
             }

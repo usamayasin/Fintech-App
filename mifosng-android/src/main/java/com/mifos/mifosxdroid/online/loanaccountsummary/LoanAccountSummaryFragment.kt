@@ -26,6 +26,7 @@ import com.mifos.objects.client.Charges
 import com.mifos.utils.Constants
 import com.mifos.utils.DateHelper
 import com.mifos.utils.FragmentConstants
+import com.mifos.utils.Utils
 import java.util.*
 import javax.inject.Inject
 
@@ -231,41 +232,65 @@ class LoanAccountSummaryFragment : ProgressableFragment(), LoanAccountSummaryMvp
     }
 
     fun inflateLoanSummary(loanWithAssociations: LoanWithAssociations) {
-        tv_amount_disbursed!!.text = loanWithAssociations.summary
-                .principalDisbursed.toString()
+        tv_amount_disbursed!!.text = Utils.getFormatedCurrency(
+                loanWithAssociations.summary.principalDisbursed.toString()
+        )
         try {
             tv_disbursement_date!!.text = DateHelper.getDateAsString(loanWithAssociations
                     .timeline.actualDisbursementDate)
         } catch (exception: IndexOutOfBoundsException) {
             Toast.makeText(activity, resources.getString(R.string.loan_rejected_message), Toast.LENGTH_SHORT).show()
         }
-        tv_in_arrears!!.text = loanWithAssociations.summary.totalOverdue.toString()
-        tv_principal!!.text = loanWithAssociations.summary
-                .principalDisbursed.toString()
-        tv_loan_principal_due!!.text = loanWithAssociations.summary
-                .principalOutstanding.toString()
-        tv_loan_principal_paid!!.text = loanWithAssociations.summary
-                .principalPaid.toString()
-        tv_interest!!.text = loanWithAssociations.summary.interestCharged.toString()
-        tv_loan_interest_due!!.text = loanWithAssociations.summary
-                .interestOutstanding.toString()
-        tv_loan_interest_paid!!.text = loanWithAssociations.summary
-                .interestPaid.toString()
-        tv_fees!!.text = loanWithAssociations.summary.feeChargesCharged.toString()
-        tv_loan_fees_due!!.text = loanWithAssociations.summary
-                .feeChargesOutstanding.toString()
-        tv_loan_fees_paid!!.text = loanWithAssociations.summary
-                .feeChargesPaid.toString()
-        tv_penalty!!.text = loanWithAssociations.summary
-                .penaltyChargesCharged.toString()
-        tv_loan_penalty_due!!.text = loanWithAssociations.summary
-                .penaltyChargesOutstanding.toString()
-        tv_loan_penalty_paid!!.text = loanWithAssociations.summary
-                .penaltyChargesPaid.toString()
-        tv_total!!.text = loanWithAssociations.summary
-                .totalExpectedRepayment.toString()
-        tv_total_due!!.text = loanWithAssociations.summary.totalOutstanding.toString()
-        tv_total_paid!!.text = loanWithAssociations.summary.totalRepayment.toString()
+        tv_in_arrears!!.text = Utils.getFormatedCurrency(
+                loanWithAssociations.summary.totalOverdue.toString()
+        )
+        tv_principal!!.text = Utils.getFormatedCurrency(
+                loanWithAssociations.summary.principalDisbursed.toString()
+        )
+        tv_loan_principal_due!!.text = Utils.getFormatedCurrency(
+                loanWithAssociations.summary
+                        .principalOutstanding.toString()
+        )
+        tv_loan_principal_paid!!.text = Utils.getFormatedCurrency(
+                loanWithAssociations.summary
+                        .principalPaid.toString()
+        )
+        tv_interest!!.text = Utils.getFormatedCurrency(
+                loanWithAssociations.summary.interestCharged.toString()
+        )
+        tv_loan_interest_due!!.text = Utils.getFormatedCurrency(
+                loanWithAssociations.summary.interestOutstanding.toString()
+        )
+        tv_loan_interest_paid!!.text = Utils.getFormatedCurrency(
+                loanWithAssociations.summary.interestPaid.toString()
+        )
+        tv_fees!!.text = Utils.getFormatedCurrency(
+                loanWithAssociations.summary.feeChargesCharged.toString()
+        )
+        tv_loan_fees_due!!.text = Utils.getFormatedCurrency(
+                loanWithAssociations.summary.feeChargesOutstanding.toString()
+        )
+        tv_loan_fees_paid!!.text = Utils.getFormatedCurrency(
+                loanWithAssociations.summary.feeChargesPaid.toString()
+        )
+        tv_penalty!!.text = Utils.getFormatedCurrency(
+                loanWithAssociations.summary.penaltyChargesCharged.toString()
+        )
+        tv_loan_penalty_due!!.text = Utils.getFormatedCurrency(
+                loanWithAssociations.summary.penaltyChargesOutstanding.toString()
+        )
+        tv_loan_penalty_paid!!.text = Utils.getFormatedCurrency(
+                loanWithAssociations.summary.penaltyChargesPaid.toString()
+        )
+        tv_total!!.text = Utils.getFormatedCurrency(
+                loanWithAssociations.summary.totalExpectedRepayment.toString()
+        )
+        tv_total_due!!.text = Utils.getFormatedCurrency(
+                loanWithAssociations.summary.totalOutstanding.toString()
+        )
+        tv_total_paid!!.text = Utils.getFormatedCurrency(
+                loanWithAssociations.summary.totalRepayment.toString()
+        )
     }
 
     fun loadDocuments() {

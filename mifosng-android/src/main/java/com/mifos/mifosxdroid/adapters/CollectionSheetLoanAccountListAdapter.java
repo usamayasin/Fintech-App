@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.mifos.mifosxdroid.R;
 import com.mifos.objects.db.Loan;
+import com.mifos.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,9 +80,17 @@ public class CollectionSheetLoanAccountListAdapter extends BaseAdapter {
         Double transactionAmount = CollectionListAdapter.sRepaymentTransactions.get(loans.get
                 (position).getLoanId());
 
-        reusableViewHolder.tv_amountDue.setText(String.valueOf(loans.get(position).getTotalDue()));
+        reusableViewHolder.tv_amountDue.setText(
+                Utils.getFormatedCurrency(
+                        String.valueOf(loans.get(position).getTotalDue()
+                        )
+                )
+        );
         reusableViewHolder.tv_loanShortName.setText(loans.get(position).getProductShortName());
-        reusableViewHolder.et_amountPaid.setText(String.valueOf(transactionAmount));
+        reusableViewHolder.et_amountPaid.setText(
+                Utils.getFormatedCurrency(String.valueOf(transactionAmount)
+                )
+        );
 
         reusableViewHolder.et_amountPaid.addTextChangedListener(new TextWatcher() {
             @Override

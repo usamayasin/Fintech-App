@@ -17,6 +17,7 @@ import com.mifos.mifosxdroid.R;
 import com.mifos.objects.db.Client;
 import com.mifos.objects.db.Loan;
 import com.mifos.objects.db.MifosGroup;
+import com.mifos.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -116,7 +117,11 @@ public class CollectionListAdapter extends BaseExpandableListAdapter {
 
         mifosGroupReusableViewHolder.tv_groupName.setText(sMifosGroups.get(groupPosition)
                 .getGroupName());
-        mifosGroupReusableViewHolder.tv_groupTotal.setText(String.valueOf(groupTotalDue));
+        mifosGroupReusableViewHolder.tv_groupTotal.setText(
+                Utils.getFormatedCurrency(
+                        String.valueOf(groupTotalDue)
+                )
+        );
 
         return convertView;
     }

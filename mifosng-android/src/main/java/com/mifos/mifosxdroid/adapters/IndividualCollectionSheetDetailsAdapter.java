@@ -16,6 +16,7 @@ import com.mifos.objects.accounts.loan.PaymentTypeOptions;
 import com.mifos.objects.collectionsheet.LoanAndClientName;
 import com.mifos.objects.collectionsheet.LoanCollectionSheet;
 import com.mifos.utils.ImageLoaderUtils;
+import com.mifos.utils.Utils;
 
 import java.util.List;
 import java.util.Locale;
@@ -87,9 +88,14 @@ public class IndividualCollectionSheetDetailsAdapter extends
                     .getProductShortName(), loanCollectionSheetItem.getAccountId()));
 
             if (loanCollectionSheetItem.getChargesDue() != null) {
-                holder.etCharges.setText(
+               /* holder.etCharges.setText(
                         String.format(Locale.getDefault(), "%f",
-                                loanCollectionSheetItem.getChargesDue()));
+                                loanCollectionSheetItem.getChargesDue())); */
+                holder.etCharges.setText(
+                        Utils.getFormatedCurrency(
+                                loanCollectionSheetItem.getChargesDue().toString()
+                        )
+                );
             }
 
             if (loanCollectionSheetItem.getTotalDue() != null) {

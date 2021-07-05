@@ -6,7 +6,9 @@
 package com.mifos.mifosxdroid.adapters;
 
 import android.content.Context;
+
 import androidx.core.content.ContextCompat;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import com.mifos.mifosxdroid.R;
 import com.mifos.objects.accounts.loan.Period;
 import com.mifos.utils.DateHelper;
+import com.mifos.utils.Utils;
 
 import java.util.List;
 
@@ -69,10 +72,18 @@ public class LoanRepaymentScheduleAdapter extends BaseAdapter {
 
         reusableViewHolder.tv_repaymentDueDate.setText(DateHelper.getDateAsString(periodList.get
                 (i).getDueDate()));
-        reusableViewHolder.tv_repaymentAmountDue.setText(String.valueOf(periodList.get(i)
-                .getTotalDueForPeriod()));
-        reusableViewHolder.tv_repaymentAmountPaid.setText(String.valueOf(periodList.get(i)
-                .getTotalPaidForPeriod()));
+        reusableViewHolder.tv_repaymentAmountDue.setText(
+                Utils.getFormatedCurrency(
+                        String.valueOf(periodList.get(i).getTotalDueForPeriod())
+                )
+        );
+        reusableViewHolder.tv_repaymentAmountPaid.setText(
+                Utils.getFormatedCurrency(
+                        String.valueOf(
+                                periodList.get(i)
+                                        .getTotalPaidForPeriod())
+                )
+        );
 
         if (periodList.get(i).getComplete()) {
             reusableViewHolder.view_status_indicator.setBackgroundColor(
@@ -93,11 +104,12 @@ public class LoanRepaymentScheduleAdapter extends BaseAdapter {
         return view;
     }
 
-    public List<Period> getLoanRepaymentScheduleList(){
+    public List<Period> getLoanRepaymentScheduleList() {
         return this.periodList;
     }
-    public void setLoanRepaymentSchedulList(List<Period> periodsList){
-        this.periodList=periodsList;
+
+    public void setLoanRepaymentSchedulList(List<Period> periodsList) {
+        this.periodList = periodsList;
         notifyDataSetChanged();
     }
 

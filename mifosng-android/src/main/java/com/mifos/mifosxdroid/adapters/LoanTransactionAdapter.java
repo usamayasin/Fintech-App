@@ -18,6 +18,7 @@ import com.mifos.mifosxdroid.R;
 import com.mifos.objects.accounts.loan.Transaction;
 import com.mifos.objects.accounts.loan.Type;
 import com.mifos.utils.DateHelper;
+import com.mifos.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,8 +126,14 @@ public class LoanTransactionAdapter extends BaseExpandableListAdapter {
                 DateHelper.getDateAsString(parents.get(i).getDate()));
         reusableParentViewHolder.tv_transactionType.setText(
                 parents.get(i).getType().getValue());
+
         reusableParentViewHolder.tv_transactionAmount.setText(
-                String.valueOf(parents.get(i).getAmount()));
+                Utils.getFormatedCurrency(
+                        String.valueOf(
+                                parents.get(i).getAmount()
+                        )
+                )
+        );
 
         return view;
     }
@@ -153,13 +160,30 @@ public class LoanTransactionAdapter extends BaseExpandableListAdapter {
         reusableChildViewHolder.tv_transactionId.setText(children.get(i).getId().toString());
         reusableChildViewHolder.tv_officeName.setText(children.get(i).getOfficeName());
         reusableChildViewHolder.tv_principal.setText(
-                String.valueOf(children.get(i).getPrincipalPortion()));
+               Utils.getFormatedCurrency(
+                       String.valueOf(children.get(i).getPrincipalPortion()
+                       )
+               )
+        );
         reusableChildViewHolder.tv_interest.setText(
-                String.valueOf(children.get(i).getInterestPortion()));
+                Utils.getFormatedCurrency(
+                        String.valueOf(children.get(i).getInterestPortion()
+                        )
+                )
+        );
         reusableChildViewHolder.tv_fees.setText(
-                String.valueOf(children.get(i).getFeeChargesPortion()));
+                Utils.getFormatedCurrency(
+                        String.valueOf(children.get(i).getFeeChargesPortion()
+                        )
+                )
+        );
         reusableChildViewHolder.tv_penalties.setText(
-                String.valueOf(children.get(i).getPenaltyChargesPortion()));
+                Utils.getFormatedCurrency(
+                        String.valueOf(
+                                children.get(i).getPenaltyChargesPortion()
+                        )
+                )
+        );
 
         return view;
     }

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.mifos.mifosxdroid.R;
 import com.mifos.objects.client.Charges;
+import com.mifos.utils.Utils;
 
 import java.util.List;
 
@@ -57,7 +58,7 @@ public class ChargeNameListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     .setText(pageItems.get(position).getChargeId().toString());
             ((ViewHolder) holder).tv_charge_Name.setText(pageItems.get(position).getName());
             ((ViewHolder) holder).tv_charge_amount
-                    .setText(pageItems.get(position).getAmount().toString());
+                    .setText(Utils.getFormatedCurrency(pageItems.get(position).getAmount().toString()));
             ((ViewHolder) holder).tv_charge_duedate
                     .setText(pageItems.get(position).getDueDate().toString());
         }

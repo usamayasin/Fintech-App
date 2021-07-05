@@ -65,7 +65,10 @@ public class SyncSavingsAccountTransactionAdapter extends
         holder.tv_savings_account_id.setText(String.valueOf(transaction.getSavingAccountId()));
         holder.tv_payment_type.setText(paymentTypeName);
         holder.tv_transaction_type.setText(transaction.getTransactionType());
-        holder.tv_transaction_amount.setText(transaction.getTransactionAmount());
+        holder.tv_transaction_amount.setText(
+                Utils.getFormatedCurrency(transaction.getTransactionAmount()
+                )
+        );
         holder.tv_transaction_date.setText(transaction.getTransactionDate());
 
         if (transaction.getErrorMessage() != null) {

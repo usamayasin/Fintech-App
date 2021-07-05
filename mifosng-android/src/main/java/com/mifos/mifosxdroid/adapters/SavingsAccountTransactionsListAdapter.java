@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.mifos.mifosxdroid.R;
 import com.mifos.objects.accounts.savings.Transaction;
 import com.mifos.utils.DateHelper;
+import com.mifos.utils.Utils;
 
 import java.util.List;
 
@@ -88,7 +89,7 @@ public class SavingsAccountTransactionsListAdapter extends BaseAdapter {
 
         String transactionAmount = listOfTransactions.get(i).getCurrency().getDisplaySymbol() +
                 mContext.getResources().getString(R.string.space) +
-                listOfTransactions.get(i).getAmount();
+                Utils.getFormatedCurrency( listOfTransactions.get(i).getAmount().toString());
         reusableViewHolder.tv_transactionAmount.setText(transactionAmount);
 
         if (listOfTransactions.get(i).getTransactionType().getDeposit()) {

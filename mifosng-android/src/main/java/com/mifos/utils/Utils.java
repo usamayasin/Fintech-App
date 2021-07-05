@@ -1,5 +1,6 @@
 package com.mifos.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -13,6 +14,7 @@ import com.mifos.objects.accounts.savings.SavingsAccount;
 import com.mifos.objects.client.Client;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -186,5 +188,12 @@ public class Utils {
         Drawable image = ContextCompat.getDrawable(context, R.drawable.circular_background);
         LayerDrawable ld = new LayerDrawable(new Drawable[]{image, color});
         return ld;
+    }
+
+    @SuppressLint("DefaultLocale")
+    public static String getFormatedCurrency(String amount){
+        //return String.format("%,.2f", amount);
+        DecimalFormat formatter = new DecimalFormat("###,###,##0.00");
+        return formatter.format(Double.parseDouble(amount));
     }
 }
