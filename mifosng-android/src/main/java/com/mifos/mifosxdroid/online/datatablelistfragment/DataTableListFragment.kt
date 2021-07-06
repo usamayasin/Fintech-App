@@ -6,6 +6,7 @@ package com.mifos.mifosxdroid.online.datatablelistfragment
 
 import android.content.Intent
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -14,6 +15,9 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat.setBackground
 import androidx.fragment.app.Fragment
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -72,6 +76,7 @@ class DataTableListFragment : Fragment(), DataTableListMvpView {
         (activity as MifosBaseActivity?)!!.activityComponent.inject(this)
     }
 
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         activity!!.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         rootView = inflater.inflate(R.layout.dialog_fragment_add_entry_to_datatable, container,
@@ -147,11 +152,20 @@ class DataTableListFragment : Fragment(), DataTableListMvpView {
         listFormWidgets.add(formWidgets)
     }
 
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     private fun addSaveButton() {
         val bt_processForm = Button(activity)
         bt_processForm.layoutParams = FormWidget.defaultLayoutParams
         bt_processForm.text = getString(R.string.save)
-        bt_processForm.setBackgroundColor(activity!!.resources.getColor(R.color.blue_dark))
+        //bt_processForm.setBackgroundColor(activity!!.resources.getColor(R.color.cardview_login_hints))
+        //bt_processForm.setBackgroundColor(ContextCompat.getR(context, R.drawable.login_button_rounded))
+        val sdk = android.os.Build.VERSION.SDK_INT;
+        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            bt_processForm.setBackgroundDrawable(context?.let { ContextCompat.getDrawable(it, R.drawable.login_button_rounded) });
+        } else {
+            bt_processForm.background = context?.let { ContextCompat.getDrawable(it, R.drawable.login_button_rounded) };
+        }
+
         linearLayout!!.addView(bt_processForm)
         bt_processForm.setOnClickListener {
             try {
