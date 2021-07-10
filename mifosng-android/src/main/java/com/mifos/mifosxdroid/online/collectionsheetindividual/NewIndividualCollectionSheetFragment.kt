@@ -25,6 +25,7 @@ import com.mifos.utils.Constants
 import com.mifos.utils.DateHelper
 import com.mifos.utils.FragmentConstants
 import com.mifos.utils.Utils
+import kotlinx.android.synthetic.main.fragment_new_collection_sheet.*
 import java.util.*
 import javax.inject.Inject
 
@@ -164,14 +165,14 @@ class NewIndividualCollectionSheetFragment : MifosBaseFragment(), IndividualColl
     override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
         when (adapterView.id) {
             R.id.sp_office_list -> if (i == officeList!!.size || i == 0) {
-                Toaster.show(rootView, getStringMessage(R.string.error_select_office))
+               // Toaster.show(rootView, getStringMessage(R.string.error_select_office))
             } else {
-                Toaster.show(rootView, officeNameList!![i])
+                //Toaster.show(rootView, officeNameList!![i])
                 officeId = officeList!![i - 1].id
                 presenter!!.fetchStaff(officeId)
             }
             R.id.sp_staff_list -> if (i == staffList!!.size || i == 0) {
-                Toaster.show(rootView, getStringMessage(R.string.error_select_staff))
+               // Toaster.show(rootView, getStringMessage(R.string.error_select_staff))
             } else {
                 staffId = staffList!![i - 1].id
             }
@@ -238,7 +239,17 @@ class NewIndividualCollectionSheetFragment : MifosBaseFragment(), IndividualColl
     override fun onClick(view: View) {
         when (view.id) {
             R.id.tv_repayment_date -> setTvRepaymentDate()
-            R.id.btn_fetch_collection_sheet -> retrieveCollectionSheet()
+            R.id.btn_fetch_collection_sheet -> {
+                if(spOffices?.selectedItem!!.equals("Select Office")){
+                    Toaster.show(rootView, getStringMessage(R.string.error_select_office))
+                    return
+                }
+                if (spStaff?.selectedItem!!.equals("Select Loan Officer")){
+                    Toaster.show(rootView, getStringMessage(R.string.error_select_staff))
+                    return
+                }
+                retrieveCollectionSheet()
+            }
             R.id.btn_clear ->clearAll()
         }
     }

@@ -233,10 +233,38 @@ class GenerateCollectionSheetFragment : MifosBaseFragment(), GenerateCollectionS
 
     override fun onNothingSelected(adapterView: AdapterView<*>?) {}
     override fun onClick(view: View) {
+
+       /* private var officeId = -1
+        private var centerId = -1
+        private var groupId = -1
+        private var staffId = -1*/
+
         when (view.id) {
             R.id.tv_meeting_date -> setMeetingDate()
-            R.id.btn_generate_collection_sheet -> fetchCollectionSheet()
-            R.id.btn_generate_productive_collection_sheet -> fetchCenterDetails()
+            R.id.btn_generate_collection_sheet ->{
+                if(spCenters?.selectedItem!!.equals("Select Center")){
+                    Toaster.show(rootView, getString(R.string.error_select_center))
+                    return
+                }
+                if(spGroups?.selectedItem!!.equals("Select Group")){
+                    Toaster.show(rootView, getString(R.string.error_select_group))
+                    return
+                }
+
+                fetchCollectionSheet()
+            }
+            R.id.btn_generate_productive_collection_sheet -> {
+
+                if(spOffices?.selectedItem!!.equals("Select Office")){
+                    Toaster.show(rootView, getString(R.string.error_select_office))
+                    return
+                }
+                if(spStaff?.selectedItem!!.equals("Select Loan Officer")){
+                    Toaster.show(rootView, getString(R.string.error_select_staff))
+                    return
+                }
+                fetchCenterDetails()
+            }
             R.id.btn_submit_productive -> when (view.tag as Int) {
                 TAG_TYPE_PRODUCTIVE -> submitProductiveSheet()
                 TAG_TYPE_COLLECTION -> submitCollectionSheet()
