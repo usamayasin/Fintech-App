@@ -149,7 +149,7 @@ public class MifosBaseActivity extends BasePassCodeActivity implements BaseActiv
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                                     finishAffinity();
                                 }else{
-                                    finish()
+                                    finish();
                                 }
                             }
                         })
