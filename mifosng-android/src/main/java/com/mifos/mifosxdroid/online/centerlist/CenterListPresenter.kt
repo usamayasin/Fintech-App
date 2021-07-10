@@ -94,9 +94,9 @@ class CenterListPresenter @Inject constructor(private val mDataManagerCenter: Da
                         if (mSyncCenterList.size == 0 && !loadmore) {
                             mvpView!!.showEmptyCenters(R.string.center)
                             mvpView!!.unregisterSwipeAndScrollListener()
-                        } else if (mSyncCenterList.size == 0 && loadmore) {
+                        } /*else if (mSyncCenterList.size == 0 && loadmore) {
                             mvpView!!.showMessage(R.string.no_more_centers_available)
-                        } else {
+                        }*/ else {
                             showCenters(mSyncCenterList)
                             mRestApiCenterSyncStatus = true
                             setAlreadyCenterSyncStatus()

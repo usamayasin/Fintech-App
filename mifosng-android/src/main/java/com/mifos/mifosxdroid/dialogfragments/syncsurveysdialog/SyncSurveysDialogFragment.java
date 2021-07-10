@@ -206,7 +206,8 @@ public class SyncSurveysDialogFragment extends DialogFragment implements SyncSur
     @Override
     public void showSurveysSyncSuccessfully() {
         btnCancel.setVisibility(View.INVISIBLE);
-        dismissDialog();
+        btnHide.setText("Close");
+       // dismissDialog();
         Toast.makeText(getActivity(), R.string.sync_success, Toast.LENGTH_SHORT).show();
     }
 

@@ -99,9 +99,9 @@ class GroupsListPresenter @Inject constructor(private val mDataManagerGroups: Da
                         if (mSyncGroupList.size == 0 && !loadmore) {
                             mvpView!!.showEmptyGroups(R.string.group)
                             mvpView!!.unregisterSwipeAndScrollListener()
-                        } else if (mSyncGroupList.size == 0 && loadmore) {
+                        } /*else if (mSyncGroupList.size == 0 && loadmore) {
                             mvpView!!.showMessage(R.string.no_more_groups_available)
-                        } else {
+                        }*/ else {
                             mRestApiGroupSyncStatus = true
                             setAlreadyClientSyncStatus()
                         }

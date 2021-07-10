@@ -11,11 +11,11 @@
     android:outAnimation="@android:anim/fade_out">
 
     <!-- Comment this out when editing the actual content -->
-     <ProgressBar
+     <!--<ProgressBar
          android:id="@+id/progress_bar"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_gravity="center" />
+         android:layout_gravity="center" />-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -347,10 +347,10 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="start"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -358,11 +358,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -370,11 +370,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
 
@@ -408,11 +408,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -420,11 +420,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -432,11 +432,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
 
@@ -469,11 +469,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -481,11 +481,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -493,11 +493,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
 
@@ -531,11 +531,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -543,11 +543,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -555,11 +555,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
 
@@ -591,11 +591,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
                             android:text="N/A"
+                            android:textSize="12sp"
                             android:textColor="@color/red"
                             android:textStyle="bold" />
 
@@ -605,11 +606,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
                             android:text="N/A"
+                            android:textSize="12sp"
                             android:textColor="@color/red"
                             android:textStyle="bold" />
 
@@ -618,10 +620,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
+                            android:textSize="12sp"
                             android:text="N/A"
                             android:textColor="@color/red"
                             android:textStyle="bold" />

@@ -90,9 +90,9 @@ class ClientDetailsFragment : MifosBaseFragment(), ClientDetailsMvpView {
     @BindView(R.id.tv_office)
     var tv_office: TextView? = null
 
-    @JvmField
+   /* @JvmField
     @BindView(R.id.tv_mobile_no)
-    var tvMobileNo: TextView? = null
+    var tvMobileNo: TextView? = null*/
 
     @JvmField
     @BindView(R.id.tv_group)
@@ -110,7 +110,7 @@ class ClientDetailsFragment : MifosBaseFragment(), ClientDetailsMvpView {
     @BindView(R.id.pb_imageProgressBar)
     var pb_imageProgressBar: ProgressBar? = null
 
-    @JvmField
+   /* @JvmField
     @BindView(R.id.row_account)
     var rowAccount: TableRow? = null
 
@@ -140,7 +140,7 @@ class ClientDetailsFragment : MifosBaseFragment(), ClientDetailsMvpView {
 
     @JvmField
     @BindView(R.id.tableRow_mobile_no)
-    var rowMobileNo: TableRow? = null
+    var rowMobileNo: TableRow? = null*/
 
     @JvmField
     @BindView(R.id.ll_bottom_panel)
@@ -506,23 +506,23 @@ class ClientDetailsFragment : MifosBaseFragment(), ClientDetailsMvpView {
             tv_accountNumber!!.text = client.accountNo
             tvGroup!!.text = client.groupNames
             tv_externalId!!.text = client.externalId
-            tvMobileNo!!.text = client.mobileNo
+            /*tvMobileNo!!.text = client.mobileNo
             if (TextUtils.isEmpty(client.accountNo)) rowAccount!!.visibility = View.GONE
             if (TextUtils.isEmpty(client.externalId)) rowExternal!!.visibility = View.GONE
             if (TextUtils.isEmpty(client.mobileNo)) rowMobileNo!!.visibility = View.GONE
-            if (TextUtils.isEmpty(client.groupNames)) rowGroup!!.visibility = View.GONE
+            if (TextUtils.isEmpty(client.groupNames)) rowGroup!!.visibility = View.GONE*/
             try {
                 val dateString = Utils.getStringOfDate(
                         client.activationDate)
                 tv_activationDate!!.text = dateString
-                if (TextUtils.isEmpty(dateString)) rowActivation!!.visibility = View.GONE
+                //if (TextUtils.isEmpty(dateString)) rowActivation!!.visibility = View.GONE
             } catch (e: IndexOutOfBoundsException) {
                 Toast.makeText(activity, getString(R.string.error_client_inactive),
                         Toast.LENGTH_SHORT).show()
                 tv_activationDate!!.text = ""
             }
             tv_office!!.text = client.officeName
-            if (TextUtils.isEmpty(client.officeName)) rowOffice!!.visibility = View.GONE
+           // if (TextUtils.isEmpty(client.officeName)) rowOffice!!.visibility = View.GONE
             if (client.isImagePresent) {
                 loadClientProfileImage()
             } else {

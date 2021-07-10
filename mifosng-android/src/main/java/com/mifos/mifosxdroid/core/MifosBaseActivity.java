@@ -14,6 +14,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
+
+import android.os.Build;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -143,7 +145,12 @@ public class MifosBaseActivity extends BasePassCodeActivity implements BaseActiv
                                 Toast.makeText(MifosBaseActivity
                                         .this, R.string.logout_successfully, Toast
                                         .LENGTH_SHORT).show();
-                                finish();
+                                //finish();
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                    finishAffinity();
+                                }else{
+                                    finish()
+                                }
                             }
                         })
                 .setNegativeButton(getString(R.string.cancel))

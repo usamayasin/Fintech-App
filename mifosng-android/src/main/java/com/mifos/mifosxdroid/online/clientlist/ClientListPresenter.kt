@@ -118,9 +118,9 @@ class ClientListPresenter @Inject constructor(private val mDataManagerClient: Da
                         if ((mSyncClientList as MutableList<Client>?)!!.size == 0 && !loadmore) {
                             mvpView!!.showEmptyClientList(R.string.client)
                             mvpView!!.unregisterSwipeAndScrollListener()
-                        } else if ((mSyncClientList as MutableList<Client>?)!!.size == 0 && loadmore) {
+                        } /*else if ((mSyncClientList as MutableList<Client>?)!!.size == 0 && loadmore) {
                             mvpView!!.showMessage(R.string.no_more_clients_available)
-                        } else {
+                        }*/ else {
                             mRestApiClientSyncStatus = true
                             setAlreadyClientSyncStatus()
                         }

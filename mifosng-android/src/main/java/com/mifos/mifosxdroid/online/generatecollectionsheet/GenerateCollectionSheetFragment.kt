@@ -199,18 +199,18 @@ class GenerateCollectionSheetFragment : MifosBaseFragment(), GenerateCollectionS
                 centerId = centerNameIdHashMap.get(centerNames[i])!!
                 if (centerId != -1) {
                     inflateGroupSpinner(centerId)
-                } else {
+                } /*else {
                     Toaster.show(rootView, getString(R.string.error_select_center))
-                }
+                }*/
             }
             R.id.sp_staff -> {
                 staffId = staffNameIdHashMap.get(staffNames[i])!!
                 if (staffId != -1) {
                     inflateCenterSpinner(officeId, staffId)
                     inflateGroupSpinner(officeId, staffId)
-                } else {
+                } /*else {
                     Toaster.show(rootView, getString(R.string.error_select_staff))
-                }
+                }*/
             }
             R.id.sp_branch_offices -> {
                 officeId = officeNameIdHashMap.get(officeNames[i])!!
@@ -218,15 +218,15 @@ class GenerateCollectionSheetFragment : MifosBaseFragment(), GenerateCollectionS
                     inflateStaffSpinner(officeId)
                     inflateCenterSpinner(officeId, -1)
                     inflateGroupSpinner(officeId, -1)
-                } else {
+                } /*else {
                     Toaster.show(rootView, getString(R.string.error_select_office))
-                }
+                }*/
             }
             R.id.sp_groups -> {
                 groupId = groupNameIdHashMap.get(groupNames[i])!!
-                if (groupId == -1) {
+                /*if (groupId == -1) {
                     Toaster.show(rootView, getString(R.string.error_select_group))
-                }
+                }*/
             }
         }
     }
