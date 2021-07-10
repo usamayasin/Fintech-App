@@ -233,12 +233,6 @@ class GenerateCollectionSheetFragment : MifosBaseFragment(), GenerateCollectionS
 
     override fun onNothingSelected(adapterView: AdapterView<*>?) {}
     override fun onClick(view: View) {
-
-       /* private var officeId = -1
-        private var centerId = -1
-        private var groupId = -1
-        private var staffId = -1*/
-
         when (view.id) {
             R.id.tv_meeting_date -> setMeetingDate()
             R.id.btn_generate_collection_sheet ->{
@@ -250,6 +244,7 @@ class GenerateCollectionSheetFragment : MifosBaseFragment(), GenerateCollectionS
                     Toaster.show(rootView, getString(R.string.error_select_group))
                     return
                 }
+                groupId = groupNameIdHashMap.get(groupNames[spGroups!!.selectedItemPosition])!!
 
                 fetchCollectionSheet()
             }

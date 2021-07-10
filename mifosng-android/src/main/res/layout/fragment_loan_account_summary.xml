@@ -333,12 +333,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
                             android:text="@string/loan_principal"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -395,12 +395,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
                             android:text="@string/loan_interest"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -457,11 +457,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
                             android:text="@string/loan_fees"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -518,12 +519,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
                             android:text="@string/loan_penalty"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -580,10 +581,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autoSizeMaxTextSize="14sp"
+                            android:autoSizeMaxTextSize="12sp"
                             android:autoSizeMinTextSize="10sp"
                             android:autoSizeTextType="uniform"
                             android:gravity="start"
+                            android:textSize="12sp"
                             android:text="@string/total" />
 
                         <TextView
