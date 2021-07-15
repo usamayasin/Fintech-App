@@ -20,6 +20,7 @@ import com.mifos.api.GenericResponse
 import com.mifos.mifosxdroid.R
 import com.mifos.mifosxdroid.core.MifosBaseActivity
 import com.mifos.mifosxdroid.core.MifosBaseFragment
+import com.mifos.mifosxdroid.core.util.Toaster
 import com.mifos.mifosxdroid.uihelpers.MFDatePicker
 import com.mifos.mifosxdroid.uihelpers.MFDatePicker.OnDatePickListener
 import com.mifos.objects.accounts.loan.SavingsApproval
@@ -91,9 +92,10 @@ class SavingsAccountApprovalFragment : MifosBaseFragment(), OnDatePickListener, 
             savingsApproval.approvedOnDate = approvaldate
             initiateSavingsApproval(savingsApproval)
         } else {
-            Toast.makeText(context,
+            /*Toast.makeText(context,
                     resources.getString(R.string.error_network_not_available),
-                    Toast.LENGTH_LONG).show()
+                    Toast.LENGTH_LONG).show()*/
+            Toaster.show(rootView, resources.getString(R.string.error_network_not_available))
         }
     }
 
@@ -119,12 +121,14 @@ class SavingsAccountApprovalFragment : MifosBaseFragment(), OnDatePickListener, 
     }
 
     override fun showSavingAccountApprovedSuccessfully(genericResponse: GenericResponse?) {
-        Toast.makeText(activity, "Savings Approved", Toast.LENGTH_LONG).show()
+       // Toast.makeText(activity, "Savings Approved", Toast.LENGTH_LONG).show()
+        Toaster.show(rootView,"Savings Approved")
         activity!!.supportFragmentManager.popBackStack()
     }
 
     override fun showError(message: String?) {
-        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+        //Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+        Toaster.show(rootView,message)
     }
 
     override fun showProgressbar(b: Boolean) {

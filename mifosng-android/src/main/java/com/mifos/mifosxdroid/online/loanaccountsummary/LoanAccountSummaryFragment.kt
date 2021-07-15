@@ -16,6 +16,7 @@ import butterknife.OnClick
 import com.mifos.mifosxdroid.R
 import com.mifos.mifosxdroid.core.MifosBaseActivity
 import com.mifos.mifosxdroid.core.ProgressableFragment
+import com.mifos.mifosxdroid.core.util.Toaster
 import com.mifos.mifosxdroid.online.datatable.DataTableFragment
 import com.mifos.mifosxdroid.online.documentlist.DocumentListFragment
 import com.mifos.mifosxdroid.online.loanaccountapproval.LoanAccountApproval
@@ -239,7 +240,8 @@ class LoanAccountSummaryFragment : ProgressableFragment(), LoanAccountSummaryMvp
             tv_disbursement_date!!.text = DateHelper.getDateAsString(loanWithAssociations
                     .timeline.actualDisbursementDate)
         } catch (exception: IndexOutOfBoundsException) {
-            Toast.makeText(activity, resources.getString(R.string.loan_rejected_message), Toast.LENGTH_SHORT).show()
+            //Toast.makeText(activity, resources.getString(R.string.loan_rejected_message), Toast.LENGTH_SHORT).show()
+
         }
         tv_in_arrears!!.text = Utils.getFormatedCurrency(
                 loanWithAssociations.summary.totalOverdue.toString()
@@ -412,7 +414,8 @@ class LoanAccountSummaryFragment : ProgressableFragment(), LoanAccountSummaryMvp
     }
 
     override fun showFetchingError(s: String?) {
-        Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+        Toaster.show(rootView,s)
     }
 
     override fun showProgressbar(b: Boolean) {

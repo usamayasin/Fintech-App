@@ -28,6 +28,6 @@ public class InvalidTextInputException extends Exception {
 
 
     public void notifyUserWithToast(Context context) {
-        Toast.makeText(context, toString(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(context, toString(), Toast.LENGTH_SHORT).show();
     }
 }

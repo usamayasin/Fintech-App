@@ -142,9 +142,9 @@ public class MifosBaseActivity extends BasePassCodeActivity implements BaseActiv
                                 PrefManager.clearPrefs();
                                 startActivity(new Intent(MifosBaseActivity.this,
                                         SplashScreenActivity.class));
-                                Toast.makeText(MifosBaseActivity
+                                /*Toast.makeText(MifosBaseActivity
                                         .this, R.string.logout_successfully, Toast
-                                        .LENGTH_SHORT).show();
+                                        .LENGTH_SHORT).show();*/
                                 //finish();
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                                     finishAffinity();

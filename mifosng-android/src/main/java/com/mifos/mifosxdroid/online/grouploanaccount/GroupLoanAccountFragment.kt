@@ -438,7 +438,8 @@ class GroupLoanAccountFragment : ProgressableDialogFragment(), OnDatePickListene
     }
 
     override fun showGroupLoansAccountCreatedSuccessfully(loans: Loans?) {
-        Toast.makeText(activity, "The Loan has been submitted for Approval", Toast.LENGTH_LONG).show()
+       // Toast.makeText(activity, "The Loan has been submitted for Approval", Toast.LENGTH_LONG).show()
+        Toaster.show(rootView, "The Loan has been submitted for Approval")
     }
 
     override fun showFetchingError(s: String?) {

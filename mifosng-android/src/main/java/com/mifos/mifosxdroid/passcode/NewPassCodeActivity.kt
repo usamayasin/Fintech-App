@@ -18,6 +18,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.mifos.mifosxdroid.R
 import com.mifos.mifosxdroid.core.MaterialDialog
 import com.mifos.mifosxdroid.core.MifosBaseActivity
+import com.mifos.mifosxdroid.core.util.Toaster
 import com.mifos.mifosxdroid.online.DashboardActivity
 import com.mifos.mobile.passcode.utils.PassCodeConstants.PASSCODE_INITIAL_LOGIN
 import com.mifos.mobile.passcode.utils.PasscodePreferencesHelper
@@ -91,19 +92,21 @@ class NewPassCodeActivity : AppCompatActivity() {
                 ) {
                     super.onAuthenticationSucceeded(result)
                     startHomeActivity()
-                    Toast.makeText(
+                    /*Toast.makeText(
                         applicationContext,
                         "Authentication succeeded!", Toast.LENGTH_SHORT
-                    ).show()
+                    ).show()*/
+                    Toaster.show(window.decorView.rootView,"Authentication succeeded!",1000)
                 }
 
                 override fun onAuthenticationFailed() {
                     super.onAuthenticationFailed()
-                    Toast.makeText(
+                    /*Toast.makeText(
                         applicationContext, "Authentication failed",
                         Toast.LENGTH_SHORT
                     )
-                        .show()
+                        .show()*/
+                    Toaster.show(window.decorView.rootView,"Authentication failed!",1000)
                     // showAlertDialogForError(this@NewPassCodeActivity, "Authentication failed")
                 }
             })
@@ -175,11 +178,11 @@ class NewPassCodeActivity : AppCompatActivity() {
                 if (AESEncryption.decrypt(savedPasscode).equals(passCodeString)) {
                     startHomeActivity()
                 } else {
-                    Toast.makeText(
+                   /* Toast.makeText(
                         this,
                         resources.getString(R.string.incorrect_passcode),
                         Toast.LENGTH_SHORT
-                    ).show()
+                    ).show()*/
                     SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                         .setTitleText("Alert")
                         .setContentText(resources.getString(R.string.incorrect_passcode))
@@ -280,11 +283,12 @@ class NewPassCodeActivity : AppCompatActivity() {
                                 passCodeString
                             )
                         )
-                        Toast.makeText(
+                        /*Toast.makeText(
                             this@NewPassCodeActivity,
                             "passcode change succesfully",
                             Toast.LENGTH_SHORT
-                        ).show()
+                        ).show()*/
+                        Toaster.show(window.decorView.rootView,"passcode change succesfully",1000)
                         clearPassCode(View(this@NewPassCodeActivity))
                         onBackPressed()
                     } catch (e: java.lang.Exception) {

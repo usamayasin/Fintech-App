@@ -123,12 +123,13 @@ class SavingsAccountActivateFragment : MifosBaseFragment(), OnDatePickListener, 
     override fun showSavingAccountActivatedSuccessfully(genericResponse: GenericResponse?) {
         Toaster.show(tvActivateDateHeading,
                 resources.getString(R.string.savings_account_activated))
-        Toast.makeText(activity, "Savings Activated", Toast.LENGTH_LONG).show()
+       // Toast.makeText(activity, "Savings Activated", Toast.LENGTH_LONG).show()
         activity!!.supportFragmentManager.popBackStack()
     }
 
     override fun showError(message: String?) {
-        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+        Toaster.show(rootView, message)
+      //  Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 
     override fun showProgressbar(b: Boolean) {

@@ -16,6 +16,7 @@ import com.mifos.mifosxdroid.R
 import com.mifos.mifosxdroid.adapters.GroupListAdapter
 import com.mifos.mifosxdroid.core.MifosBaseActivity
 import com.mifos.mifosxdroid.core.ProgressableFragment
+import com.mifos.mifosxdroid.core.util.Toaster
 import com.mifos.objects.client.Client
 import com.mifos.objects.group.CenterWithAssociations
 import com.mifos.objects.group.GroupWithAssociations
@@ -91,7 +92,8 @@ class GroupListFragment : ProgressableFragment(), GroupListMvpView, AdapterView.
     }
 
     override fun showFetchingError(s: String?) {
-        Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+       // Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+        Toaster.show(rootView,s)
     }
 
     override fun showEmptyGroups(message: Int) {

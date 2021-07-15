@@ -16,6 +16,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.mifos.mifosxdroid.R;
 import com.mifos.mifosxdroid.core.MifosBaseActivity;
 import com.mifos.mifosxdroid.core.ProgressableDialogFragment;
+import com.mifos.mifosxdroid.core.util.Toaster;
 import com.mifos.objects.noncore.DocumentType;
 import com.mifos.objects.noncore.Identifier;
 import com.mifos.objects.noncore.IdentifierCreationResponse;
@@ -169,8 +170,12 @@ public class IdentifierDialogFragment extends BottomSheetDialogFragment implemen
     @Override
     public void showIdentifierCreatedSuccessfully(
             IdentifierCreationResponse identifierCreationResponse) {
-        Toast.makeText(getActivity(), R.string.identifier_created_successfully,
-                Toast.LENGTH_SHORT).show();
+        /*Toast.makeText(getActivity(), R.string.identifier_created_successfully,
+                Toast.LENGTH_SHORT).show();*/
+
+        Toaster.show(rootView,R.string.identifier_created_successfully,1000);
+
+
         identifier.setClientId(identifierCreationResponse.getClientId());
         identifier.setId(identifierCreationResponse.getResourceId());
         if (clientIdentifierCreationListener != null) {
@@ -184,13 +189,15 @@ public class IdentifierDialogFragment extends BottomSheetDialogFragment implemen
         if (clientIdentifierCreationListener != null) {
             clientIdentifierCreationListener.onClientIdentifierCreationFailure(message);
         } else {
-            Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+            Toaster.show(rootView,message,1000);
         }
     }
 
     @Override
     public void showError(int errorMessage) {
-        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+        Toaster.show(rootView,errorMessage,1000);
     }
 
     @Override

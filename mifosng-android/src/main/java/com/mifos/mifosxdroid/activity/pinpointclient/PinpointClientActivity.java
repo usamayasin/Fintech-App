@@ -151,9 +151,11 @@ public class PinpointClientActivity extends MifosBaseActivity implements PinPoin
         } catch (GooglePlayServicesRepairableException e) {
             GooglePlayServicesUtil.getErrorDialog(e.getConnectionStatusCode(), this, 0);
         } catch (GooglePlayServicesNotAvailableException e) {
-            Toast.makeText(this, getString(R.string.google_play_services_not_available),
+           /* Toast.makeText(this, getString(R.string.google_play_services_not_available),
                     Toast.LENGTH_LONG)
-                    .show();
+                    .show();*/
+            Toaster.
+                    show(getWindow().getDecorView().getRootView(),getString(R.string.google_play_services_not_available),1000);
         }
     }
 

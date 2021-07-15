@@ -231,8 +231,9 @@ class CreateNewGroupFragment : ProgressableFragment(), OnDatePickListener, Creat
     }
 
     override fun showGroupCreatedSuccessfully(group: SaveResponse?) {
-        Toast.makeText(activity, "Group " + MifosResponseHandler.getResponse(),
-                Toast.LENGTH_LONG).show()
+        /*Toast.makeText(activity, "Group " + MifosResponseHandler.getResponse(),
+                Toast.LENGTH_LONG).show()*/
+        Toaster.show(rootView,"Group " + MifosResponseHandler.getResponse())
         activity!!.supportFragmentManager.popBackStack()
         if (PrefManager.getUserStatus() == Constants.USER_ONLINE) {
             val groupActivityIntent = Intent(activity, GroupsActivity::class.java)
@@ -242,7 +243,8 @@ class CreateNewGroupFragment : ProgressableFragment(), OnDatePickListener, Creat
     }
 
     override fun showFetchingError(s: String?) {
-        Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+        Toaster.show(rootView,s)
     }
 
     override fun showProgressbar(b: Boolean) {

@@ -166,7 +166,8 @@ class SavingsAccountTransactionFragment : ProgressableFragment(), OnDatePickList
                 return
             }
         } catch (e: NumberFormatException) {
-            Toast.makeText(activity, R.string.error_invalid_amount, Toast.LENGTH_SHORT).show()
+           // Toast.makeText(activity, R.string.error_invalid_amount, Toast.LENGTH_SHORT).show()
+            Toaster.show(rootView,R.string.error_invalid_amount)
             return
         }
         val headers = arrayOf(resources.getString(R.string.field),

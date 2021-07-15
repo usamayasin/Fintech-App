@@ -20,6 +20,7 @@ import com.mifos.mifosxdroid.adapters.LoanAccountsListAdapter
 import com.mifos.mifosxdroid.adapters.SavingsAccountsListAdapter
 import com.mifos.mifosxdroid.core.MifosBaseActivity
 import com.mifos.mifosxdroid.core.MifosBaseFragment
+import com.mifos.mifosxdroid.core.util.Toaster
 import com.mifos.mifosxdroid.online.activate.ActivateFragment
 import com.mifos.mifosxdroid.online.datatable.DataTableFragment
 import com.mifos.mifosxdroid.online.documentlist.DocumentListFragment
@@ -276,8 +277,9 @@ class GroupDetailsFragment : MifosBaseFragment(), GroupDetailsMvpView {
                 tv_activationDate!!.text = dateString
                 if (TextUtils.isEmpty(dateString)) rowActivation!!.visibility = View.GONE
             } catch (e: IndexOutOfBoundsException) {
-                Toast.makeText(activity, getString(R.string.error_group_inactive),
-                        Toast.LENGTH_SHORT).show()
+               /* Toast.makeText(activity, getString(R.string.error_group_inactive),
+                        Toast.LENGTH_SHORT).show()*/
+                Toaster.show(rootView,getString(R.string.error_group_inactive))
                 tv_activationDate!!.text = ""
             }
             tv_office!!.text = group.officeName
@@ -362,7 +364,8 @@ class GroupDetailsFragment : MifosBaseFragment(), GroupDetailsMvpView {
     }
 
     override fun showFetchingError(errorMessage: Int) {
-        Toast.makeText(activity, getStringMessage(errorMessage), Toast.LENGTH_SHORT).show()
+        //Toast.makeText(activity, getStringMessage(errorMessage), Toast.LENGTH_SHORT).show()
+        Toaster.show(rootView, getStringMessage(errorMessage))
     }
 
     override fun onAttach(activity: Activity) {

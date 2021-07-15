@@ -16,6 +16,7 @@ import com.mifos.mifosxdroid.adapters.CheckerTaskListAdapter
 import com.mifos.mifosxdroid.core.MaterialDialog
 import com.mifos.mifosxdroid.core.MifosBaseActivity
 import com.mifos.mifosxdroid.core.MifosBaseFragment
+import com.mifos.mifosxdroid.core.util.Toaster
 import com.mifos.mifosxdroid.dialogfragments.checkertaskfilterdialog.CheckerTaskFilterDialogFragment
 import com.mifos.objects.CheckerTask
 import kotlinx.android.synthetic.main.checker_inbox_fragment.*
@@ -344,8 +345,9 @@ class CheckerInboxFragment : MifosBaseFragment(), TextWatcher,
                             showMifosProgressBar()
                         })
             } else {
-                Toast.makeText(activity, getString(R.string.no_task_selected),
-                        Toast.LENGTH_SHORT).show()
+               /* Toast.makeText(activity, getString(R.string.no_task_selected),
+                        Toast.LENGTH_SHORT).show()*/
+                Toaster.show(view,getString(R.string.no_task_selected),1000)
             }
         }
 
@@ -359,8 +361,9 @@ class CheckerInboxFragment : MifosBaseFragment(), TextWatcher,
                             showMifosProgressBar()
                         })
             } else {
-                Toast.makeText(activity, getString(R.string.no_task_selected),
-                        Toast.LENGTH_SHORT).show()
+               /* Toast.makeText(activity, getString(R.string.no_task_selected),
+                        Toast.LENGTH_SHORT).show()*/
+                Toaster.show(view,getString(R.string.no_task_selected),1000)
             }
         }
 
@@ -374,8 +377,9 @@ class CheckerInboxFragment : MifosBaseFragment(), TextWatcher,
                             showMifosProgressBar()
                         })
             } else {
-                Toast.makeText(activity, getString(R.string.no_task_selected),
-                        Toast.LENGTH_SHORT).show()
+                /*Toast.makeText(activity, getString(R.string.no_task_selected),
+                        Toast.LENGTH_SHORT).show()*/
+                Toaster.show(view,getString(R.string.no_task_selected),1000)
             }
         }
 
@@ -398,12 +402,15 @@ class CheckerInboxFragment : MifosBaseFragment(), TextWatcher,
         val task = checkerTaskList.removeAt(position)
         fetchedCheckerTaskList.remove(task)
         checkerTaskListAdapter.submitList(checkerTaskList)
-        Toast.makeText(activity, getString(R.string.entry) + action, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(activity, getString(R.string.entry) + action, Toast.LENGTH_SHORT).show()
+        Toaster.show(view,getString(R.string.entry) + action,1000)
+
     }
 
     private fun showNetworkError() {
-        Toast.makeText(activity, getString(R.string.something_went_wrong),
-                Toast.LENGTH_SHORT).show()
+       /* Toast.makeText(activity, getString(R.string.something_went_wrong),
+                Toast.LENGTH_SHORT).show()*/
+        Toaster.show(view,getString(R.string.something_went_wrong),1000)
     }
 
     override fun afterTextChanged(p0: Editable?) {

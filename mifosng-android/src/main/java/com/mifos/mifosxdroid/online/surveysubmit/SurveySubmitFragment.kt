@@ -19,6 +19,7 @@ import butterknife.OnClick
 import com.mifos.mifosxdroid.R
 import com.mifos.mifosxdroid.core.MifosBaseActivity
 import com.mifos.mifosxdroid.core.MifosBaseFragment
+import com.mifos.mifosxdroid.core.util.Toaster
 import com.mifos.mifosxdroid.online.Communicator
 import com.mifos.mifosxdroid.online.SurveyQuestionActivity
 import com.mifos.objects.survey.Scorecard
@@ -76,21 +77,25 @@ class SurveySubmitFragment : MifosBaseFragment(), Communicator, SurveySubmitMvpV
             btn_submit!!.visibility = View.GONE
             mSurveySubmitPresenter!!.submitSurvey(mSurveyId, mScorecard)
         } else {
-            Toast.makeText(getContext(), resources
+            /*Toast.makeText(getContext(), resources
                     .getString(R.string.please_attempt_atleast_one_question), Toast.LENGTH_SHORT)
-                    .show()
+                    .show()*/
+            Toaster.show(view,resources
+                    .getString(R.string.please_attempt_atleast_one_question))
         }
     }
 
     override fun showSurveySubmittedSuccessfully(scorecard: Scorecard?) {
-        Toast.makeText(getContext(), resources.getString(R.string.scorecard_created_successfully),
-                Toast.LENGTH_LONG).show()
+       /* Toast.makeText(getContext(), resources.getString(R.string.scorecard_created_successfully),
+                Toast.LENGTH_LONG).show()*/
+        Toaster.show(view,resources.getString(R.string.scorecard_created_successfully))
         tv_submit!!.text = resources.getString(R.string.survey_successfully_submitted)
         btn_submit!!.visibility = View.GONE
     }
 
     override fun showError(errorMessage: Int) {
-        Toast.makeText(getContext(), resources.getString(errorMessage), Toast.LENGTH_LONG).show()
+      //  Toast.makeText(getContext(), resources.getString(errorMessage), Toast.LENGTH_LONG).show()
+        Toaster.show(view,resources.getString(errorMessage))
         tv_submit!!.text = resources.getString(R.string.error_submitting_survey)
         btn_submit!!.visibility = View.GONE
     }

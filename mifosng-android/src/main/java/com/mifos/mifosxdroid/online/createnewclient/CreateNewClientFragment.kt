@@ -387,7 +387,8 @@ class CreateNewClientFragment : ProgressableFragment(), OnDatePickListener, Crea
     }
 
     override fun showMessage(message: String?) {
-        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+        Toaster.show(rootView, message)
     }
 
     override fun showProgressbar(show: Boolean) {

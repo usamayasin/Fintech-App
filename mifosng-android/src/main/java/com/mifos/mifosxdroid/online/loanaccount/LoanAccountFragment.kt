@@ -517,7 +517,8 @@ class LoanAccountFragment : ProgressableDialogFragment(), OnDatePickListener, Lo
     }
 
     override fun showLoanAccountCreatedSuccessfully(loans: Loans?) {
-        Toast.makeText(activity, R.string.loan_creation_success, Toast.LENGTH_LONG).show()
+       // Toast.makeText(activity, R.string.loan_creation_success, Toast.LENGTH_LONG).show()
+        Toaster.show(rootView,R.string.loan_creation_success)
         activity!!.supportFragmentManager.popBackStackImmediate()
     }
 

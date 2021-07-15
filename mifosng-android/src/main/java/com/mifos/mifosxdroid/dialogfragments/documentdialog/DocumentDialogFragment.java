@@ -303,28 +303,32 @@ public class DocumentDialogFragment extends BottomSheetDialogFragment implements
 
     @Override
     public void showDocumentedCreatedSuccessfully(GenericResponse genericResponse) {
-        Toast.makeText(getActivity(), String.format(getString(R.string
+       /* Toast.makeText(getActivity(), String.format(getString(R.string
                         .uploaded_successfully), fileChoosen.getName()),
-                Toast.LENGTH_SHORT).show();
+                Toast.LENGTH_SHORT).show();*/
         getDialog().dismiss();
     }
 
     @Override
     public void showDocumentUpdatedSuccessfully() {
-        Toast.makeText(getActivity(), String.format(getString(R.string
+       /* Toast.makeText(getActivity(), String.format(getString(R.string
                         .document_updated_successfully), fileChoosen.getName()),
-                Toast.LENGTH_SHORT).show();
+                Toast.LENGTH_SHORT).show();*/
+        Toaster.show(rootView,getString(R.string
+                .document_updated_successfully),1000);
         getDialog().dismiss();
     }
 
     @Override
     public void showError(int errorMessage) {
-        Toast.makeText(getActivity(), getString(errorMessage), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(), getString(errorMessage), Toast.LENGTH_SHORT).show();
+        Toaster.show(rootView,getString(errorMessage),1000);
         getDialog().dismiss();
     }
     @Override
     public void showUploadError(String errorMessage) {
-        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+        Toaster.show(rootView,errorMessage,1000);
         getDialog().dismiss();
     }
 

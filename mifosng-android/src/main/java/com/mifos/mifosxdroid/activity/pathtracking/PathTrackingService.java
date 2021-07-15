@@ -44,6 +44,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -324,31 +325,44 @@ public class PathTrackingService extends Service implements GoogleApiClient.Conn
                             new Subscriber<GenericResponse>() {
                                 @Override
                                 public void onCompleted() {
-                                    Toast.makeText(getApplicationContext(),
+                                 /*   Toast.makeText(getApplicationContext(),
                                             "Location Submission Completed \n",
-                                            Toast.LENGTH_SHORT).show();
+                                            Toast.LENGTH_SHORT).show();*/
+                                    showToaster(getApplicationContext(), "Location Submission Completed ");
                                 }
 
                                 @Override
                                 public void onError(Throwable e) {
                                     Log.e("Error ", e.getMessage());
-                                    Toast.makeText(getApplicationContext(),
+                                    showToaster(getApplicationContext(), "Location Submission Error ");
+                                    /*Toast.makeText(getApplicationContext(),
                                             "Location Submission Error \n" + e.getMessage(),
-                                            Toast.LENGTH_SHORT).show();
+                                            Toast.LENGTH_SHORT).show();*/
 
                                 }
 
                                 @Override
                                 public void onNext(GenericResponse
                                                            genericResponse) {
-                                    Toast.makeText(getApplicationContext(),
+                                    showToaster(getApplicationContext(), getString(R.string.tracks_submitted));
+
+                                   /* Toast.makeText(getApplicationContext(),
                                             getString(R.string.tracks_submitted),
-                                            Toast.LENGTH_SHORT).show();
+                                            Toast.LENGTH_SHORT).show();*/
                                 }
                             }
                     );
         } catch (Exception e) {
             Log.e("Error", e.getMessage());
         }
+    }
+
+    private void showToaster(Context context, String text) {
+        new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Alert")
+                .setContentText(text)
+                .setConfirmText("Ok")
+                .setConfirmClickListener(SweetAlertDialog::dismissWithAnimation)
+                .show();
     }
 }

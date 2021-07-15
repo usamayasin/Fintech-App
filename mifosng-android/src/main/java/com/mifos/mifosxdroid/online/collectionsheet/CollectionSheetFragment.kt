@@ -20,6 +20,7 @@ import com.mifos.mifosxdroid.R
 import com.mifos.mifosxdroid.adapters.CollectionListAdapter
 import com.mifos.mifosxdroid.core.MifosBaseActivity
 import com.mifos.mifosxdroid.core.MifosBaseFragment
+import com.mifos.mifosxdroid.core.util.Toaster
 import com.mifos.objects.db.CollectionSheet
 import com.mifos.objects.response.SaveResponse
 import com.mifos.utils.Constants
@@ -143,8 +144,9 @@ class CollectionSheetFragment : MifosBaseFragment(), CollectionSheetMvpView {
 
     override fun showCollectionSheetSuccessfullySaved(saveResponse: SaveResponse?) {
         if (saveResponse != null) {
-            Toast.makeText(activity, "Collection Sheet Saved Successfully",
-                    Toast.LENGTH_SHORT).show()
+            /*Toast.makeText(activity, "Collection Sheet Saved Successfully",
+                    Toast.LENGTH_SHORT).show()*/
+            Toaster.show(rootView,"Collection Sheet Saved Successfully")
         }
     }
 
@@ -154,13 +156,16 @@ class CollectionSheetFragment : MifosBaseFragment(), CollectionSheetMvpView {
                 //TODO for now, It is commented
                 //MFErrorParser.parseError(response.response().body());
             }
-            Toast.makeText(activity, "Collection Sheet could not be saved.",
-                    Toast.LENGTH_SHORT).show()
+            /*Toast.makeText(activity, "Collection Sheet could not be saved.",
+                    Toast.LENGTH_SHORT).show()*/
+            Toaster.show(rootView,"Collection Sheet could not be saved")
         }
     }
 
     override fun showFetchingError(s: String?) {
-        Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+       // Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+        Toaster.show(rootView,s)
+
     }
 
     override fun showProgressbar(b: Boolean) {

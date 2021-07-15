@@ -161,8 +161,9 @@ class LoanAccountDisbursementFragment : MifosBaseFragment(), OnDatePickListener,
 
 
     override fun showDisburseLoanSuccessfully(genericResponse: GenericResponse?) {
-        Toast.makeText(activity, R.string.loan_disburse_successfully,
-                Toast.LENGTH_LONG).show()
+        /*Toast.makeText(activity, R.string.loan_disburse_successfully,
+                Toast.LENGTH_LONG).show()*/
+        Toaster.show(rootView,R.string.loan_disburse_successfully)
         activity!!.supportFragmentManager.popBackStack()
     }
 

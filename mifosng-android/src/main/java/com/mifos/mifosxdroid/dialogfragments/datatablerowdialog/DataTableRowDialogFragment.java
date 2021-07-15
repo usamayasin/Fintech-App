@@ -254,7 +254,7 @@ public class DataTableRowDialogFragment extends DialogFragment
 
     @Override
     public void showDataTableEntrySuccessfully(GenericResponse genericResponse) {
-        Toast.makeText(getActivity(), R.string.data_table_entry_added, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity(), R.string.data_table_entry_added, Toast.LENGTH_LONG).show();
         getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK,
                 getActivity().getIntent());
         getActivity().getSupportFragmentManager().popBackStack();
@@ -262,7 +262,7 @@ public class DataTableRowDialogFragment extends DialogFragment
 
     @Override
     public void showError(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
         getActivity().getSupportFragmentManager().popBackStack();
     }
 

@@ -237,9 +237,10 @@ class SavingsAccountFragment : ProgressableDialogFragment(), OnDatePickListener,
     }
 
     override fun showSavingsAccountCreatedSuccessfully(savings: Savings?) {
-        Toast.makeText(activity,
+        /*Toast.makeText(activity,
                 resources.getString(R.string.savings_account_submitted_for_approval),
-                Toast.LENGTH_LONG).show()
+                Toast.LENGTH_LONG).show()*/
+        Toaster.show(rootView,resources.getString(R.string.savings_account_submitted_for_approval))
         activity!!.supportFragmentManager.popBackStackImmediate()
     }
 

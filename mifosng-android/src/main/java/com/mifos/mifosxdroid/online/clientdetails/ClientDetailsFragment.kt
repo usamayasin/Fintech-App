@@ -517,8 +517,9 @@ class ClientDetailsFragment : MifosBaseFragment(), ClientDetailsMvpView {
                 tv_activationDate!!.text = dateString
                 //if (TextUtils.isEmpty(dateString)) rowActivation!!.visibility = View.GONE
             } catch (e: IndexOutOfBoundsException) {
-                Toast.makeText(activity, getString(R.string.error_client_inactive),
-                        Toast.LENGTH_SHORT).show()
+                /*Toast.makeText(activity, getString(R.string.error_client_inactive),
+                        Toast.LENGTH_SHORT).show()*/
+                Toaster.show(rootView,getString(R.string.error_client_inactive),1000)
                 tv_activationDate!!.text = ""
             }
             tv_office!!.text = client.officeName
@@ -632,7 +633,8 @@ class ClientDetailsFragment : MifosBaseFragment(), ClientDetailsMvpView {
     }
 
     override fun showFetchingError(s: String?) {
-        Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+        Toaster.show(view,s,Toast.LENGTH_SHORT)
     }
 
     interface OnFragmentInteractionListener {

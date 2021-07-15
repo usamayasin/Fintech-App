@@ -185,8 +185,11 @@ public class SyncGroupsDialogFragment extends DialogFragment implements SyncGrou
 
     @Override
     public void showNetworkIsNotAvailable() {
-        Toast.makeText(getActivity(), getResources()
-                .getString(R.string.error_network_not_available), Toast.LENGTH_SHORT).show();
+       /* Toast.makeText(getActivity(), getResources()
+                .getString(R.string.error_network_not_available), Toast.LENGTH_SHORT).show();*/
+
+        Toaster.show(rootView,getResources()
+                .getString(R.string.error_network_not_available),1000);
     }
 
     @Override

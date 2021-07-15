@@ -240,8 +240,10 @@ public class LoanChargeDialogFragment extends ProgressableDialogFragment impleme
                 chargeName = chargesNames.get(i);
                 Log.d("chargesoptionss" + chargesNames.get(i), String.valueOf(chargeId));
                 if (chargeId == -1) {
-                    Toast.makeText(getActivity(), getString(R.string.error_select_charge)
-                            , Toast.LENGTH_SHORT).show();
+                    /*Toast.makeText(getActivity(), getString(R.string.error_select_charge)
+                            , Toast.LENGTH_SHORT).show();*/
+
+                    Toaster.show(rootView,getString(R.string.error_select_charge),1000);
                 }
             }
 

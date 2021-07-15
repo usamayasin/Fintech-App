@@ -127,7 +127,8 @@ class DataTableDataFragment : MifosBaseFragment(), DataTableActionListener, Data
         linearLayout!!.visibility = View.GONE
         llError!!.visibility = View.VISIBLE
         tvError!!.text = errorMessage
-        Toast.makeText(activity, errorMessage, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(activity, errorMessage, Toast.LENGTH_SHORT).show()
+        Toaster.show(rootView,errorMessage)
     }
 
     override fun showProgressbar(show: Boolean) {

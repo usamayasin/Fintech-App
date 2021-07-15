@@ -33,6 +33,7 @@ import com.mifos.mifosxdroid.R;
 import com.mifos.mifosxdroid.adapters.PathTrackingAdapter;
 import com.mifos.mifosxdroid.core.MifosBaseActivity;
 import com.mifos.mifosxdroid.core.RecyclerItemClickListener;
+import com.mifos.mifosxdroid.core.util.Toaster;
 import com.mifos.objects.user.UserLatLng;
 import com.mifos.objects.user.UserLocation;
 import com.mifos.utils.CheckSelfPermissionAndRequest;
@@ -211,9 +212,11 @@ public class PathTrackingActivity extends MifosBaseActivity implements PathTrack
                     startService(intentLocationService);
                 } else {
                     // permission denied
-                    Toast.makeText(getApplicationContext(), getResources()
+                    /*Toast.makeText(getApplicationContext(), getResources()
                                     .getString(R.string.permission_denied_to_access_fine_location),
-                            Toast.LENGTH_SHORT).show();
+                            Toast.LENGTH_SHORT).show();*/
+                    Toaster.show(getWindow().getDecorView().getRootView(),
+                            getString(R.string.permission_denied_to_access_fine_location),1000);
                 }
             }
         }

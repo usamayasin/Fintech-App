@@ -22,6 +22,7 @@ import com.mifos.exceptions.ShortOfLengthException
 import com.mifos.mifosxdroid.R
 import com.mifos.mifosxdroid.core.MifosBaseActivity
 import com.mifos.mifosxdroid.core.MifosBaseFragment
+import com.mifos.mifosxdroid.core.util.Toaster
 import com.mifos.mifosxdroid.uihelpers.MFDatePicker
 import com.mifos.mifosxdroid.uihelpers.MFDatePicker.OnDatePickListener
 import com.mifos.objects.organisation.Office
@@ -186,8 +187,9 @@ class CreateNewCenterFragment : MifosBaseFragment(), OnDatePickListener, CreateN
                 Log.d("officeId " + officeList[i], officeId.toString())
                 if (officeId != -1) {
                 } else {
-                    Toast.makeText(activity, getString(R.string.error_select_office)
-                            , Toast.LENGTH_SHORT).show()
+                    /*Toast.makeText(activity, getString(R.string.error_select_office)
+                            , Toast.LENGTH_SHORT).show()*/
+                    Toaster.show(rootView,getString(R.string.error_select_office))
                 }
             }
 
@@ -196,17 +198,20 @@ class CreateNewCenterFragment : MifosBaseFragment(), OnDatePickListener, CreateN
     }
 
     override fun centerCreatedSuccessfully(saveResponse: SaveResponse?) {
-        Toast.makeText(activity, "Center " + MifosResponseHandler.getResponse(),
-                Toast.LENGTH_LONG).show()
+       /* Toast.makeText(activity, "Center " + MifosResponseHandler.getResponse(),
+                Toast.LENGTH_LONG).show()*/
+        Toaster.show(rootView,"Center " + MifosResponseHandler.getResponse())
         activity!!.supportFragmentManager.popBackStack()
     }
 
     override fun showFetchingError(errorMessage: Int) {
-        Toast.makeText(activity, errorMessage, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(activity, errorMessage, Toast.LENGTH_SHORT).show()
+        Toaster.show(rootView,errorMessage)
     }
 
     override fun showFetchingError(s: String?) {
-        Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+       // Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+        Toaster.show(rootView,s)
     }
 
     override fun showProgressbar(show: Boolean) {

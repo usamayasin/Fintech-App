@@ -17,6 +17,7 @@ import com.mifos.mifosxdroid.R
 import com.mifos.mifosxdroid.adapters.SavingsAccountTransactionsListAdapter
 import com.mifos.mifosxdroid.core.MifosBaseActivity
 import com.mifos.mifosxdroid.core.ProgressableFragment
+import com.mifos.mifosxdroid.core.util.Toaster
 import com.mifos.mifosxdroid.online.datatable.DataTableFragment
 import com.mifos.mifosxdroid.online.documentlist.DocumentListFragment
 import com.mifos.mifosxdroid.online.savingsaccountactivate.SavingsAccountActivateFragment
@@ -374,11 +375,13 @@ class SavingsAccountSummaryFragment : ProgressableFragment(), SavingsAccountSumm
     }
 
     override fun showFetchingError(s: Int) {
-        Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+      //  Toast.makeText(activity, s, Toast.LENGTH_SHORT).show()
+        Toaster.show(rootView,s)
     }
 
     override fun showFetchingError(errorMessage: String?) {
-        Toast.makeText(activity, errorMessage, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(activity, errorMessage, Toast.LENGTH_SHORT).show()
+        Toaster.show(rootView,errorMessage)
     }
 
     override fun showProgressbar(b: Boolean) {

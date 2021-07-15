@@ -135,7 +135,8 @@ class ClientIdentifiersFragment : MifosBaseFragment(), ClientIdentifiersMvpView,
     }
 
     override fun showFetchingError(errorMessage: Int) {
-        Toast.makeText(activity, errorMessage, Toast.LENGTH_SHORT).show()
+       // Toast.makeText(activity, errorMessage, Toast.LENGTH_SHORT).show()
+        Toaster.show(rootView, errorMessage)
     }
 
     override fun onClickIdentifierOptions(position: Int, view: View) {
@@ -163,8 +164,9 @@ class ClientIdentifiersFragment : MifosBaseFragment(), ClientIdentifiersMvpView,
     }
 
     override fun identifierDeletedSuccessfully(position: Int) {
-        Toast.makeText(activity, R.string.identifier_deleted_successfully,
-                Toast.LENGTH_SHORT).show()
+        /*Toast.makeText(activity, R.string.identifier_deleted_successfully,
+                Toast.LENGTH_SHORT).show()*/
+        Toaster.show(rootView, R.string.identifier_deleted_successfully)
         identifiers!!.removeAt(position)
         identifierListAdapter!!.notifyItemRemoved(position)
     }

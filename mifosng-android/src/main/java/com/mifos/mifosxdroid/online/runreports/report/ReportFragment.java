@@ -26,6 +26,7 @@ import com.mifos.mifosxdroid.R;
 import com.mifos.mifosxdroid.adapters.RunReportListAdapter;
 import com.mifos.mifosxdroid.core.MifosBaseActivity;
 import com.mifos.mifosxdroid.core.MifosBaseFragment;
+import com.mifos.mifosxdroid.core.util.Toaster;
 import com.mifos.objects.runreports.ColumnHeader;
 import com.mifos.objects.runreports.DataRow;
 import com.mifos.objects.runreports.FullParameterListResponse;
@@ -97,8 +98,9 @@ public class ReportFragment extends MifosBaseFragment implements ReportMvpView {
                 //setUpValues();
                 setRunReportList();
             } else {
-                Toast.makeText(getActivity(), getString(R.string.msg_report_empty), Toast.LENGTH_SHORT)
-                        .show();
+                /*Toast.makeText(getActivity(), getString(R.string.msg_report_empty), Toast.LENGTH_SHORT)
+                        .show();*/
+                Toaster.show(rootView,getString(R.string.msg_report_empty));
             }
             showProgressbar(false);
         } catch (Exception e) {

@@ -21,6 +21,7 @@ import com.mifos.exceptions.RequiredFieldException
 import com.mifos.mifosxdroid.R
 import com.mifos.mifosxdroid.core.MifosBaseActivity
 import com.mifos.mifosxdroid.core.MifosBaseFragment
+import com.mifos.mifosxdroid.core.util.Toaster
 import com.mifos.mifosxdroid.uihelpers.MFDatePicker
 import com.mifos.mifosxdroid.uihelpers.MFDatePicker.OnDatePickListener
 import com.mifos.objects.accounts.loan.LoanApproval
@@ -161,12 +162,14 @@ class LoanAccountApproval : MifosBaseFragment(), OnDatePickListener, LoanAccount
     }
 
     override fun showLoanApproveSuccessfully(genericResponse: GenericResponse?) {
-        Toast.makeText(activity, "Loan Approved", Toast.LENGTH_LONG).show()
+       // Toast.makeText(activity, "Loan Approved", Toast.LENGTH_LONG).show()
+        Toaster.show(rootView,"Loan Approved")
         activity!!.supportFragmentManager.popBackStackImmediate()
     }
 
     override fun showLoanApproveFailed(s: String?) {
-        Toast.makeText(activity, s, Toast.LENGTH_LONG).show()
+       // Toast.makeText(activity, s, Toast.LENGTH_LONG).show()
+        Toaster.show(rootView,s)
     }
 
     override fun showProgressbar(show: Boolean) {

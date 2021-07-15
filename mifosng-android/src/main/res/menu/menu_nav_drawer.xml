@@ -79,6 +79,7 @@
             android:checked="false"
             android:icon="@drawable/ic_about"
             android:title="@string/about"
+            android:visible="false"
             />
 
     </group>

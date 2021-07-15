@@ -137,7 +137,8 @@ public class SearchFragment extends MifosBaseFragment implements SearchMvpView,
 
     @Override
     public void showMessage(int message) {
-        Toast.makeText(getActivity(), getString(message), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(), getString(message), Toast.LENGTH_SHORT).show();
+        Toaster.show(getView(),message);
         EspressoIdlingResource.decrement(); // App is idle.
     }
 

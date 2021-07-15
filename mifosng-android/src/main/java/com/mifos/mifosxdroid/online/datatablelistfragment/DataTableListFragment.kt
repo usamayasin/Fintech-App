@@ -233,8 +233,10 @@ class DataTableListFragment : Fragment(), DataTableListMvpView {
     override fun showClientCreatedSuccessfully(client: Client) {
         activity!!.supportFragmentManager.popBackStack()
         activity!!.supportFragmentManager.popBackStack()
-        Toast.makeText(activity, getString(R.string.client) +
-                MifosResponseHandler.getResponse(), Toast.LENGTH_SHORT).show()
+       /* Toast.makeText(activity, getString(R.string.client) +
+                MifosResponseHandler.getResponse(), Toast.LENGTH_SHORT).show()*/
+        Toaster.show(rootView, getString(R.string.client) +
+                MifosResponseHandler.getResponse())
         if (PrefManager.getUserStatus() == Constants.USER_ONLINE) {
             val clientActivityIntent = Intent(activity, ClientActivity::class.java)
             clientActivityIntent.putExtra(Constants.CLIENT_ID, client.clientId)

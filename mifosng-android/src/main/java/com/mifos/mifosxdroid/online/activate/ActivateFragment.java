@@ -121,8 +121,9 @@ public class ActivateFragment extends MifosBaseFragment implements ActivateMvpVi
 
     @Override
     public void showActivatedSuccessfully(int message) {
-        Toast.makeText(getActivity(),
-                getString(message), Toast.LENGTH_SHORT).show();
+        /*Toast.makeText(getActivity(),
+                getString(message), Toast.LENGTH_SHORT).show();*/
+        Toaster.show(getView(),message,1000);
         getActivity().getSupportFragmentManager().popBackStack();
     }
 
